@@ -1,0 +1,117 @@
+/* primary */
+main.mobile-view{
+  position: absolute;
+  border: none;
+  height: calc(100% - 0px);
+  width: 375px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.bg-dark-custome{
+  background-color: #3E1583 !important;
+}
+/* navbar */
+.navbar-toggle {
+  float: left !important;
+  margin-left: 15px !important;
+}
+
+.navbar-header.navbar-right.pull-right {
+  margin-right: 15px !important;
+}
+
+.navbar-right > li {
+  float: left !important;
+}
+
+.rounded {
+  border-radius: calc(var(--bs-border-radius) + 28px) !important;
+}
+
+.rounded-bottom-custome {
+  border-bottom-right-radius: 28px !important;
+  border-bottom-left-radius: 28px !important;
+}
+
+.rounded-top-dnone-bottom{
+
+  border-top-left-radius: calc(var(--bs-border-radius) + 28px) !important;
+  border-top-right-radius: calc(var(--bs-border-radius) + 28px) !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+
+}
+
+/* modal */
+.animate-bottom {
+  position: relative !important;
+  animation: animatebottom 0.4s !important;
+}
+
+.modal-content{
+  position: absolute !important;
+  border: none !important;
+  width: 375px !important;
+  left: 50% !important;
+  -webkit-transform: translateX(-50%) !important;
+  transform: translateX(-50%) !important;
+}
+
+.modal-position-bottom{
+  transform: translate(0%, 30%) !important;
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+/* textarea */
+textarea{
+  background-color: #FFEAEA !important;
+}
+
+/* footer */
+.fixed-bottom {
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 60px !important;
+  line-height: 14px !important;
+}
+
+.icon{
+    height: 30px !important;
+}
+
+/* table */
+.table thead th:first-child,
+.table tbody td:first-child {
+  width: 1em !important;
+  white-space: nowrap !important;
+}
+
+.table thead th:first-child input[type="checkbox"] {
+  margin-top: 0 !important;
+}
+
+.table tbody td:first-child input[type="checkbox"] {
+  margin-top: -1px !important;
+}
+
+.select-row {
+  transform: scale(1.5) !important;
+}
+
+.table-dark-opacity{
+  background-color: rgba(85, 73, 213, 0.43) !important;
+}
