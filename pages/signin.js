@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
-import custom from '../styles/custome.module.scss';
 import { useRouter } from 'next/router';
 function signin() {
   const [phone, setPhone] = useState('');
