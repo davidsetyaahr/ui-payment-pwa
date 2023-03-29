@@ -14,23 +14,23 @@ function payment() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     </Head>
-    <main class="main bg-white mobile-view">
-      <div class="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
-        <div class="d-flex flex-column align-items-start">
+    <main className="main bg-white mobile-view">
+      <div className="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
+        <div className="d-flex flex-column align-items-start">
           <Link href="/">
-          <span class="material-symbols-outlined text-white">
+          <span className="material-symbols-outlined text-white">
             arrow_back
           </span>
           </Link>
         </div>
-        <div class="d-flex flex-grow-1 justify-content-center align-items-center">
-          <h2 class="mb-1 text-white">Jumlah Tagihan</h2>
+        <div className="d-flex flex-grow-1 justify-content-center align-items-center">
+          <h2 className="mb-1 text-white">Jumlah Tagihan</h2>
         </div>
       </div>
-    <section class="section-1 mt-5">
-    <table class="table table-striped">
+    <section className="section-1 mt-5">
+    <table className="table table-striped">
               <thead>
-                <tr class="table-dark text-center">
+                <tr className="table-dark text-center">
                   <th scope="col"></th>
                   <th scope="col">Nama</th>
                   <th scope="col">Pembayaran</th>
@@ -38,16 +38,16 @@ function payment() {
                 </tr>
               </thead>
               <tbody>
-                <tr class="text-center">
+                <tr className="text-center">
 
-                  <td><input type="checkbox" class="form-check-input"/></td>
+                  <td><input type="checkbox" className="form-check-input"/></td>
                   <td>Gilbert limantoro</td>
                   <td>jan</td>
                   <td>2000</td>
                 </tr>
-                <tr class="text-center">
+                <tr className="text-center">
 
-                  <td><input type="checkbox" class="form-check-input"/></td>
+                  <td><input type="checkbox" className="form-check-input"/></td>
                   <td>silbert</td>
                   <td>jan</td>
                   <td>1000</td>
@@ -55,19 +55,19 @@ function payment() {
               </tbody>
             </table>
     </section>
-    <section class="section-4 bg-white">
+    <section className="section-4 bg-white">
     <footer className="footer fixed-bottom bg-dark-custome rounded-top-dnone-bottom">
               <div className="container pt-2">
-              <div class="d-flex flex-row p-2 pt-0 pb-0 ps-3">
-                    <h2 class="text-black">Total: </h2>
-                    <h3 class="mb-1 text-black d-flex align-items-center">
+              <div className="d-flex flex-row p-2 pt-0 pb-0 ps-3">
+                    <h2 className="text-black">Total: </h2>
+                    <h3 className="mb-1 text-black d-flex align-items-center">
                     Rp.&nbsp;
                     <span id="total">
                       0
                     </span>
                     ,-
                     </h3>
-                  <Link href="/payment_konfirm" class="btn btn-primary mx-auto">Bayar Sekarang</Link>
+                  <Link href="/payment_konfirm" className="btn btn-primary mx-auto">Bayar Sekarang</Link>
                   </div>
               </div>
           </footer>

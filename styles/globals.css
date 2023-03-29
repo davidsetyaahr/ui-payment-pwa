@@ -8,9 +8,17 @@ main.mobile-view{
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-
+/* background */
 .bg-dark-custome{
   background-color: #3E1583 !important;
+}
+
+.bg-warning-custome{
+  background: #FFCB14 !important;
+}
+/* font-color */
+.font-dark-custome{
+  color: #3E1583 !important;
 }
 /* navbar */
 .navbar-toggle {
@@ -62,6 +70,14 @@ main.mobile-view{
 .modal-position-bottom{
   transform: translate(0%, 30%) !important;
 }
+
+/* card */
+.card-custome{
+  border: 1px solid #9C7FCC !important;
+box-shadow: -2px 4px 4px rgba(0, 0, 0, 0.25) !important;
+border-radius: 28px !important;
+}
+
 
 @keyframes animatebottom {
   from {
