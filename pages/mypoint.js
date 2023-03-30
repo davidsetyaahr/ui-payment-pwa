@@ -1,80 +1,127 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
-import React, { useState, useEffect } from 'react'
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import homeIcon from "../public/img/icons/icon-home.png";
+import React, { useState, useEffect } from "react";
 import { getMyPoint } from "../pages/api/fetchdata";
-export default function mypoint(){
-  const [dataPoint, setDataPoint] = useState()
-  const [id, setId] = useState(4)
-  const  getData = async () => {
+import NavBottom from "./component/navbottom";
+
+export default function mypoint() {
+  const [dataPoint, setDataPoint] = useState();
+  const [id, setId] = useState(4);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [perPage, setPerPage] = useState(10);
+  const [total, setTotal] = useState();
+
+  const getData = async (perpage) => {
     let data = {
-      startDate: '',
-      endDate: '',
-      page:1,
-      id:'2067',
+      startDate: startDate ?? "",
+      endDate: endDate ?? "",
+      page: 1,
+      id: "2067",
     };
-   await getMyPoint(data, (res) => {
+    await getMyPoint({ data, perPage: perpage }, (res) => {
       setDataPoint(res.payload);
-    })
-  }
+      setTotal(res.payload.total);
+    });
+  };
 
   useEffect(() => {
-    getData();
-   },)
+    getData(10);
+  }, []);
+
+  function filter() {
+    // if (condition) {
+    // }
+    console.log(startDate);
+    console.log(endDate);
+    getData(10);
+  }
 
   const getList = () => {
     return (
       <tbody>
-        { dataPoint &&
-          dataPoint.data.map((data) =>
-            <tr class="text-center">
+        {dataPoint &&
+          dataPoint.data.map((data, index) => (
+            <tr key={index} className="text-center">
               <th scope="row">{data.date}</th>
               <td>{data.type}</td>
               <td>{data.total_point}</td>
               <td>{data.keterangan}</td>
             </tr>
-          )
-        }
+          ))}
       </tbody>
-    )
-  }
+    );
+  };
 
+  const getPageNum = () => {
+    let item = [];
+    let tmpTotal = 0;
+    for (let index = 0; index < total; index++) {
+      tmpTotal += 10;
+      item.push(
+        <option key={index} value={tmpTotal}>
+          {tmpTotal}
+        </option>
+      );
+    }
+
+    return item;
+  };
 
   return (
     <div>
-    <Head/>
-    <main class="main bg-white mobile-view">
-      <div class="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
-        <div class="d-flex flex-column align-items-start">
-          <Link href="/">
-          <span class="material-symbols-outlined text-white">
-            arrow_back
-          </span>
-          </Link>
+      <Head />
+      <main className="main bg-white mobile-view">
+        <div className="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
+          <div className="d-flex flex-column align-items-start">
+            <Link href="/">
+              <span className="material-symbols-outlined text-white">
+                arrow_back
+              </span>
+            </Link>
+          </div>
+          <div className="d-flex flex-grow-1 justify-content-center align-items-center">
+            <h2 className="mb-1 text-white">My point :</h2>
+          </div>
         </div>
-        <div class="d-flex flex-grow-1 justify-content-center align-items-center">
-          <h2 class="mb-1 text-white">My point :</h2>
-        </div>
-      </div>
-    <section class="section-1">
-        <div class="d-flex justify-content-center mt-3">
-            <div class="card border-0">
-              <div class="card-body bg-light rounded-1 shadow text-center">
-                  <h3 class="text-black">
-                    Gracia Limantoro
-                  </h3>
-                  <h1 class="text-dark">
-                    80
-                  </h1>
+        <section className="section-1">
+          <div className="d-flex justify-content-center mt-3">
+            <div className="card border-0">
+              <div className="card-body bg-light rounded-1 shadow text-center">
+                <h3 className="text-black">Gracia Limantoro</h3>
+                <h1 className="text-dark">80</h1>
               </div>
             </div>
-        </div>
-    </section>
-    <section class="section-2 mt-4">
+          </div>
+        </section>
+        <section className="section-2 mt-4">
+          <input
+            type="date"
+            value={startDate}
+            name="startDate"
+            onChange={(e) => {
+              setStartDate(e.currentTarget.value);
+            }}
+            title="start"
+          />
+          <input
+            type="date"
+            value={endDate}
+            name="endDate"
+            onChange={(e) => {
+              setEndDate(e.currentTarget.value);
+            }}
+            title="end"
+          />
+          <button type="submit" onClick={filter}>
+            Submit
+          </button>
 
-        <table class="table table-borderless table-hover">
+          <table className="table table-borderless table-hover">
             <thead>
-              <tr class="table-dark-opacity text-center">
+              <tr className="table-dark-opacity text-center">
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Detail</th>
@@ -82,80 +129,22 @@ export default function mypoint(){
               </tr>
             </thead>
             {getList()}
-
           </table>
-    </section>
-    <section class="section-4 bg-white">
-    <footer className="footer fixed-bottom bg-dark-custome rounded-top-dnone-bottom">
-              <div className="container pt-2">
-                  <div className="d-flex justify-content-between">
-                      <div className="d-flex flex-row align-items-center">
-                          <div className="d-flex flex-column pt-0 pb-0">
-                              <Link href="/" className="nav-link">
-                              <div className="text-center">
-                                  <Image src="/img/icons/icon-home.png" width={30} height={30} className="icon" alt="" srcset=""/>
-                              </div>
-                              <span className="text-white">
-                                  home
-                              </span>
-                              </Link>
-                          </div>
-                      </div>
-                      <div className="d-flex flex-row align-items-center">
-                          <div className="d-flex flex-column pt-0 pb-0">
-                              <Link href="/attend" className="nav-link">
-                              <div className="text-center">
-                                  <Image src="/img/icons/icon-attend.png" width={30} height={30} className="icon" alt="" srcset=""/>
-                              </div>
-                              <span className="text-white">
-                                  Attend
-                              </span>
-                              </Link>
-                          </div>
-                      </div>
-                      <div className="d-flex flex-row align-items-center">
-                          <div className="d-flex flex-column pt-0 pb-0">
-                              <Link href="/mypoint" className="nav-link">
-                              <div className="text-center">
-                                  <Image src="/img/icons/icon-point.png" width={30} height={30} className="icon" alt="" srcset=""/>
-                              </div>
-                              <span className="text-white">
-                                  Point
-                              </span>
-                              </Link>
-                          </div>
-                      </div>
-                      <div className="d-flex flex-row align-items-center">
-                          <div className="d-flex flex-column pt-0 pb-0">
-                              <Link href="/score" className="nav-link">
-                              <div className="text-center">
-                                  <Image src="/img/icons/icon-score.png" width={30} height={30} className="icon" alt="" srcset=""/>
-                              </div>
-                              <span className="text-white">
-                                  Score
-                              </span>
-                              </Link>
-                          </div>
-                      </div>
-                      <div className="d-flex flex-row align-items-center">
-                          <div className="d-flex flex-column pt-0 pb-0">
-                              <Link href="/payment" className="nav-link">
-                              <div className="text-center">
-                                  <Image src="/img/icons/icon-payment.png" width={30} height={30} className="icon" alt="" srcset=""/>
-                              </div>
-                              <span className="text-white">
-                                  Payment
-                              </span>
-                              </Link>
-                          </div>
-                      </div>
-
-                    </div>
-              </div>
-          </footer>
-    </section>
-
-    </main>
+          {/* {getPageNum()} */}
+          <select
+            value={perPage}
+            onChange={(e) => {
+              setPerPage(e.target.value);
+              console.log(e.target.value);
+              getData(e.target.value);
+            }}
+          >
+            {getPageNum()}
+            {/* <option value={1}>Page 1</option> */}
+          </select>
+        </section>
+        <NavBottom />
+      </main>
     </div>
-)
+  );
 }
