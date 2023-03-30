@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 function signin() {
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState(null);
@@ -80,6 +81,7 @@ function signin() {
   if (code) {
     return (
       <div>
+        <Head/>
          <main className="main bg-white mobile-view">
           <form onSubmit={handleOtpSubmit}>
           <div class="row vh-100 align-items-center justify-content-center">
@@ -113,6 +115,7 @@ function signin() {
 
   return (
     <div>
+      <Head/>
       <main className="main bg-white mobile-view">
       <form onSubmit={handleCodeSubmit}>
         <div class="row vh-100 align-items-center justify-content-center">
