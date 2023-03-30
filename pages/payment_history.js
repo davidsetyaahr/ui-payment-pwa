@@ -1,9 +1,130 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {
+  getHistoryPayment,
+  getDetailPayment,
+  getPrintReceipt,
+} from "../pages/api/fetchdata";
+import NavBottom from "./component/navbottom";
 
-function payment_history() {
+export default function payment_history() {
+  const [dataPayment, setDataPayment] = useState();
+  const [dataDetail, setDataDetail] = useState();
+  const [id, setId] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [perPage, setPerPage] = useState(10);
+  const [total, setTotal] = useState();
+
+  const getData = async (perpage) => {
+    let data = {
+      startDate: startDate ?? "",
+      endDate: endDate ?? "",
+      id: "1",
+    };
+    await getHistoryPayment({ data, perPage: perpage }, (res) => {
+      setDataPayment(res.payload);
+      setTotal(res.payload.total);
+    });
+  };
+
+  const getDataDetail = async (idDetail) => {
+    let data = {
+      id: idDetail,
+    };
+    await getDetailPayment({ data }, (res) => {
+      setDataDetail(res.payload);
+    });
+  };
+
+  const printReceipt = async (idDetail) => {
+    let data = {
+      id: idDetail,
+    };
+    await getPrintReceipt({ data }, (res) => {
+      const aElement = document.createElement("a");
+      aElement.setAttribute("download", `invoice-${Date()}`);
+      const href = URL.createObjectURL(res);
+      aElement.href = href;
+      aElement.setAttribute("target", "_blank");
+      aElement.click();
+      URL.revokeObjectURL(href);
+    });
+  };
+
+  useEffect(() => {
+    getData(10);
+  }, []);
+
+  function filter() {
+    getData(10);
+  }
+
+  function showModal(idPayment) {
+    getDataDetail(idPayment);
+    setId(idPayment);
+  }
+
+  function getReceipt(params) {
+    printReceipt(params);
+  }
+
+  const getList = () => {
+    return (
+      <tbody>
+        {dataPayment &&
+          dataPayment.data.map((data, index) => (
+            <tr key={index} className="text-center">
+              <th scope="row">{data.date}</th>
+              <td>{data.total}</td>
+              <td>
+                <button
+                  onClick={() => showModal(data.id)}
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  className="rounded-pill text-decoration-none px-3 bg-primary text-white"
+                >
+                  view
+                </button>
+               
+              </td>
+            </tr>
+          ))}
+      </tbody>
+    );
+  };
+
+  const getDetail = () => {
+    return (
+      <tbody>
+        {dataDetail &&
+          dataDetail.map((data, index) => (
+            <tr  key={index} className="text-center">
+              <td>{data.name}</td>
+              <td>{data.description}</td>
+              <td>{data.total}</td>
+            </tr>
+          ))}
+      </tbody>
+    );
+  };
+
+  const getPageNum = () => {
+    let item = [];
+    let tmpTotal = 0;
+    for (let index = 0; index < total; index++) {
+      tmpTotal += 10;
+      item.push(
+        <option key={index} value={tmpTotal}>
+          {tmpTotal}
+        </option>
+      );
+    }
+
+    return item;
+  };
+
   return (
     <>
       <Head />
@@ -23,6 +144,27 @@ function payment_history() {
         <section className="section-1">
           <h3 className="text-black mx-3 mt-5">history payment :</h3>
           <div className="mx-4 mt-5">
+            <input
+              type="date"
+              value={startDate}
+              name="startDate"
+              onChange={(e) => {
+                setStartDate(e.currentTarget.value);
+              }}
+              title="start"
+            />
+            <input
+              type="date"
+              value={endDate}
+              name="endDate"
+              onChange={(e) => {
+                setEndDate(e.currentTarget.value);
+              }}
+              title="end"
+            />
+            <button type="submit" onClick={filter}>
+              Submit
+            </button>
             <table className="table table-borderless">
               <thead>
                 <tr className="text-start">
@@ -31,132 +173,21 @@ function payment_history() {
                   <th scope="col"></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="">
-                  <td>23/01/2023</td>
-                  <td>Rp 25.000</td>
-                  <td className="text-start">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      className="rounded-pill text-decoration-none px-3 bg-primary text-white"
-                    >
-                      view
-                    </a>
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>23/01/2023</td>
-                  <td>Rp 25.000</td>
-                  <td className="text-start">
-                    <a
-                      href=""
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      className="rounded-pill text-decoration-none px-3 bg-primary text-white"
-                    >
-                      view
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
+              {getList()}
             </table>
+            <select
+              value={perPage}
+              onChange={(e) => {
+                setPerPage(e.target.value);
+                
+                getData(e.target.value);
+              }}
+            >
+              {getPageNum()}
+            </select>
           </div>
         </section>
-        <section className="section-4 bg-white">
-          <footer className="footer fixed-bottom bg-dark-custome rounded-top-dnone-bottom">
-            <div className="container pt-2">
-              <div className="d-flex justify-content-between">
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-home.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">home</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/attend" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-attend.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Attend</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/mypoint" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-point.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Point</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/score" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-score.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Score</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/payment" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-payment.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Payment</span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </section>
+        <NavBottom />
       </main>
       {/* modal */}
       <div
@@ -188,22 +219,11 @@ function payment_history() {
                     <th scope="col">Detail</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr className="text-center">
-                    <td>Gilbert limantoro</td>
-                    <td>jan</td>
-                    <td>2000</td>
-                  </tr>
-                  <tr className="text-center">
-                    <td>silbert</td>
-                    <td>jan</td>
-                    <td>1000</td>
-                  </tr>
-                </tbody>
+                {getDetail()}
               </table>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" className="btn btn-primary mx-auto">
+              <button type="button" onClick={() => getReceipt(id)} className="btn btn-primary mx-auto">
                 save recipt
               </button>
             </div>
@@ -213,5 +233,3 @@ function payment_history() {
     </>
   );
 }
-
-export default payment_history;

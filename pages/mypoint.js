@@ -1,7 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
-import homeIcon from "../public/img/icons/icon-home.png";
 import React, { useState, useEffect } from "react";
 import { getMyPoint } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
@@ -32,10 +30,7 @@ export default function mypoint() {
   }, []);
 
   function filter() {
-    // if (condition) {
-    // }
-    console.log(startDate);
-    console.log(endDate);
+    
     getData(10);
   }
 
