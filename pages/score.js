@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 import NavBottom from "./component/navbottom";
-import withAuth from '@/utils/withAuth.util';
 
 const score = () => {
   const [token, setToken] = useState(null)
@@ -17,10 +16,10 @@ const score = () => {
   const { data:datascore } = useScoreDetail({ token, options: { enabled: !!token } });
   const { data:datascorebytest } = useScoreDetailBytest({
     token,
-    studentId: authUser?.id,
+    studentId: authUser?.default_student_id,
     testId,
     options: {
-      enabled: !!token && !!authUser?.id
+      enabled: !!token && !!authUser?.default_student_id
     }
   });
 
@@ -134,4 +133,4 @@ const score = () => {
   );
 };
 
-export default withAuth(score);
+export default score;

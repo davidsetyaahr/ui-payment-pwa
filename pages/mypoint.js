@@ -9,18 +9,22 @@ function mypoint() {
   const [dataPoint, setDataPoint] = useState();
   const [id, setId] = useState(4);
   const [startDate, setStartDate] = useState();
+  const [studentName, setStudentName] = useState();
   const [endDate, setEndDate] = useState();
   const [perPage, setPerPage] = useState(10);
   const [total, setTotal] = useState();
 
   const getData = async (perpage) => {
+    var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       page: 1,
-      id: "2067",
+      // id: "2067",
+      id: tempStorage.default_student_id,
     };
     await getMyPoint({ data, perPage: perpage }, (res) => {
+      setStudentName(tempStorage.default_student_name)
       setDataPoint(res.payload);
       setTotal(res.payload.total);
     });
@@ -96,7 +100,7 @@ function mypoint() {
           >
           <small className="font-dark fw-bold">Nama Siswa:</small>
           <h5 className="my-0">
-            Gracia Limantoro
+          {studentName}
           </h5>
           </a>
         </div>
