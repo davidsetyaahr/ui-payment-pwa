@@ -6,5 +6,14 @@ const withPWA = require('next-pwa')({
 
 module.exports = withPWA({
   // next.js config
-  reactStrictMode: true
+  reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/signin',
+        permanent: false,
+      },
+    ];
+  },
 })

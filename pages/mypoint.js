@@ -3,8 +3,9 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { getMyPoint } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
+import withAuth from "@/utils/withAuth.util";
 
-export default function mypoint() {
+function mypoint() {
   const [dataPoint, setDataPoint] = useState();
   const [id, setId] = useState(4);
   const [startDate, setStartDate] = useState();
@@ -30,7 +31,7 @@ export default function mypoint() {
   }, []);
 
   function filter() {
-    
+
     getData(10);
   }
 
@@ -156,3 +157,5 @@ export default function mypoint() {
     </div>
   );
 }
+
+export default withAuth(mypoint);
