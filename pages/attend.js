@@ -1,22 +1,75 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
+import { getAttend } from "./api/fetchdata";
 
 
 function attend() {
+  const [dataAttend, setDataAttend] = useState();
+  const [id, setId] = useState();
+  const [perPage, setPerPage] = useState(10);
+  const [studentName, setStudentName] = useState();
+  const [total, setTotal] = useState();
+  const getData = async (perpage) => {
+    var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
+    let data = {
+      // startDate: startDate ?? "",
+      // endDate: endDate ?? "",
+      id: tempStorage.default_student_id,
+    };
+    await getAttend({ data, perPage: perpage }, (res) => {
+      setStudentName(tempStorage.default_student_name)
+      setDataAttend(res.payload);
+      setTotal(res.payload.total);
+    });
+  };
+
+  useEffect(() => {
+    getData(10);
+  }, []);
+
+
+
+    const getList = () => {
+      return (
+        <tbody>
+          {dataAttend &&
+            dataAttend.data.map((data, index) => (
+              <tr key={index} className="text-center">
+                <th scope="row">{data.date}</th>
+                <th scope="row">{data.is_absent=="1"?"in":"-"}</th>
+                <td>{data.total_point}</td>
+                <td>attend</td>
+              </tr>
+          ))}
+        </tbody>
+      );
+    };
+
+    const getPageNum = () => {
+      let item = [];
+      let tmpTotal = 0;
+      for (let index = 0; index < total; index++) {
+        tmpTotal += 10;
+        item.push(
+          <option key={index} value={tmpTotal}>
+            {tmpTotal}
+          </option>
+        );
+      }
+
+      return item;
+    };
   return (
     <>
       <Head />
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/" >
-              <span className="fa fa-arrow-left fa-2x color-blue">
-              </span>
-            </Link>
+
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
             <h4 className="font-dark fw-500 mb-0">Attendance</h4>
@@ -34,7 +87,7 @@ function attend() {
           >
           <small className="font-dark fw-bold">Nama Siswa:</small>
           <h5 className="my-0">
-            Gracia Limantoro
+            {studentName}
           </h5>
           </a>
         </div>
@@ -64,27 +117,25 @@ function attend() {
                 <th scope="col">Kategori</th>
               </tr>
             </thead>
-            <tbody>
-              <tr className="text-center">
-                <th scope="row">23/03/2023</th>
-                <td>in</td>
-                <td>10</td>
-                <td>Attend</td>
-              </tr>
-              <tr className="text-center">
-                <th scope="row">23/03/2023</th>
-                <td>in</td>
-                <td>10</td>
-                <td>Attend</td>
-              </tr>
-              <tr className="text-center">
-                <th scope="row">23/03/2023</th>
-                <td>in</td>
-                <td>10</td>
-                <td>-</td>
-              </tr>
-            </tbody>
+            {/* get data table */}
+            {getList()}
           </table>
+          {/* select  */}
+          <div className="d-flex justify-content-center">
+
+          <span className="me-2">per</span>
+          <select className="text-center"
+            value={perPage}
+            onChange={(e) => {
+              setPerPage(e.target.value);
+              console.log(e.target.value);
+              getData(e.target.value);
+            }}
+            >
+          {getPageNum()}
+          </select>
+          <span className="ms-2">page</span>
+          </div>
         </section>
         <NavBottom />
       </main>
