@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import NavBottom from "./component/navbottom";
+import withAuth from "@/utils/withAuth.util";
 
 
 function attend() {
@@ -91,4 +92,4 @@ function attend() {
   );
 }
 
-export default attend;
+export default withAuth(attend);

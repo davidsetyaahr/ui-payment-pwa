@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 import Script from 'next/script'
 import NavBottom from "./component/navbottom";
+import withAuth from '@/utils/withAuth.util'
 
 function payment() {
   return (
@@ -86,4 +87,4 @@ function payment() {
   )
 }
 
-export default payment
+export default withAuth(payment)

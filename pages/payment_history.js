@@ -8,7 +8,7 @@ import {
 } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
 
-export default function payment_history() {
+function payment_history() {
   const [dataPayment, setDataPayment] = useState();
   const [dataDetail, setDataDetail] = useState();
   const [id, setId] = useState();
@@ -87,7 +87,7 @@ export default function payment_history() {
                 >
                   view
                 </button>
-               
+
               </td>
             </tr>
           ))}
@@ -195,7 +195,7 @@ export default function payment_history() {
               value={perPage}
               onChange={(e) => {
                 setPerPage(e.target.value);
-                
+
                 getData(e.target.value);
               }}
             >
@@ -248,3 +248,5 @@ export default function payment_history() {
     </>
   );
 }
+
+export default withAuth(payment_history);

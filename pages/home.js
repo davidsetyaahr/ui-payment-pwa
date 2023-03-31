@@ -3,8 +3,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import NavBottom from "./component/navbottom";
+import withAuth from '@/utils/withAuth.util';
 
-export default function Home() {
+function Home() {
 
   const [students, setStudents] = useState([]);
   const [totalPoint, setTotalPoint] = useState(0);
@@ -165,3 +166,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default withAuth(Home);

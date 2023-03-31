@@ -57,6 +57,7 @@ function signin() {
       localStorage.setItem("token", data.token.access_token);
       setUserData(data.data);
       localStorage.setItem("userData", JSON.stringify(data.data));
+      router.push('/home');
     }
   };
 
@@ -68,16 +69,16 @@ function signin() {
     localStorage.removeItem("userData");
   };
 
-  if (isLoggedIn) {
-    return (
-      <div>
-        <div>
-          You are logged in as {userData.name} ({userData.no_hp})!
-        </div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-    );
-  }
+  // if (isLoggedIn) {
+  //   return (
+  //     <div>
+  //       <div>
+  //         You are logged in as {userData.name} ({userData.no_hp})!
+  //       </div>
+  //       <button onClick={handleLogout}>Logout</button>
+  //     </div>
+  //   );
+  // }
 
   if (code) {
     return (

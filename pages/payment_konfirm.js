@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import withAuth from "@/utils/withAuth.util";
 
 function payment_konfirm() {
   return (
@@ -61,4 +62,4 @@ function payment_konfirm() {
   );
 }
 
-export default payment_konfirm;
+export default withAuth(payment_konfirm);

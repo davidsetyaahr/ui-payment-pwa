@@ -9,7 +9,7 @@ function NavBottom() {
                     <div className="d-flex justify-content-between">
                         <div className="d-flex flex-row align-items-center">
                             <div className="d-flex flex-column py-3">
-                                <Link href="/" className="nav-link">
+                                <Link href="/home" className="nav-link">
                                 <div className="text-center mb-2">
                                   <span className="fa fa-home fa-lg"></span>
                                 </div>
