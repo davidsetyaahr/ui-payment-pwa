@@ -169,6 +169,7 @@ function payment_history() {
               }}
               title="start"
             />
+            <div className="px-1"></div>
             <input
               type="date"
               value={endDate}
@@ -178,6 +179,7 @@ function payment_history() {
               }}
               title="end"
             />
+            <div className="px-3"></div>
             <button type="submit" onClick={filter}>
               Submit
             </button>
@@ -192,6 +194,8 @@ function payment_history() {
               </thead>
               {getList()}
             </table>
+            <div className="d-flex justify-content-center">
+            <span className="me-2">per</span>
             <select
               value={perPage}
               onChange={(e) => {
@@ -202,6 +206,8 @@ function payment_history() {
             >
               {getPageNum()}
             </select>
+            <span className="ms-2">page</span>
+            </div>
         </section>
         <NavBottom />
       </main>

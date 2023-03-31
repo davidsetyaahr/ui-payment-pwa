@@ -113,6 +113,7 @@ function mypoint() {
             }}
             title="start"
           />
+          <div className="px-1"></div>
           <input
             type="date"
             value={endDate}
@@ -123,6 +124,7 @@ function mypoint() {
             className="end"
             title="end"
           />
+          <div className="px-3"></div>
           <button type="submit" onClick={filter}>
             Filter
           </button>
@@ -140,6 +142,8 @@ function mypoint() {
             {getList()}
           </table>
           {/* {getPageNum()} */}
+          <div className="d-flex justify-content-center">
+          <span className="me-2">per</span>
           <select
             value={perPage}
             onChange={(e) => {
@@ -151,6 +155,8 @@ function mypoint() {
             {getPageNum()}
             {/* <option value={1}>Page 1</option> */}
           </select>
+          <span className="ms-2">page</span>
+          </div>
         </section>
         <NavBottom />
       </main>
