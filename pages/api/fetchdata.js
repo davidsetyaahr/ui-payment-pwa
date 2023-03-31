@@ -72,15 +72,16 @@ export const getPrintReceipt = async ({ data }, callback) => {
 };
 
 // update todo attend
+// update filter
 // attend
 
 
 export const getAttend = async ({ data, perPage = 10 }, callback) => {
   const id = data.id;
   var url = `${baseUrl}attendace/${id}?perpage=${perPage}`;
-  // if (data.startDate != "" && data.endDate != "") {
-  //   url = `${url}&start=${data.startDate}&end=${data.endDate}`;
-  // }
+  if (data.startDate != "" && data.endDate != "") {
+    url = `${url}&start=${data.startDate}&end=${data.endDate}`;
+  }
   const res = await fetch(url, {
     headers: {
       "Content-Type": "application/json",

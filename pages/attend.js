@@ -13,11 +13,13 @@ function attend() {
   const [perPage, setPerPage] = useState(10);
   const [studentName, setStudentName] = useState();
   const [total, setTotal] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
   const getData = async (perpage) => {
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
-      // startDate: startDate ?? "",
-      // endDate: endDate ?? "",
+      startDate: startDate ?? "",
+      endDate: endDate ?? "",
       id: tempStorage.default_student_id,
     };
     await getAttend({ data, perPage: perpage }, (res) => {
@@ -30,6 +32,10 @@ function attend() {
   useEffect(() => {
     getData(10);
   }, []);
+
+  function filter() {
+    getData(10);
+  }
 
 
 
@@ -108,6 +114,34 @@ function attend() {
           <h2 className="mt-3 text-black">- Test 1</h2> */}
         </section>
         <section className="section-2 bg-light mt-3 p-4 mb-last-content">
+
+        <div className="filter-date">
+          <input
+            type="date"
+            value={startDate}
+            className="start"
+            name="startDate"
+            onChange={(e) => {
+              setStartDate(e.currentTarget.value);
+            }}
+            title="start"
+          />
+          <div className="px-1"></div>
+          <input
+            type="date"
+            value={endDate}
+            name="endDate"
+            onChange={(e) => {
+              setEndDate(e.currentTarget.value);
+            }}
+            className="end"
+            title="end"
+          />
+          <div className="px-3"></div>
+          <button type="submit" onClick={filter}>
+            Filter
+          </button>
+          </div>
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
