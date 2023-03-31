@@ -129,21 +129,36 @@ export default function payment_history() {
     <>
       <Head />
       <main className="main bg-white mobile-view">
-        <div className="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
+        <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/">
-              <span className="material-symbols-outlined text-white">
-                arrow_back
+            <Link href="/" >
+              <span className="fa fa-arrow-left fa-2x font-dark">
               </span>
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
-            <h2 className="mb-1 text-white">Jumlah Tagihan</h2>
+            <h4 className="font-dark fw-500 mb-0">History Pembayaran</h4>
           </div>
         </div>
-        <section className="section-1">
-          <h3 className="text-black mx-3 mt-5">history payment :</h3>
-          <div className="mx-4 mt-5">
+        <section className="section-1 bg-light p-4">
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="icon-bg">
+              <span className="fa fa-shopping-cart fa-lg color-blue"></span>
+            </div>
+            <a
+              className="text-decoration-none color-blue text-end"
+              href="#"
+              target="_blank"
+            >
+            <small className="font-dark fw-bold">Nama Siswa:</small>
+            <h5 className="my-0">
+              Gracia Limantoro
+            </h5>
+            </a>
+          </div>
+        </section>
+        <section className="section-1 mt-3 p-4 bg-light">
+          <div className="filter-date">
             <input
               type="date"
               value={startDate}
@@ -165,9 +180,10 @@ export default function payment_history() {
             <button type="submit" onClick={filter}>
               Submit
             </button>
+          </div>
             <table className="table table-borderless">
               <thead>
-                <tr className="text-start">
+                <tr className="table-dark-opacity">
                   <th scope="col">Tanggal</th>
                   <th scope="col">Jumlah</th>
                   <th scope="col"></th>
@@ -185,7 +201,6 @@ export default function payment_history() {
             >
               {getPageNum()}
             </select>
-          </div>
         </section>
         <NavBottom />
       </main>
