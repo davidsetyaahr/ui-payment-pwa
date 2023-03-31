@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 import NavBottom from "./component/navbottom";
+import withAuth from '@/utils/withAuth.util';
 
 const score = () => {
   const [token, setToken] = useState(null)
@@ -82,7 +83,7 @@ const score = () => {
                         <option value={1}>"asdfsdaf"</option>
                     </select>
                     <button type="submit" class="btn btn-primary" onClick={handleScoreByTestSubmit}>Filter</button>
-                  </div>                
+                  </div>
                   <div class="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                     </div>
                 {/* </form> */}
@@ -133,4 +134,4 @@ const score = () => {
   );
 };
 
-export default score;
+export default withAuth(score);
