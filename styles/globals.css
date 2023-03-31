@@ -18,6 +18,10 @@ main.mobile-view{
 .font-dark-custome,.color-blue{
   color: #136dde !important;
 }
+.btn-primary{
+  background:#136dde !important;
+  color:white !important;
+}
 /* navbar */
 .navbar-toggle {
   float: left !important;
@@ -95,7 +99,7 @@ border-radius: 28px !important;
 }
 /* textarea */
 textarea{
-  background-color: #FFEAEA !important;
+  /* background-color: #FFEAEA !important; */
 }
 footer{
   box-shadow: 0px -3px 8px rgba(157, 178, 214, 0.13);
@@ -206,6 +210,10 @@ footer .nav-link,.font-dark{
 }
 .color-yellow{
   color:#ffcb14;
+}
+.btn-yellow{
+  background:#ffcb14 !important;
+  color:#136dde !important;
 }
 .fw-500{
   font-weight:500;
