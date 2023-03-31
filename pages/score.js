@@ -6,12 +6,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 import NavBottom from "./component/navbottom";
+import withAuth from '@/utils/withAuth.util';
 
 const score = () => {
   const [token, setToken] = useState(null)
   const [authUser, setAuthUser] = useState(null)
   const [testId, setTestId] = useState(2)
-
+  const [studentName, setStudentName] = useState();
   const queryClient = useQueryClient()
   const { data:datascore } = useScoreDetail({ token, options: { enabled: !!token } });
   const { data:datascorebytest } = useScoreDetailBytest({
@@ -64,7 +65,7 @@ const score = () => {
             >
             <small className="font-dark fw-bold">Nama Siswa:</small>
             <h5 className="my-0">
-              Gracia Limantoro
+              {authUser?.default_student_name}
             </h5>
             </a>
           </div>
@@ -133,4 +134,4 @@ const score = () => {
   );
 };
 
-export default score;
+export default withAuth(score);
