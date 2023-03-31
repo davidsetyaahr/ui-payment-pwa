@@ -67,6 +67,7 @@ function signin() {
     setUserData(null);
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
+
   };
 
   // if (isLoggedIn) {

@@ -7,6 +7,7 @@ import {
   getPrintReceipt,
 } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
+import withAuth from "@/utils/withAuth.util";
 
 function payment_history() {
   const [dataPayment, setDataPayment] = useState();

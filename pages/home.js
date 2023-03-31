@@ -4,32 +4,43 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import NavBottom from "./component/navbottom";
 import withAuth from '@/utils/withAuth.util';
+import { useAdvertise, useAgenda, useAnnouncement } from '@/helper/helperApiInfo';
+import { useRouter } from "next/router";
 
 function Home() {
+  const [authUser, setAuthUser] = useState(null)
+  const [testId, setTestId] = useState(2)
+  const [token, setToken] = useState(null)
+  const router = useRouter();
+  const { data:dataannounce } = useAnnouncement({ token, options: { enabled: !!token } });
+  const { data:dataagenda } = useAgenda({ token, options: { enabled: !!token } });
+  const { data:datads } = useAdvertise({ token, options: { enabled: !!token } });
 
-  const [students, setStudents] = useState([]);
-  const [totalPoint, setTotalPoint] = useState(0);
-  const [averageScore, setAverageScore] = useState(0);
-  const [tagihan, setTagihan] = useState(0);
+
+  // logout
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setToken("");
+    setUserData(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
+    router.push('/signin');
+  };
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/listStudents/2')
-      .then(response => response.json())
-      .then(data => {
-        setStudents(data.payload);
-        setTotalPoint(data.payload.reduce((acc, curr) => acc + curr.total_point, 0));
-        setAverageScore(data.payload.reduce((acc, curr) => acc + curr.average_score, 0) / data.payload.length);
-        setTagihan(data.payload.reduce((acc, curr) => acc + curr.price, 0));
-      })
-      .catch(error => console.error(error));
-  }, []);
+    setToken(localStorage.getItem('token'))
+    const localStorageAuthUser = localStorage.getItem('userData')
+    if (localStorageAuthUser) {
+      setAuthUser(JSON.parse(localStorageAuthUser))
+    }
+}, [])
   return (
     <div>
       <Head/>
       {/* <body className="bg-black"> */}
         <div className="container">
           <div className="row">
-            <div className="col-md-5 relative px-0">
+            <div className="col-md-12 relative px-0">
               <main className="main bg-white mobile-view">
                 <div className="navbar nav-top bg-dark-custome d-flex flex-row justify-content-between pt-4 px-3 mx-auto">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzPb_pSj-ir-9eB6mi0lVJdQP1KKHiB8fRBS1CbmOXGd9Z1FEGMJHbEKhahwhWLGSaEXY&usqp=CAU" className="rounded-circle" alt="" width="40" height="40"/>
@@ -45,7 +56,7 @@ function Home() {
                           </p>
                         </button>
                     </div>
-                    <Link href="" className="logout"><span className="fa fa-sign-out"></span></Link>
+                    <Link href="/signin" onClick={handleLogout} className="logout"><span className="fa fa-sign-out"></span></Link>
                 </div>
                 <section className="section-1 section-rounded bg-white p-4 pb-1">
                     <div className="bg-light rounded p-3">
@@ -58,7 +69,7 @@ function Home() {
                             <div>
                               <p className="mb-0 fw-500 font-dark fs-16">Tagihan saat ini :</p>
                               <h4 className="mb-1 color-blue price text-center">
-                                {tagihan}
+                                {/* {tagihan} */}
                               </h4>
                             </div>
                             <Link href="" className="px-2 btn btn-sm btn-blue">Detail</Link>
@@ -73,7 +84,7 @@ function Home() {
                               <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                                 <div className="me-2 icon-bg fw-500 color-blue sm">
                                   <h4 className="my-0">
-                                    {totalPoint}
+                                    {/* {totalPoint} */}
                                   </h4>
                                 </div>
                                 <div className="mb-1 font-dark total_point fw-500">Mypoint</div>
@@ -87,7 +98,7 @@ function Home() {
                               <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                                 <div className="me-2 icon-bg fw-500 color-blue sm">
                                   <h4 className="my-0">
-                                    {averageScore}
+                                    {/* {averageScore} */}
                                   </h4>
                                 </div>
                                 <div className="mb-1 font-dark total_point fw-500">Last Score</div>
@@ -103,7 +114,7 @@ function Home() {
                     </h5>
                     <div className="card" style={{height: '100px !important'}}>
                     <div className="card-body">
-
+                          {dataagenda?.payload?.activity}
                     </div>
                     </div>
                 </section>
@@ -111,26 +122,20 @@ function Home() {
                     <h5 className="mt-0 mb-2 font-dark fw-500">
                         Announcement
                     </h5>
-                    <Image  src="/img/banner.png" width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" />
+                    <Image  src={`/${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" />
                 </section>
                 <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
                     <h5 className="mt-0 mb-2 font-dark fw-500">
                         Advertise
                     </h5>
-                    <div className="img-slide">
-                      <div className="content">
-                        <Image  src="/img/banner.png" width={100} height={100} alt="" />
-                        <div className="title">Title</div>
-                      </div>
-                      <div className="content">
-                        <Image  src="/img/banner.png" width={100} height={100} alt="" />
-                        <div className="title">Title</div>
-                      </div>
-                      <div className="content">
-                        <Image  src="/img/banner.png" width={100} height={100} alt="" />
-                        <div className="title">Title</div>
-                      </div>
 
+                    <div  className="img-slide">
+                          {datads?.payload?.map((ads)=>
+                            <div key={ads.id} className="content">
+                              <Image  src={`/${ads.banner}`} width={100} height={100} alt="" />
+                              <div className="title">{ads.title}</div>
+                            </div>
+                        )}
                     </div>
                 </section>
                   <NavBottom />
@@ -139,7 +144,7 @@ function Home() {
           </div>
         </div>
         {/* </body> */}
-      <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered modal-position-bottom">
           <div className="modal-content animate-bottom">
               <div className="modal-header border-0">
