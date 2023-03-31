@@ -71,10 +71,24 @@ export const getPrintReceipt = async ({ data }, callback) => {
   callback(result);
 };
 
+export const getListBill = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}payment/billing/${id}`;
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
+
 // update todo attend
 // update filter
 // attend
-
 
 export const getAttend = async ({ data, perPage = 10 }, callback) => {
   const id = data.id;
@@ -82,6 +96,37 @@ export const getAttend = async ({ data, perPage = 10 }, callback) => {
   if (data.startDate != "" && data.endDate != "") {
     url = `${url}&start=${data.startDate}&end=${data.endDate}`;
   }
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
+
+export const checkOutBill = async (payload, callback) => {
+  const res = await fetch(baseUrl + "payment/checkout", {
+    body: JSON.stringify(payload.body),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "POST",
+  });
+
+  const result = await res.json();
+
+  callback(result);
+};
+
+export const verifyPayment = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}payment/verify/${id}`;
+
   const res = await fetch(url, {
     headers: {
       "Content-Type": "application/json",

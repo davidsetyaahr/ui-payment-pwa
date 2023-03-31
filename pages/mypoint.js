@@ -7,7 +7,7 @@ import withAuth from "@/utils/withAuth.util";
 
 function mypoint() {
   const [dataPoint, setDataPoint] = useState();
-  const [id, setId] = useState(4);
+  const [name, setname] = useState();
   const [startDate, setStartDate] = useState();
   const [studentName, setStudentName] = useState();
   const [endDate, setEndDate] = useState();
@@ -15,11 +15,13 @@ function mypoint() {
   const [total, setTotal] = useState();
 
   const getData = async (perpage) => {
+    const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       page: 1,
+      id: student.default_student_id,
       // id: "2067",
       id: tempStorage.default_student_id,
     };
@@ -27,6 +29,7 @@ function mypoint() {
       setStudentName(tempStorage.default_student_name)
       setDataPoint(res.payload);
       setTotal(res.payload.total);
+      setname(student.default_student_name)
     });
   };
 
@@ -35,7 +38,6 @@ function mypoint() {
   }, []);
 
   function filter() {
-
     getData(10);
   }
 
@@ -76,9 +78,8 @@ function mypoint() {
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/" >
-              <span className="fa fa-arrow-left fa-2x color-blue">
-              </span>
+            <Link href="/">
+              <span className="fa fa-arrow-left fa-2x color-blue"></span>
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
@@ -86,11 +87,10 @@ function mypoint() {
           </div>
         </div>
         <section className="section-1 bg-light p-4">
-        <div className="d-flex align-items-center justify-content-between">
-          <div>
-            <small className="font-dark fw-bold">Point:</small>
-            <div className="icon-bg rounded auto fw-500">
-            80.000
+          <div className="d-flex align-items-center justify-content-between">
+            <div>
+              <small className="font-dark fw-bold">Point:</small>
+              <div className="icon-bg rounded auto fw-500">80.000</div>
             </div>
           </div>
           <a

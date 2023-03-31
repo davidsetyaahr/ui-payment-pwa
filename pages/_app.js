@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import queryClientInstance from '../instances/react-query.instance';
 import { useEffect } from "react";
 import queryClientInstance from '@/instances/react-query.instance';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function App({ Component, pageProps }) {
       <QueryClientProvider client={queryClientInstance}>
         <Hydrate state={pageProps.dehydratedState}>
           <Component {...pageProps} />
+          <ToastContainer />
         </Hydrate>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
