@@ -6,6 +6,7 @@ import NavBottom from "./component/navbottom";
 import withAuth from '@/utils/withAuth.util';
 import { useAdvertise, useAgenda, useAnnouncement } from '@/helper/helperApiInfo';
 import { useRouter } from "next/router";
+import { baseStorageUrl } from "../pages/api/fetchdata";
 
 function Home() {
   const [authUser, setAuthUser] = useState(null)
@@ -46,7 +47,7 @@ function Home() {
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzPb_pSj-ir-9eB6mi0lVJdQP1KKHiB8fRBS1CbmOXGd9Z1FEGMJHbEKhahwhWLGSaEXY&usqp=CAU" className="rounded-circle" alt="" width="40" height="40"/>
                     <div className="d-flex flex-column p-2 pt-0 pb-0 ps-3" >
                       <p className="mb-1 text-white parent-name">
-                        Hallo Mr.Limantoro
+                      Hallo Mr.Limantoro
                         </p>
                         <button className="p-0 text-decoration-none bg-dark-custome border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           <p className="justify-content-center mb-1 text-warning d-flex align-items-center student-name">Gracia Limantoro
@@ -122,7 +123,8 @@ function Home() {
                     <h5 className="mt-0 mb-2 font-dark fw-500">
                         Announcement
                     </h5>
-                    <Image  src={`/${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" />
+                    <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" />
+                    {/* <Image  src={`${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" /> */}
                 </section>
                 <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
                     <h5 className="mt-0 mb-2 font-dark fw-500">
@@ -132,7 +134,7 @@ function Home() {
                     <div  className="img-slide">
                           {datads?.payload?.map((ads)=>
                             <div key={ads.id} className="content">
-                              <Image  src={`/${ads.banner}`} width={100} height={100} alt="" />
+                              <Image  src={`${baseStorageUrl}${ads.banner}`} width={100} height={100} alt="" />
                               <div className="title">{ads.title}</div>
                             </div>
                         )}

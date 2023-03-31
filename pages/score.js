@@ -125,6 +125,7 @@ const score = () => {
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
+              value={datascorebytest?.payload?.score?.comment}
             ></textarea>
           </div>
         </section>
