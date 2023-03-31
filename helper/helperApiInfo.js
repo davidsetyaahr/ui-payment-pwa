@@ -9,9 +9,7 @@ export const fetchAnnouncement = (props) => {
       ...props,
     });
 };
-
-
-  export const useAnnouncement = (params) => {
+export const useAnnouncement = (params) => {
     const { key = 'fetchAnnouncement', deps, fnParams, options, token } = params || {};
 
     return useQuery({
@@ -20,7 +18,6 @@ export const fetchAnnouncement = (props) => {
       ...options,
     });
 };
-
 // advertise
 export const fetchAdvertise = (props) => {
     return apiGet({
@@ -28,9 +25,7 @@ export const fetchAdvertise = (props) => {
       ...props,
     });
 };
-
-
-  export const useAdvertise = (params) => {
+export const useAdvertise = (params) => {
     const { key = 'fetchAdvertise', deps, fnParams, options, token } = params || {};
 
     return useQuery({
@@ -46,9 +41,7 @@ export const fetchAgenda = (props) => {
       ...props,
     });
 };
-
-
-  export const useAgenda = (params) => {
+export const useAgenda = (params) => {
     const { key = 'fetchAgenda', deps, fnParams, options, token } = params || {};
 
     return useQuery({
