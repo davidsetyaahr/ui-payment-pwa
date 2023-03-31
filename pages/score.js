@@ -102,61 +102,7 @@ const score = () => {
               <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary mt-3">Primary</button>
         </div>
-        <section className="section-1 px-3 py-1">
-          <a
-            className="text-decoration-none text-black h2"
-            href="#"
-            target="_blank"
-          >
-            Gracia Limantoro
-          </a>
-          <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0 mt-3">
-            <select
-              className="form-select rounded-pill me-3"
-              aria-label="Default select example"
-            >
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-            <button type="button" className="btn btn-primary rounded-pill">
-              Primary
-            </button>
-          </div>
-          <h2 className="mt-2 text-black">- Test 1</h2>
-        </section>
-        <section className="section-2 mt-2">
-          <table className="table table-borderless table-hover">
-            <thead>
-              <tr className="table-dark-opacity text-center">
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Detail</th>
-                <th scope="col">Kategori</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="text-center">
-                <th scope="row">23/03/2023</th>
-                <td>in</td>
-                <td>10</td>
-                <td>Attend</td>
-              </tr>
-              <tr className="text-center">
-                <th scope="row">23/03/2023</th>
-                <td>in</td>
-                <td>10</td>
-                <td>Attend</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="d-flex justify-content-center">
-            <button type="button" className="btn btn-primary mt-3">
-              Primary
-            </button>
-          </div>
-        </section>
+
 
         <section className="section-3 px-3 py-1">
           <div className="">
