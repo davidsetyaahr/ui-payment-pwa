@@ -19,10 +19,12 @@ function payment_history() {
   const [total, setTotal] = useState();
 
   const getData = async (perpage) => {
+    const student = JSON.parse(localStorage.getItem("userData")) ?? [];
+
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
-      id: "1",
+      id: student.default_student_id,
     };
     await getHistoryPayment({ data, perPage: perpage }, (res) => {
       setDataPayment(res.payload);

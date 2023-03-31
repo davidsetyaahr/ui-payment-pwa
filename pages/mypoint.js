@@ -7,22 +7,24 @@ import withAuth from "@/utils/withAuth.util";
 
 function mypoint() {
   const [dataPoint, setDataPoint] = useState();
-  const [id, setId] = useState(4);
+  const [name, setname] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [perPage, setPerPage] = useState(10);
   const [total, setTotal] = useState();
 
   const getData = async (perpage) => {
+    const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       page: 1,
-      id: "2067",
+      id: student.default_student_id,
     };
     await getMyPoint({ data, perPage: perpage }, (res) => {
       setDataPoint(res.payload);
       setTotal(res.payload.total);
+      setname(student.default_student_name)
     });
   };
 
@@ -31,7 +33,6 @@ function mypoint() {
   }, []);
 
   function filter() {
-
     getData(10);
   }
 
@@ -72,9 +73,8 @@ function mypoint() {
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/" >
-              <span className="fa fa-arrow-left fa-2x color-blue">
-              </span>
+            <Link href="/">
+              <span className="fa fa-arrow-left fa-2x color-blue"></span>
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
@@ -82,50 +82,46 @@ function mypoint() {
           </div>
         </div>
         <section className="section-1 bg-light p-4">
-        <div className="d-flex align-items-center justify-content-between">
-          <div>
-            <small className="font-dark fw-bold">Point:</small>
-            <div className="icon-bg rounded auto fw-500">
-            80.000
+          <div className="d-flex align-items-center justify-content-between">
+            <div>
+              <small className="font-dark fw-bold">Point:</small>
+              <div className="icon-bg rounded auto fw-500">80.000</div>
             </div>
+            <a
+              className="text-decoration-none color-blue text-end"
+              href="#"
+              target="_blank"
+            >
+              <small className="font-dark fw-bold">Nama Siswa:</small>
+              <h5 className="my-0">{name}</h5>
+            </a>
           </div>
-          <a
-            className="text-decoration-none color-blue text-end"
-            href="#"
-            target="_blank"
-          >
-          <small className="font-dark fw-bold">Nama Siswa:</small>
-          <h5 className="my-0">
-            Gracia Limantoro
-          </h5>
-          </a>
-        </div>
         </section>
         <section className="section-2 mt-3 mb-last-content bg-light p-4">
           <div className="filter-date">
-          <input
-            type="date"
-            value={startDate}
-            className="start"
-            name="startDate"
-            onChange={(e) => {
-              setStartDate(e.currentTarget.value);
-            }}
-            title="start"
-          />
-          <input
-            type="date"
-            value={endDate}
-            name="endDate"
-            onChange={(e) => {
-              setEndDate(e.currentTarget.value);
-            }}
-            className="end"
-            title="end"
-          />
-          <button type="submit" onClick={filter}>
-            Filter
-          </button>
+            <input
+              type="date"
+              value={startDate}
+              className="start"
+              name="startDate"
+              onChange={(e) => {
+                setStartDate(e.currentTarget.value);
+              }}
+              title="start"
+            />
+            <input
+              type="date"
+              value={endDate}
+              name="endDate"
+              onChange={(e) => {
+                setEndDate(e.currentTarget.value);
+              }}
+              className="end"
+              title="end"
+            />
+            <button type="submit" onClick={filter}>
+              Filter
+            </button>
           </div>
 
           <table className="table table-borderless table-hover">
