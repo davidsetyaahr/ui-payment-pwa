@@ -86,7 +86,7 @@ function signin() {
         <Head />
         <main className="main bg-white mobile-view">
           <form onSubmit={handleOtpSubmit}>
-            <div className="row vh-100 align-items-center justify-content-center">
+            <div className="row align-items-center justify-content-center">
               <div className="col-12">
                 <Image
                   src="/img/logoutama1.png"
@@ -132,24 +132,25 @@ function signin() {
     <div>
       <Head />
       <main className="main bg-white mobile-view">
-        <form onSubmit={handleCodeSubmit}>
-          <div className="row vh-100 align-items-center justify-content-center">
+      <div className="container bg-light h-100">
+        <form className="h-100" onSubmit={handleCodeSubmit}>
+          <div className="h-100 row align-items-center justify-content-center">
             <div className="col-12">
               <Image
                 src="/img/logoutama1.png"
-                className="rounded mx-auto d-block mb-5"
-                width="80"
-                height="80"
+                className="rounded mx-auto d-block mb-3"
+                width="130"
+                height="130"
                 alt="..."
               />
-              <div className="card py-4 rounded card-custome">
+              <h5 className="font-dark text-center fw-bold">Welcome to U&I Member App</h5>
+              <div className="card py-4">
                 <div className="card-body">
-                  <div className="bg-light p-3 mb-3">Welcome to U&i Member</div>
                   <div className="mb-3">
-                    {/* <label for="exampleFormControlInput1" className="form-label">Phone</label> */}
+                    <label for="exampleFormControlInput1" className="form-label fs-15 fw-500">Your Phone Number</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control py-3"
                       value={phone}
                       onChange={(event) => setPhone(event.target.value)}
                       placeholder="Enter phone number"
@@ -157,7 +158,7 @@ function signin() {
                   </div>
                   <div className="d-grid gap-2">
                     <button
-                      className="btn btn-secondary bg-warning-custome font-dark-custome"
+                      className="py-3 btn btn-yellow fw-bold"
                       type="submit"
                     >
                       Get Code
@@ -168,6 +169,7 @@ function signin() {
             </div>
           </div>
         </form>
+      </div>
       </main>
     </div>
   );
