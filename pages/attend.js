@@ -2,33 +2,42 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import NavBottom from "./component/navbottom";
+
 
 function attend() {
   return (
     <>
       <Head />
       <main className="main bg-white mobile-view">
-        <div className="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
+        <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/">
-              <span className="material-symbols-outlined text-white">
-                arrow_back
+            <Link href="/" >
+              <span className="fa fa-arrow-left fa-2x color-blue">
               </span>
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
-            <h2 className="mb-1 text-white">Score</h2>
+            <h4 className="font-dark fw-500 mb-0">Attendance</h4>
           </div>
         </div>
-        <section className="section-1">
+        <section className="section-1 bg-light p-4">
+        <div className="d-flex align-items-center justify-content-between">
+          <div className="icon-bg">
+            <span className="fa fa-clipboard-user fa-lg color-blue"></span>
+          </div>
           <a
-            className="text-decoration-none text-black h2"
+            className="text-decoration-none color-blue text-end"
             href="#"
             target="_blank"
           >
+          <small className="font-dark fw-bold">Nama Siswa:</small>
+          <h5 className="my-0">
             Gracia Limantoro
+          </h5>
           </a>
-          <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0 mt-3">
+        </div>
+          {/* <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0 mt-3">
             <select
               className="form-select rounded-pill me-3"
               aria-label="Default select example"
@@ -42,9 +51,9 @@ function attend() {
               Pilih
             </button>
           </div>
-          <h2 className="mt-3 text-black">- Test 1</h2>
+          <h2 className="mt-3 text-black">- Test 1</h2> */}
         </section>
-        <section className="section-2 mt-4">
+        <section className="section-2 bg-light mt-3 p-4 mb-last-content">
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
@@ -76,99 +85,7 @@ function attend() {
             </tbody>
           </table>
         </section>
-        <section className="section-4 bg-white">
-          <footer className="footer fixed-bottom bg-dark-custome rounded-top-dnone-bottom">
-            <div className="container pt-2">
-              <div className="d-flex justify-content-between">
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-home.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">home</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/attend" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-attend.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Attend</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/mypoint" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-point.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Point</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/score" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-score.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Score</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="d-flex flex-column pt-0 pb-0">
-                    <Link href="/payment" className="nav-link">
-                      <div className="text-center">
-                        <Image
-                          src="/img/icons/icon-payment.png"
-                          width={30}
-                          height={30}
-                          className="icon"
-                          alt=""
-                          srcset=""
-                        />
-                      </div>
-                      <span className="text-white">Payment</span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </section>
+        <NavBottom />
       </main>
     </>
   );

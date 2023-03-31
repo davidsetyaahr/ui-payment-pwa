@@ -139,7 +139,16 @@ footer .nav-link,.font-dark{
 }
 
 .table-dark-opacity{
-  background-color: rgba(85, 73, 213, 0.43) !important;
+  background:#136dde !important;
+  color:white;
+}
+.table-borderless{
+  border-collapse: separate;
+  border-spacing: 0 0.7em;  
+
+}
+.table-borderless tr{
+  background:white;
 }
 .section-rounded{
   border-top-left-radius : 30px;
@@ -177,6 +186,11 @@ footer .nav-link,.font-dark{
     color:white !important;
 }
 
+.icon-bg.auto{
+  width : auto;
+  padding : 0.5rem;
+  height : auto;
+}
 .icon-bg.sm{
   width : 40px;
   height : 40px;
@@ -216,3 +230,27 @@ footer .nav-link,.font-dark{
   font-weight:500;
   font-size : 15px;
 }
+.main-content{
+  height : 100%;
+  display:flex;
+}
+.filter-date{
+  display:flex;
+}
+.filter-date input{
+  width : 40%;
+  background:white;
+  border: 1px solid #ddd;
+  padding : 0.3rem;
+}
+.filter-date input{
+}
+.filter-date button{
+  width : 20%;
+  background:#ffcb14;
+  color:#136dde;
+  border:none;
+  font-weight:600;
+}
+
+

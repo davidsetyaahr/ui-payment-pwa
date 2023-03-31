@@ -69,32 +69,43 @@ export default function mypoint() {
     <div>
       <Head />
       <main className="main bg-white mobile-view">
-        <div className="navbar d-flex flex-row bg-dark-custome rounded-bottom-custome py-4 px-3 mx-auto">
+        <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/">
-              <span className="material-symbols-outlined text-white">
-                arrow_back
+            <Link href="/" >
+              <span className="fa fa-arrow-left fa-2x color-blue">
               </span>
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
-            <h2 className="mb-1 text-white">My point :</h2>
+            <h4 className="font-dark fw-500 mb-0">My Point</h4>
           </div>
         </div>
-        <section className="section-1">
-          <div className="d-flex justify-content-center mt-3">
-            <div className="card border-0">
-              <div className="card-body bg-light rounded-1 shadow text-center">
-                <h3 className="text-black">Gracia Limantoro</h3>
-                <h1 className="text-dark">80</h1>
-              </div>
+        <section className="section-1 bg-light p-4">
+        <div className="d-flex align-items-center justify-content-between">
+          <div>
+            <small className="font-dark fw-bold">Point:</small>
+            <div className="icon-bg rounded auto fw-500">
+            80.000
             </div>
           </div>
+          <a
+            className="text-decoration-none color-blue text-end"
+            href="#"
+            target="_blank"
+          >
+          <small className="font-dark fw-bold">Nama Siswa:</small>
+          <h5 className="my-0">
+            Gracia Limantoro
+          </h5>
+          </a>
+        </div>
         </section>
-        <section className="section-2 mt-4">
+        <section className="section-2 mt-3 mb-last-content bg-light p-4">
+          <div className="filter-date">
           <input
             type="date"
             value={startDate}
+            className="start"
             name="startDate"
             onChange={(e) => {
               setStartDate(e.currentTarget.value);
@@ -108,11 +119,13 @@ export default function mypoint() {
             onChange={(e) => {
               setEndDate(e.currentTarget.value);
             }}
+            className="end"
             title="end"
           />
           <button type="submit" onClick={filter}>
-            Submit
+            Filter
           </button>
+          </div>
 
           <table className="table table-borderless table-hover">
             <thead>
