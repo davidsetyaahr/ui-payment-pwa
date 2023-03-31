@@ -99,29 +99,31 @@ function mypoint() {
         </section>
         <section className="section-2 mt-3 mb-last-content bg-light p-4">
           <div className="filter-date">
-            <input
-              type="date"
-              value={startDate}
-              className="start"
-              name="startDate"
-              onChange={(e) => {
-                setStartDate(e.currentTarget.value);
-              }}
-              title="start"
-            />
-            <input
-              type="date"
-              value={endDate}
-              name="endDate"
-              onChange={(e) => {
-                setEndDate(e.currentTarget.value);
-              }}
-              className="end"
-              title="end"
-            />
-            <button type="submit" onClick={filter}>
-              Filter
-            </button>
+          <input
+            type="date"
+            value={startDate}
+            className="start"
+            name="startDate"
+            onChange={(e) => {
+              setStartDate(e.currentTarget.value);
+            }}
+            title="start"
+          />
+          <div className="px-1"></div>
+          <input
+            type="date"
+            value={endDate}
+            name="endDate"
+            onChange={(e) => {
+              setEndDate(e.currentTarget.value);
+            }}
+            className="end"
+            title="end"
+          />
+          <div className="px-3"></div>
+          <button type="submit" onClick={filter}>
+            Filter
+          </button>
           </div>
 
           <table className="table table-borderless table-hover">
@@ -136,6 +138,8 @@ function mypoint() {
             {getList()}
           </table>
           {/* {getPageNum()} */}
+          <div className="d-flex justify-content-center">
+          <span className="me-2">per</span>
           <select
             value={perPage}
             onChange={(e) => {
@@ -147,6 +151,8 @@ function mypoint() {
             {getPageNum()}
             {/* <option value={1}>Page 1</option> */}
           </select>
+          <span className="ms-2">page</span>
+          </div>
         </section>
         <NavBottom />
       </main>
