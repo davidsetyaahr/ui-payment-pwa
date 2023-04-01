@@ -87,10 +87,11 @@ function mypoint() {
           </div>
         </div>
         <section className="section-1 bg-light p-4">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>
-              <small className="font-dark fw-bold">Point:</small>
-              <div className="icon-bg rounded auto fw-500">80.000</div>
+        <div className="d-flex align-items-center justify-content-between">
+          <div>
+            <small className="font-dark fw-bold">Point:</small>
+            <div className="icon-bg rounded auto fw-500">
+            80.000
             </div>
           </div>
           <a
@@ -100,7 +101,7 @@ function mypoint() {
           >
           <small className="font-dark fw-bold">Nama Siswa:</small>
           <h5 className="my-0">
-          {studentName}
+            {studentName}
           </h5>
           </a>
         </div>
@@ -165,6 +166,7 @@ function mypoint() {
         <NavBottom />
       </main>
     </div>
+
   );
 }
 
