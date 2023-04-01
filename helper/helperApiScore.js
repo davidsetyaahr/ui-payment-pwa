@@ -2,9 +2,11 @@ import { AxiosError } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { apiGet } from '@/utils/api.util';
 
+export const baseUrl = "http://127.0.0.1:8000/api";
+
 export const fetchScore = (props) => {
     return apiGet({
-      url: `/score/getTestItem`,
+      url: `${baseUrl}/score/getTestItem`,
       ...props,
     });
 };
@@ -20,7 +22,7 @@ export const useScoreDetail = (params) => {
 
 export const fetchScoreByTest = (studentId, testId, props) => {
     return apiGet({
-      url: `/score/getScore/${studentId}/${testId}`,
+      url: `${baseUrl}/score/getScore/${studentId}/${testId}`,
       ...props,
     });
 };

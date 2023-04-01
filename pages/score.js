@@ -78,7 +78,7 @@ const score = () => {
                   <select onChange={(e) => setTestId(e.target.value)} class="form-select py-1" aria-label="Default select example">
                       <option selected disabled>Open this select menu</option>
                       {datascore?.payload?.map((score)=>
-                        <option value={score.id}>{score.name}</option>
+                        <option key={score.id} value={score.id}>{score.name}</option>
                         )}
                         <option value={1}>"asdfsdaf"</option>
                     </select>
