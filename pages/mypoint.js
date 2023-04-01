@@ -92,7 +92,6 @@ function mypoint() {
               <small className="font-dark fw-bold">Point:</small>
               <div className="icon-bg rounded auto fw-500">80.000</div>
             </div>
-          </div>
           <a
             className="text-decoration-none color-blue text-end"
             href="#"

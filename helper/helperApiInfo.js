@@ -2,10 +2,12 @@ import { AxiosError } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { apiGet } from '@/utils/api.util';
 
+export const baseUrl = "http://127.0.0.1:8000/api";
+
 // Aannounce
 export const fetchAnnouncement = (props) => {
     return apiGet({
-      url: `/announcement`,
+      url: `${baseUrl}/announcement`,
       ...props,
     });
 };
@@ -21,7 +23,7 @@ export const useAnnouncement = (params) => {
 // advertise
 export const fetchAdvertise = (props) => {
     return apiGet({
-      url: `/advertise`,
+      url: `${baseUrl}/advertise`,
       ...props,
     });
 };
@@ -37,7 +39,7 @@ export const useAdvertise = (params) => {
 // agenda
 export const fetchAgenda = (props) => {
     return apiGet({
-      url: `/agenda`,
+      url: `${baseUrl}/agenda`,
       ...props,
     });
 };
@@ -47,6 +49,22 @@ export const useAgenda = (params) => {
     return useQuery({
       queryKey: deps ? [key, deps] : [key],
       queryFn: async ({ signal }) => await fetchAgenda({ params: fnParams, signal, token }),
+      ...options,
+    });
+};
+// student
+export const fetchStudent = (props) => {
+    return apiGet({
+      url: `${baseUrl}/listStudents/${JSON.parse(localStorage.getItem('userData')).id}`,
+      ...props,
+    });
+};
+export const useStudent = (params) => {
+    const { key = 'fetchStudent', deps, fnParams, options, token } = params || {};
+
+    return useQuery({
+      queryKey: deps ? [key, deps] : [key],
+      queryFn: async ({ signal }) => await fetchStudent({ params: fnParams, signal, token }),
       ...options,
     });
 };
