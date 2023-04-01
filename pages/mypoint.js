@@ -13,15 +13,16 @@ function mypoint() {
   const [endDate, setEndDate] = useState();
   const [perPage, setPerPage] = useState(10);
   const [total, setTotal] = useState();
+  const [totalPointStudent, setTotalPointStudent] = useState();
 
   const getData = async (perpage) => {
-    const student = JSON.parse(localStorage.getItem("userData")) ?? [];
+    // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       page: 1,
-      id: student.default_student_id,
+      // id: student.default_student_id,
       // id: "2067",
       id: tempStorage.default_student_id,
     };
@@ -29,7 +30,8 @@ function mypoint() {
       setStudentName(tempStorage.default_student_name)
       setDataPoint(res.payload);
       setTotal(res.payload.total);
-      setname(student.default_student_name)
+      setTotalPointStudent(res.total_point);
+      setname(tempStorage.default_student_name)
     });
   };
 
@@ -91,7 +93,8 @@ function mypoint() {
           <div>
             <small className="font-dark fw-bold">Point:</small>
             <div className="icon-bg rounded auto fw-500">
-            80.000
+            {totalPointStudent}
+            </div>
             </div>
           <a
             className="text-decoration-none color-blue text-end"
