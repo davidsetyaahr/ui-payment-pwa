@@ -93,7 +93,6 @@ function mypoint() {
             <div className="icon-bg rounded auto fw-500">
             80.000
             </div>
-          </div>
           <a
             className="text-decoration-none color-blue text-end"
             href="#"

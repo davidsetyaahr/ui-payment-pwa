@@ -4,19 +4,21 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import NavBottom from "./component/navbottom";
 import withAuth from '@/utils/withAuth.util';
-import { useAdvertise, useAgenda, useAnnouncement } from '@/helper/helperApiInfo';
+import { useStudent, useAdvertise, useAgenda, useAnnouncement } from '@/helper/helperApiInfo';
 import { useRouter } from "next/router";
 import { baseStorageUrl } from "../pages/api/fetchdata";
 
 function Home() {
   const [authUser, setAuthUser] = useState(null)
   const [testId, setTestId] = useState(2)
+  const [studentId, setStudentId] = useState(null)
+  const [studentName, setStudentName] = useState(null)
   const [token, setToken] = useState(null)
   const router = useRouter();
   const { data:dataannounce } = useAnnouncement({ token, options: { enabled: !!token } });
   const { data:dataagenda } = useAgenda({ token, options: { enabled: !!token } });
   const { data:datads } = useAdvertise({ token, options: { enabled: !!token } });
-
+  const { data:datastudent } = useStudent({ token, options: { enabled: !!token } });
 
   // logout
   const handleLogout = () => {
@@ -27,9 +29,22 @@ function Home() {
     localStorage.removeItem("userData");
     router.push('/signin');
   };
+  const handleSetStudent = (id,name) => {
+    setStudentId(id)
+    setStudentName(name)
+  }
+  const handleClickSetDefaultStudentId = () => {
+    let dataStorage = JSON.parse(localStorage.getItem('userData'))
+    dataStorage.default_student_id = studentId
+    dataStorage.default_student_name = studentName
+    localStorage.setItem('userData',JSON.stringify(dataStorage))
+
+    
+  }
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
+    // setStudentId(JSON.parse(localStorage.getItem('userData')).default_student_id)
     const localStorageAuthUser = localStorage.getItem('userData')
     if (localStorageAuthUser) {
       setAuthUser(JSON.parse(localStorageAuthUser))
@@ -46,14 +61,11 @@ function Home() {
                 <div className="navbar nav-top bg-dark-custome d-flex flex-row justify-content-between pt-4 px-3 mx-auto">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzPb_pSj-ir-9eB6mi0lVJdQP1KKHiB8fRBS1CbmOXGd9Z1FEGMJHbEKhahwhWLGSaEXY&usqp=CAU" className="rounded-circle" alt="" width="40" height="40"/>
                     <div className="d-flex flex-column p-2 pt-0 pb-0 ps-3" >
-                      <p className="mb-1 text-white parent-name">
-                      Hallo Mr.Limantoro
+                      <p className="mb-1 text-white text-center parent-name">
+                                    {authUser?.name}
                         </p>
                         <button className="p-0 text-decoration-none bg-dark-custome border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                          <p className="justify-content-center mb-1 text-warning d-flex align-items-center student-name">Gracia Limantoro
-                          <span className="material-symbols-outlined">
-                          expand_more
-                          </span>
+                          <p className="justify-content-center mb-1 text-warning d-flex align-items-center student-name">{authUser?.default_student_name} <span className="fa fa-chevron-down ms-1"></span>
                           </p>
                         </button>
                     </div>
@@ -123,7 +135,7 @@ function Home() {
                     <h5 className="mt-0 mb-2 font-dark fw-500">
                         Announcement
                     </h5>
-                    <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" />
+                    <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1" alt="" />
                     {/* <Image  src={`${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1 img-fluid" alt="" /> */}
                 </section>
                 <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
@@ -151,21 +163,22 @@ function Home() {
           <div className="modal-content animate-bottom">
               <div className="modal-header border-0">
               <h1 className="modal-title fs-5" id="exampleModalLabel">Chose Student :</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button"  className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
-              <div className="border border-dark rounded-1 p-3">
-                  <h4 className="font-dark">
-                      Gilberd Limantoro
-                  </h4>
-
-                  <p className="text-danger">
-                      KID 2B
-                  </p>
-              </div>
+                {datastudent?.payload?.map((item,key)=>
+                  <div onClick={() => handleSetStudent(item.id,item.name)}  key={item.id} className="border border rounded-1 p-3 mt-2">
+                      <h5 className="font-dark">
+                          {item.name}
+                      </h5>
+                      {/* <p className="text-danger">
+                          KID 2B
+                      </p> */}
+                  </div>
+              )}
               </div>
               <div className="modal-footer border-0">
-              <button type="button" className="btn btn-primary mx-auto">Chose</button>
+              <button type="button" onClick={handleClickSetDefaultStudentId} className="btn btn-yellow mx-auto fw-bold px-3">Choose Student</button>
               </div>
           </div>
           </div>
