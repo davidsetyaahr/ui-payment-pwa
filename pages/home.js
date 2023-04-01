@@ -13,6 +13,10 @@ function Home() {
   const [testId, setTestId] = useState(2)
   const [studentId, setStudentId] = useState(null)
   const [studentName, setStudentName] = useState(null)
+  const [studentNameLocalStorage, setStudentNameLocalStorage] = useState(null)
+  const [tagihan, setTagihan] = useState(0)
+  const [mypoint, setMypoint] = useState(0)
+  const [averageScore, setAverageScore] = useState(0)
   const [token, setToken] = useState(null)
   const router = useRouter();
   const { data:dataannounce } = useAnnouncement({ token, options: { enabled: !!token } });
@@ -29,27 +33,50 @@ function Home() {
     localStorage.removeItem("userData");
     router.push('/signin');
   };
+  
   const handleSetStudent = (id,name) => {
     setStudentId(id)
     setStudentName(name)
-  }
-  const handleClickSetDefaultStudentId = () => {
+
     let dataStorage = JSON.parse(localStorage.getItem('userData'))
     dataStorage.default_student_id = studentId
     dataStorage.default_student_name = studentName
     localStorage.setItem('userData',JSON.stringify(dataStorage))
-
-    
+    setStudentNameLocalStorage(studentName)
   }
 
+  const handleClickSetDefaultStudentId = () => {
+    // var myModalEl = document.getElementById("exampleModal");
+    // var modal = new bootstrap.Modal.getInstance(myModalEl)
+    // modal.hide();
+  }
+  const formatMoney = (amount, currency) => {
+    if(isNaN(amount)){
+      return 0;
+    }
+    else{
+      return currency + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    }
+  }
+
+
   useEffect(() => {
+    const stundentIdLocalStorage = JSON.parse(localStorage.getItem('userData')).default_student_id;
+    setStudentId(stundentIdLocalStorage)
     setToken(localStorage.getItem('token'))
-    // setStudentId(JSON.parse(localStorage.getItem('userData')).default_student_id)
+    setStudentNameLocalStorage(JSON.parse(localStorage.getItem('userData')).default_student_name)
     const localStorageAuthUser = localStorage.getItem('userData')
     if (localStorageAuthUser) {
       setAuthUser(JSON.parse(localStorageAuthUser))
     }
 }, [])
+    let getCurrentStudent = {
+      price : 0
+    }
+    if(typeof datastudent !== 'undefined'){
+      getCurrentStudent = datastudent.payload.find((data) => data.id === studentId)    
+    }
+
   return (
     <div>
       <Head/>
@@ -65,7 +92,7 @@ function Home() {
                                     {authUser?.name}
                         </p>
                         <button className="p-0 text-decoration-none bg-dark-custome border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                          <p className="justify-content-center mb-1 text-warning d-flex align-items-center student-name">{authUser?.default_student_name} <span className="fa fa-chevron-down ms-1"></span>
+                          <p className="justify-content-center mb-1 text-warning d-flex align-items-center student-name">{studentNameLocalStorage} <span className="fa fa-chevron-down ms-1"></span>
                           </p>
                         </button>
                     </div>
@@ -82,10 +109,10 @@ function Home() {
                             <div>
                               <p className="mb-0 fw-500 font-dark fs-16">Tagihan saat ini :</p>
                               <h4 className="mb-1 color-blue price text-center">
-                                {/* {tagihan} */}
+                                {formatMoney(parseInt(getCurrentStudent.price),'Rp. ')}
                               </h4>
                             </div>
-                            <Link href="" className="px-2 btn btn-sm btn-blue">Detail</Link>
+                            <Link href="/payment" className="px-2 btn btn-sm btn-blue">Detail</Link>
                           </div>
                         </div>
                       </div>
@@ -96,9 +123,9 @@ function Home() {
                             <div className="card-body">
                               <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                                 <div className="me-2 icon-bg fw-500 color-blue sm">
-                                  <h4 className="my-0">
-                                    {/* {totalPoint} */}
-                                  </h4>
+                                  <h5 className="my-0">
+                                    {getCurrentStudent.total_point}
+                                  </h5>
                                 </div>
                                 <div className="mb-1 font-dark total_point fw-500">Mypoint</div>
                               </div>
@@ -110,11 +137,11 @@ function Home() {
                             <div className="card-body">
                               <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                                 <div className="me-2 icon-bg fw-500 color-blue sm">
-                                  <h4 className="my-0">
-                                    {/* {averageScore} */}
-                                  </h4>
+                                  <h5 className="my-0">
+                                    {getCurrentStudent.average_score}
+                                  </h5>
                                 </div>
-                                <div className="mb-1 font-dark total_point fw-500">Last Score</div>
+                                <div className="mb-1 font-dark total_point fw-500">Average Score</div>
                               </div>
                             </div>
                           </div>
@@ -167,7 +194,7 @@ function Home() {
               </div>
               <div className="modal-body">
                 {datastudent?.payload?.map((item,key)=>
-                  <div onClick={() => handleSetStudent(item.id,item.name)}  key={item.id} className="border border rounded-1 p-3 mt-2">
+                  <div onClick={() => handleSetStudent(item.id,item.name)}  key={item.id} className={`rounded-1 p-3 mt-2 ${item.id === studentId ? 'bg-light border-blue' : 'border'}`}>
                       <h5 className="font-dark">
                           {item.name}
                       </h5>
@@ -178,7 +205,7 @@ function Home() {
               )}
               </div>
               <div className="modal-footer border-0">
-              <button type="button" onClick={handleClickSetDefaultStudentId} className="btn btn-yellow mx-auto fw-bold px-3">Choose Student</button>
+              {/* <button type="button" onClick={handleClickSetDefaultStudentId} className="btn btn-yellow mx-auto fw-bold px-3">Choose Student</button> */}
               </div>
           </div>
           </div>
