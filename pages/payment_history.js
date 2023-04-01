@@ -13,22 +13,28 @@ function payment_history() {
   const [dataPayment, setDataPayment] = useState();
   const [dataDetail, setDataDetail] = useState();
   const [id, setId] = useState();
+  const [name, setname] = useState();
+  const [studentName, setStudentName] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [perPage, setPerPage] = useState(10);
   const [total, setTotal] = useState();
 
+
   const getData = async (perpage) => {
     const student = JSON.parse(localStorage.getItem("userData")) ?? [];
-
+    var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       id: student.default_student_id,
+      id: tempStorage.default_student_id,
     };
     await getHistoryPayment({ data, perPage: perpage }, (res) => {
+      setStudentName(tempStorage.default_student_name)
       setDataPayment(res.payload);
       setTotal(res.payload.total);
+      setname(student.default_student_name)
     });
   };
 
@@ -155,7 +161,7 @@ function payment_history() {
             >
             <small className="font-dark fw-bold">Nama Siswa:</small>
             <h5 className="my-0">
-              Gracia Limantoro
+              {studentName}
             </h5>
             </a>
           </div>
