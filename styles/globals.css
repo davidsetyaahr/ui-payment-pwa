@@ -280,3 +280,6 @@ footer .nav-link,.font-dark{
   border-radius:0px !important;
   width:100%;
 }
+.border-blue{
+  border : 1px solid #136dde;
+}

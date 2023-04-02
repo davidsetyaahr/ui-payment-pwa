@@ -38,8 +38,9 @@ export const useAdvertise = (params) => {
 };
 // agenda
 export const fetchAgenda = (props) => {
+    const dataStorage = JSON.parse(localStorage.getItem('userData'))
     return apiGet({
-      url: `${baseUrl}/agenda`,
+      url: `${baseUrl}/agenda/${dataStorage.default_student_id}`,
       ...props,
     });
 };
