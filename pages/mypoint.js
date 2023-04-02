@@ -27,11 +27,11 @@ function mypoint() {
       id: tempStorage.default_student_id,
     };
     await getMyPoint({ data, perPage: perpage }, (res) => {
-      setStudentName(tempStorage.default_student_name)
+      setStudentName(tempStorage.default_student_name);
       setDataPoint(res.payload);
       setTotal(res.payload.total);
+      setname(student.default_student_name);
       setTotalPointStudent(res.total_point);
-      setname(tempStorage.default_student_name)
     });
   };
 
@@ -96,45 +96,43 @@ function mypoint() {
             {totalPointStudent}
             </div>
             </div>
-          <a
-            className="text-decoration-none color-blue text-end"
-            href="#"
-            target="_blank"
-          >
-          <small className="font-dark fw-bold">Nama Siswa:</small>
-          <h5 className="my-0">
-            {studentName}
-          </h5>
-          </a>
-        </div>
+            <a
+              className="text-decoration-none color-blue text-end"
+              href="#"
+              target="_blank"
+            >
+              <small className="font-dark fw-bold">Nama Siswa:</small>
+              <h5 className="my-0">{studentName}</h5>
+            </a>
+          </div>
         </section>
         <section className="section-2 mt-3 mb-last-content bg-light p-4">
           <div className="filter-date">
-          <input
-            type="date"
-            value={startDate}
-            className="start"
-            name="startDate"
-            onChange={(e) => {
-              setStartDate(e.currentTarget.value);
-            }}
-            title="start"
-          />
-          <div className="px-1"></div>
-          <input
-            type="date"
-            value={endDate}
-            name="endDate"
-            onChange={(e) => {
-              setEndDate(e.currentTarget.value);
-            }}
-            className="end"
-            title="end"
-          />
-          <div className="px-3"></div>
-          <button type="submit" onClick={filter}>
-            Filter
-          </button>
+            <input
+              type="date"
+              value={startDate}
+              className="start"
+              name="startDate"
+              onChange={(e) => {
+                setStartDate(e.currentTarget.value);
+              }}
+              title="start"
+            />
+            <div className="px-1"></div>
+            <input
+              type="date"
+              value={endDate}
+              name="endDate"
+              onChange={(e) => {
+                setEndDate(e.currentTarget.value);
+              }}
+              className="end"
+              title="end"
+            />
+            <div className="px-3"></div>
+            <button type="submit" onClick={filter}>
+              Filter
+            </button>
           </div>
 
           <table className="table table-borderless table-hover">
@@ -150,25 +148,24 @@ function mypoint() {
           </table>
           {/* {getPageNum()} */}
           <div className="d-flex justify-content-center">
-          <span className="me-2">per</span>
-          <select
-            value={perPage}
-            onChange={(e) => {
-              setPerPage(e.target.value);
-              console.log(e.target.value);
-              getData(e.target.value);
-            }}
-          >
-            {getPageNum()}
-            {/* <option value={1}>Page 1</option> */}
-          </select>
-          <span className="ms-2">page</span>
+            <span className="me-2">per</span>
+            <select
+              value={perPage}
+              onChange={(e) => {
+                setPerPage(e.target.value);
+                console.log(e.target.value);
+                getData(e.target.value);
+              }}
+            >
+              {getPageNum()}
+              {/* <option value={1}>Page 1</option> */}
+            </select>
+            <span className="ms-2">page</span>
           </div>
         </section>
         <NavBottom />
       </main>
     </div>
-
   );
 }
 

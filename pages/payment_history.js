@@ -13,6 +13,7 @@ function payment_history() {
   const [dataPayment, setDataPayment] = useState();
   const [dataDetail, setDataDetail] = useState();
   const [id, setId] = useState();
+  const [code, setCode] = useState();
   const [name, setname] = useState();
   const [studentName, setStudentName] = useState();
   const [startDate, setStartDate] = useState();
@@ -72,11 +73,15 @@ function payment_history() {
 
   function showModal(idPayment) {
     getDataDetail(idPayment);
-    setId(idPayment);
+    setCode(idPayment);
   }
 
   function getReceipt(params) {
     printReceipt(params);
+  }
+
+  function formatMoney(amount, currency) {
+    return currency + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
   }
 
   const getList = () => {
@@ -85,11 +90,11 @@ function payment_history() {
         {dataPayment &&
           dataPayment.data.map((data, index) => (
             <tr key={index} className="text-center">
-              <th scope="row">{data.date}</th>
-              <td>{data.total}</td>
+              <th scope="row">{String(data.created_at).split("T")[0]}</th>
+              <td>{formatMoney(data.amount, 'Rp. ')}</td>
               <td>
                 <button
-                  onClick={() => showModal(data.id)}
+                  onClick={() => showModal(data.unique_code)}
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   className="rounded-pill text-decoration-none px-3 bg-primary text-white"
@@ -111,8 +116,8 @@ function payment_history() {
           dataDetail.map((data, index) => (
             <tr  key={index} className="text-center">
               <td>{data.name}</td>
-              <td>{data.description}</td>
-              <td>{data.total}</td>
+              <td>{data.payment}</td>
+              <td>{formatMoney(data.price, 'Rp. ')}</td>
             </tr>
           ))}
       </tbody>
@@ -253,7 +258,7 @@ function payment_history() {
               </table>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" onClick={() => getReceipt(id)} className="btn btn-primary mx-auto">
+              <button type="button" onClick={() => getReceipt(code)} className="btn btn-primary mx-auto">
                 save recipt
               </button>
             </div>

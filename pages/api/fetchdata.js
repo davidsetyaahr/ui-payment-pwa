@@ -16,7 +16,7 @@ export const getMyPoint = async ({ data, perPage = 10 }, callback) => {
     method: "GET",
   });
   const result = await res.json();
-
+  
   callback(result);
 };
 
