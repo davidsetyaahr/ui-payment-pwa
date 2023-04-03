@@ -56,7 +56,9 @@ const score = () => {
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
             <div className="icon-bg">
-              <span className="fa fa-star fa-lg color-blue"></span>
+              <span className="color-blue fw-500">
+                B2
+              </span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -76,7 +78,7 @@ const score = () => {
                 {/* <form onSubmit={handleScoreByTestSubmit}> */}
                   <div class="input-group mb-2">
                   <select onChange={(e) => setTestId(e.target.value)} class="form-select py-1" aria-label="Default select example">
-                      <option selected disabled>Open this select menu</option>
+                      <option selected disabled>select test</option>
                       {datascore?.payload?.map((score)=>
                         <option key={score.id} value={score.id}>{score.name}</option>
                         )}
@@ -95,7 +97,7 @@ const score = () => {
                     <th scope="col">No</th>
                     <th scope="col">Item</th>
                     <th scope="col">Score</th>
-                    <th scope="col">Kategori</th>
+                    <th scope="col">category</th>
                   </tr>
                 </thead>
                 <tbody>
