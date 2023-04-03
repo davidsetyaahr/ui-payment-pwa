@@ -11,7 +11,7 @@ import {
   useAnnouncement,
 } from "@/helper/helperApiInfo";
 import { useRouter } from "next/router";
-import { baseStorageUrl } from "../pages/api/fetchdata";
+import { baseStorageUrl, getSummaryStudent } from "../pages/api/fetchdata";
 
 function Home() {
   const [authUser, setAuthUser] = useState(null);
@@ -75,10 +75,26 @@ function Home() {
     }
   };
 
+  const getDataSummary = async () => {
+    // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
+    var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
+    let data = {
+      
+      id: tempStorage.default_student_id,
+    };
+    await getSummaryStudent({ data }, (res) => {
+      console.log(res.payload);
+      setTagihan(res.payload.billing);
+      setAverageScore(res.payload.score);
+      setMypoint(res.payload.point);
+    });
+  };
+
   useEffect(() => {
     const stundentIdLocalStorage = JSON.parse(
       localStorage.getItem("userData")
     ).default_student_id;
+    getDataSummary();
     setStudentId(stundentIdLocalStorage);
     setToken(localStorage.getItem("token"));
     setStudentNameLocalStorage(
@@ -147,7 +163,7 @@ function Home() {
                           </p>
                           <h4 className="mb-1 color-blue price text-center">
                             {formatMoney(
-                              parseInt(getCurrentStudent.price),
+                              parseInt(tagihan),
                               "Rp. "
                             )}
                           </h4>
@@ -169,7 +185,7 @@ function Home() {
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                           <div className="me-2 icon-bg fw-500 color-blue sm">
                             <h5 className="my-0">
-                              {getCurrentStudent.total_point}
+                              {mypoint}
                             </h5>
                           </div>
                           <div className="mb-1 font-dark total_point fw-500">
@@ -185,7 +201,7 @@ function Home() {
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                           <div className="me-2 icon-bg fw-500 color-blue sm">
                             <h5 className="my-0">
-                              {getCurrentStudent.average_score}
+                              {averageScore}
                             </h5>
                           </div>
                           <div className="mb-1 font-dark total_point fw-500">

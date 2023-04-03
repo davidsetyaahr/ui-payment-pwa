@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
           <ToastContainer />
         </Hydrate>
-        <ReactQueryDevtools initialIsOpen={false} />
+        
       </QueryClientProvider>
     </>
     )
