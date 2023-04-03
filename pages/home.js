@@ -33,7 +33,7 @@ function Home() {
     localStorage.removeItem("userData");
     router.push('/signin');
   };
-  
+
   const handleSetStudent = (id,name) => {
     setStudentId(id)
     setStudentName(name)
@@ -74,7 +74,7 @@ function Home() {
       price : 0
     }
     if(typeof datastudent !== 'undefined'){
-      getCurrentStudent = datastudent.payload.find((data) => data.id === studentId)    
+      getCurrentStudent = datastudent.payload.find((data) => data.id === studentId)
     }
 
   return (
@@ -107,7 +107,7 @@ function Home() {
                               <span className="fa fa-receipt fa-lg color-blue"></span>
                             </div>
                             <div>
-                              <p className="mb-0 fw-500 font-dark fs-16">Tagihan saat ini :</p>
+                              <p className="mb-0 fw-500 font-dark fs-16">Current bill :</p>
                               <h4 className="mb-1 color-blue price text-center">
                                 {formatMoney(parseInt(getCurrentStudent.price),'Rp. ')}
                               </h4>
@@ -147,7 +147,8 @@ function Home() {
                           </div>
                         </div>
                     </div>
-                </section>
+
+                                    </section>
                 <section className="section-2 bg-light p-4">
                     <h5 className="mb-2 font-dark fw-500">
                         Agenda
@@ -189,7 +190,7 @@ function Home() {
           <div className="modal-dialog modal-dialog-centered modal-position-bottom">
           <div className="modal-content animate-bottom">
               <div className="modal-header border-0">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Chose Student :</h1>
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Choose Student :</h1>
               <button type="button"  className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
