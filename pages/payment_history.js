@@ -157,7 +157,9 @@ function payment_history() {
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
             <div className="icon-bg">
-              <span className="fa fa-shopping-cart fa-lg color-blue"></span>
+              <span className="color-blue fw-500">
+                B3
+              </span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
