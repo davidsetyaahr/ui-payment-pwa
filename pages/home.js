@@ -162,10 +162,10 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="row justify-content-between mt-3">
-                  <div className="col-6">
-                    <div className="card rounded bg-light border-0 pr-3">
+                    <div className="card rounded bg-light border-0 pr-3 mt-3">
                       <div className="card-body">
+                <div className="row justify-content-between">
+                  <div className="col-6">
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                           <div className="me-2 icon-bg fw-500 color-blue sm">
                             <h5 className="my-0">
@@ -175,13 +175,13 @@ function Home() {
                           <div className="mb-1 font-dark total_point fw-500">
                             Mypoint
                           </div>
-                        </div>
-                      </div>
+                        {/* </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="col-6">
-                    <div className="card rounded bg-light border-0 pr-3">
-                      <div className="card-body">
+                    {/* <div className="card rounded bg-light border-0 pr-3">
+                      <div className="card-body"> */}
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                           <div className="me-2 icon-bg fw-500 color-blue sm">
                             <h5 className="my-0">
@@ -199,7 +199,8 @@ function Home() {
               </section>
               <section className="section-2 bg-light p-4">
                 <h5 className="mb-2 font-dark fw-500">Agenda</h5>
-                <div className="img-slide">
+                {/* update ui agend with slide */}
+                {/* <div className="img-slide">
                   {dataagenda?.payload?.map((dt) => (
                     <div
                       className="content card mr-1"
@@ -209,23 +210,51 @@ function Home() {
                         width: "100% !important",
                       }}
                     >
-                      <div className="card-body">
+                      <div className="card-body d-flex align-items-center">
                        <div className="card-title">{dt.date}</div>
                         <p className="card-text">{dt.activity}</p>
                       </div>
                     </div>
                   ))}
-                </div>
-                {/* <div className="card" style={{ height: "100px !important" }}>
-                  <div className="card-body">
+                </div> */}
+                {/* end update ui agend with slide */}
+                {/* test ui agenda with slide */}
+                {/* <div className="img-slide">
+                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                  <div className="card-body d-flex align-items-center">
+                    {dataagenda?.payload?.activity}
+                    <br></br>
                     {dataagenda?.payload?.activity}
                   </div>
+                </div>
+                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                  <div className="card-body d-flex align-items-center">
+                    {dataagenda?.payload?.activity}
+                    <br></br>
+                    {dataagenda?.payload?.activity}
+                  </div>
+                </div>
+                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                  <div className="card-body">
+                    {dataagenda?.payload?.activity}
+                    <br></br>
+                    {dataagenda?.payload?.activity}
+                  </div>
+                </div>
+                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                  <div className="card-body">
+                    {dataagenda?.payload?.activity}
+                    <br></br>
+                    {dataagenda?.payload?.activity}
+                  </div>
+                </div>
                 </div> */}
+                {/*end test ui agenda with slide */}
               </section>
               <section className="section-3 mt-3 bg-light p-4">
                 <h5 className="mt-0 mb-2 font-dark fw-500">Announcement</h5>
                 <div className="img-slide">
-                  {dataannounce?.payload?.map((dt) => (
+                  {/* {dataannounce?.payload?.map((dt) => (
                     <div key={dt.id} className="content">
                       <Image
                         src={`${baseStorageUrl}${dt.banner}`}
@@ -235,7 +264,7 @@ function Home() {
                       />
                       <div className="title">{dt.description}</div>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
                 {/* <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1" alt="" /> */}
               </section>

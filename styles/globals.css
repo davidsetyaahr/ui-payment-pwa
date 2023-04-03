@@ -3,8 +3,8 @@
 main.mobile-view{
   border: none;
   height: 100vh;
-  font-family: 'Poppins', sans-serif;   
-  font-size:14px;   
+  font-family: 'Poppins', sans-serif;
+  font-size:14px;
 }
 /* background */
 .bg-dark-custome{
@@ -151,7 +151,7 @@ footer .nav-link,.font-dark{
 }
 .table-borderless{
   border-collapse: separate;
-  border-spacing: 0 0.7em;  
+  border-spacing: 0 0.7em;
 
 }
 .table-borderless tr{
@@ -230,6 +230,10 @@ footer .nav-link,.font-dark{
   padding-bottom : 10px;
 }
 .img-slide img{
+  width : 200px !important;
+}
+.img-slide .content.card{
+  min-width: fit-content !important;
   width : 200px !important;
 }
 .img-slide .content{
