@@ -248,6 +248,7 @@ function payment_history() {
               ></button>
             </div>
             <div className="modal-body">
+              <div className="table-responsive">
               <table className="table table-striped">
                 <thead>
                   <tr className="table-dark text-center">
@@ -258,6 +259,7 @@ function payment_history() {
                 </thead>
                 {getDetail()}
               </table>
+              </div>
             </div>
             <div className="modal-footer border-0">
               <button type="button" onClick={() => getReceipt(code)} className="btn btn-primary mx-auto">
