@@ -8,6 +8,7 @@ import withAuth from "@/utils/withAuth.util";
 function mypoint() {
   const [dataPoint, setDataPoint] = useState();
   const [name, setname] = useState();
+  const [className, setclassName] = useState();
   const [startDate, setStartDate] = useState();
   const [studentName, setStudentName] = useState();
   const [endDate, setEndDate] = useState();
@@ -32,6 +33,7 @@ function mypoint() {
       setTotal(res.payload.total);
       setname(tempStorage.default_student_name);
       setTotalPointStudent(res.total_point);
+      setclassName(res.class);
     });
   };
 

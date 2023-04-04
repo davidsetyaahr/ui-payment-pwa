@@ -11,6 +11,7 @@ function attend() {
   const [dataClass, setDataClass] = useState();
   const [classSelected, setClassSelected] = useState(0);
   const [id, setId] = useState();
+  const [className, setclassName] = useState();
   const [perPage, setPerPage] = useState(10);
   const [studentName, setStudentName] = useState();
   const [total, setTotal] = useState();
@@ -23,6 +24,7 @@ function attend() {
     await getAttend({ data, perPage: perpage }, (res) => {
       setStudentName(tempStorage.default_student_name);
       setDataAttend(res.payload);
+      setclassName(res.class)
       setTotal(res.payload.total);
     });
   };
@@ -104,7 +106,7 @@ function attend() {
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
             <div className="icon-bg">
-              <span className="color-blue fw-500">B3</span>
+              <span className="color-blue fw-500">{className}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
