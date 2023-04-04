@@ -79,7 +79,7 @@ function Home() {
     // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
-      
+
       id: tempStorage.default_student_id,
     };
     await getSummaryStudent({ data }, (res) => {
@@ -93,12 +93,12 @@ function Home() {
   useEffect(() => {
     const stundentIdLocalStorage = JSON.parse(
       localStorage.getItem("userData")
-    ).default_student_id;
+    )?.default_student_id;
     getDataSummary();
     setStudentId(stundentIdLocalStorage);
     setToken(localStorage.getItem("token"));
     setStudentNameLocalStorage(
-      JSON.parse(localStorage.getItem("userData")).default_student_name
+      JSON.parse(localStorage.getItem("userData"))?.default_student_name
     );
     const localStorageAuthUser = localStorage.getItem("userData");
     if (localStorageAuthUser) {
@@ -227,8 +227,9 @@ function Home() {
                       }}
                     >
                       <div className="card-body d-flex align-items-center">
-                       <div className="card-title">{dt.date}</div>
-                        <p className="card-text">{dt.activity}</p>
+                       {dt.date}
+                       <br></br>
+                        {dt.activity}
                       </div>
                     </div>
                   ))}

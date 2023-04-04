@@ -175,7 +175,6 @@ const score = () => {
                   {score.name}
                 </option>
               ))}
-              <option value={1}>"asdfsdaf"</option>
             </select>
             <button
               type="submit"
