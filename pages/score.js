@@ -38,6 +38,47 @@ const score = () => {
           setAuthUser(JSON.parse(localStorageAuthUser))
         }
     }, [])
+
+    const getListScore = () => {
+      return (
+        <>
+        <thead>
+            <tr class="table-dark-opacity text-center">
+            <th scope="col">No</th>
+            <th scope="col">Item</th>
+            <th scope="col">Score</th>
+            <th scope="col">category</th>
+          </tr>
+        </thead>
+        <tbody>
+          {datascorebytest?.payload?.scoreItems?.map((scorebytest,index)=>
+              <tr key={scorebytest.id} class="text-center">
+                <th scope="row">{index + 1}</th>
+                <th>{scorebytest.name}</th>
+                <td>{scorebytest.score}</td>
+                <td>{scorebytest.grade}</td>
+            </tr>
+          )}
+        </tbody>
+        </>
+      );
+    };
+
+    const renderTestScores = () => {
+      if (!datascorebytest || !datascorebytest?.payload?.scoreItems?.length) {
+        return (
+          <tbody>
+          <tr>
+            <td colSpan="4" className='fw-500'> (Result test:83 (B). 5 of 10 Test)</td>
+          </tr>
+          </tbody>
+        )
+      }else {
+        return getListScore();
+      }
+    }
+
+
   return (
     <div>
       <Head />
@@ -78,7 +119,7 @@ const score = () => {
                 {/* <form onSubmit={handleScoreByTestSubmit}> */}
                   <div class="input-group mb-2">
                   <select onChange={(e) => setTestId(e.target.value)} class="form-select py-1" aria-label="Default select example">
-                      <option selected disabled>select test</option>
+                      <option value={10} selected>select test</option>
                       {datascore?.payload?.map((score)=>
                         <option key={score.id} value={score.id}>{score.name}</option>
                         )}
@@ -92,24 +133,19 @@ const score = () => {
             {/* <h2 class="mt-2 text-black">- Test 1</h2> */}
 
             <table class="table table-borderless table-hover">
-                <thead>
-                  <tr class="table-dark-opacity text-center">
-                    <th scope="col">No</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">category</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {datascorebytest?.payload?.scoreItems?.map((scorebytest,index)=>
+
+                {/* <tbody> */}
+                  {/* {datascorebytest?.payload?.scoreItems?.map((scorebytest,index)=>
                       <tr key={scorebytest.id} class="text-center">
                         <th scope="row">{index + 1}</th>
                         <th>{scorebytest.name}</th>
                         <td>{scorebytest.score}</td>
                         <td>{scorebytest.grade}</td>
                       </tr>
-                  )}
-                </tbody>
+                  )} */}
+                  {/* {getListScore()} */}
+                  {renderTestScores()}
+                {/* </tbody> */}
               </table>
               <div className="d-flex align-items-center justify-content-between">
                 <div>
