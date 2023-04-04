@@ -138,11 +138,11 @@ const score = () => {
                 {/* <form onSubmit={handleScoreByTestSubmit}> */}
                   <div class="input-group mb-2">
                   <select onChange={(e) => setTestId(e.target.value)} class="form-select py-1" aria-label="Default select example">
-                      <option value={10} selected>select test</option>
+                      <option value="default" selected>select test</option>
                       {datascore?.payload?.map((score)=>
                         <option key={score.id} value={score.id}>{score.name}</option>
                         )}
-                        <option value={1}>"asdfsdaf"</option>
+
                     </select>
                     <button type="submit" class="btn btn-primary" onClick={handleScoreByTestSubmit}>Filter</button>
                   </div>
