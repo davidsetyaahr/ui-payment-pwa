@@ -108,7 +108,7 @@ export const getClassItem = async ({ data }, callback) => {
 export const getAttend = async ({ data, perPage = 10 }, callback) => {
   const id = data.id;
   var url = `${baseUrl}attendace/${id}?perpage=${perPage}`;
-  
+
   if (data.classSelected !== 0) {
     url = `${url}&class=${data.classSelected}`;
   }
@@ -124,10 +124,26 @@ export const getAttend = async ({ data, perPage = 10 }, callback) => {
   callback(result);
 };
 
-export const getSummaryStudent = async ({ data, }, callback) => {
+export const getSummaryStudent = async ({ data }, callback) => {
   const id = data.id;
   var url = `${baseUrl}summaryStudent/${id}`;
-  
+
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
+
+export const getResultScore = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}score/getResult/${id}`;
+
   const res = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
