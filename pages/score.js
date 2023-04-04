@@ -1,7 +1,7 @@
 import { useScoreDetail, useScoreDetailBytest } from "@/helper/helperApiScore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
-import { getResultScore } from "../pages/api/fetchdata";
+import { getResultScore } from "./api/fetchdata";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,9 +13,11 @@ const score = () => {
   const [token, setToken] = useState(null);
   const [authUser, setAuthUser] = useState(null);
   const [testId, setTestId] = useState(2);
-  const [studentName, setStudentName] = useState();
+  const [className, setclassName] = useState();
+  const [totalTest, settotalTest] = useState();
+  const [totalPassed, settotalPassed] = useState();
   const [resultScore, setResultScore] = useState();
-  const [showResult, setshowResult] = useState(true);
+  const [showResult, setShowResult] = useState(true);
   const queryClient = useQueryClient();
   const { data: datascore } = useScoreDetail({
     token,
@@ -30,10 +32,6 @@ const score = () => {
     },
   });
 
-  const handleScoreByTestSubmit = () => {
-    // fetch data queary
-    queryClient.refetchQueries("fetchScoreByTest");
-  };
   const getResult = async () => {
     // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
@@ -41,9 +39,19 @@ const score = () => {
       id: tempStorage.default_student_id,
     };
     await getResultScore({ data }, (res) => {
-      console.log(res.payload);
       setResultScore(res.payload);
+      setShowResult(true);
+      setclassName(res.payload.class);
+      settotalTest(res.payload.total_test);
+      settotalPassed(res.payload.total_test_passed);
     });
+  };
+
+  const handleScoreByTestSubmit = () => {
+    // fetch data queary
+    queryClient.refetchQueries("fetchScoreByTest");
+    
+    setShowResult(false);
   };
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -57,36 +65,61 @@ const score = () => {
   const getListScore = () => {
     return (
       <>
-        <thead>
-          <tr class="table-dark-opacity text-center">
-            <th scope="col">No</th>
-            <th scope="col">Item</th>
-            <th scope="col">Score</th>
-            <th scope="col">category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {datascorebytest?.payload?.scoreItems?.map((scorebytest, index) => (
-            <tr key={scorebytest.id} class="text-center">
-              <th scope="row">{index + 1}</th>
-              <th>{scorebytest.name}</th>
-              <td>{scorebytest.score}</td>
-              <td>{scorebytest.grade}</td>
+        <table class="table table-borderless table-hover">
+          <thead>
+            <tr class="table-dark-opacity text-center">
+              <th scope="col">No</th>
+              <th scope="col">Item</th>
+              <th scope="col">Score</th>
+              <th scope="col">category</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+            {datascorebytest?.payload?.scoreItems?.map((scorebytest, index) => (
+              <tr key={scorebytest.id} class="text-center">
+                <th scope="row">{index + 1}</th>
+                <th>{scorebytest.name}</th>
+                <td>{scorebytest.score}</td>
+                <td>{scorebytest.grade}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {getAverageBtn()}
       </>
     );
   };
 
+  const getAverageBtn = () => {
+    if (totalTest === totalPassed) {
+      return (
+        <>
+          <div className="d-flex align-items-center justify-content-between">
+            <div>
+              <p className="mt-0 mb-1 fw-bold"> Average Point</p>
+              <p class="mb-0 fw-500">
+                {datascorebytest?.payload?.score?.average_score} (
+                {datascorebytest?.payload?.score?.grade})
+              </p>
+            </div>
+            <button type="button" class="fw-bold btn btn-yellow btn-sm">
+              <span className="fa fa-download me-1"></span> E Sertifikat
+            </button>
+          </div>
+        </>
+      );
+    }
+  };
+
   const renderTestScores = () => {
-    if (!datascorebytest || !datascorebytest?.payload?.scoreItems?.length) {
+    if (resultScore && showResult === true) {
       return (
         <tbody>
           <tr>
             <td colSpan="4" className="fw-500">
               {" "}
-              (Result test:83 (B). 5 of 10 Test)
+              (Result test:{resultScore.total_score} ({resultScore.grade}).{" "}
+              {resultScore.total_test_passed} of {resultScore.total_test} Test)
             </td>
           </tr>
         </tbody>
@@ -113,7 +146,7 @@ const score = () => {
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
             <div className="icon-bg">
-              <span className="color-blue fw-500">B2</span>
+              <span className="color-blue fw-500">{className}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -156,7 +189,7 @@ const score = () => {
           {/* </form> */}
           {/* <h2 class="mt-2 text-black">- Test 1</h2> */}
 
-          <table class="table table-borderless table-hover">
+          {/* <table class="table table-borderless table-hover"> */}
             {/* <tbody> */}
             {/* {datascorebytest?.payload?.scoreItems?.map((scorebytest,index)=>
                       <tr key={scorebytest.id} class="text-center">
@@ -169,18 +202,14 @@ const score = () => {
             {/* {getListScore()} */}
             {renderTestScores()}
             {/* </tbody> */}
-          </table>
+          {/* </table> */}
+          {/* section average */}
           <div className="d-flex align-items-center justify-content-between">
-            <div>
-              <p className="mt-0 mb-1 fw-bold"> Average Point</p>
-              <p class="mb-0 fw-500">
-                {datascorebytest?.payload?.score?.average_score} (
-                {datascorebytest?.payload?.score?.grade})
-              </p>
-            </div>
-            <button type="button" class="fw-bold btn btn-yellow btn-sm">
-              <span className="fa fa-download me-1"></span> E Sertifikat
-            </button>
+            {/* <div>
+                  <p className="mt-0 mb-1 fw-bold"> Average Point</p>
+                  <p class="mb-0 fw-500">{datascorebytest?.payload?.score?.average_score} ({datascorebytest?.payload?.score?.grade})</p>
+                </div>
+                <button type="button" class="fw-bold btn btn-yellow btn-sm"><span className="fa fa-download me-1"></span> E Sertifikat</button> */}
           </div>
         </section>
 
