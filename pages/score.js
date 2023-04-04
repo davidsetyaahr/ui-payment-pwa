@@ -42,6 +42,7 @@ const score = () => {
     const getListScore = () => {
       return (
         <>
+         <table class="table table-borderless table-hover">
         <thead>
             <tr class="table-dark-opacity text-center">
             <th scope="col">No</th>
@@ -60,9 +61,26 @@ const score = () => {
             </tr>
           )}
         </tbody>
+        </table>
+            {getAverageBtn()}
         </>
       );
     };
+
+    const getAverageBtn = () =>{
+      return(
+      <>
+      <div className="d-flex align-items-center justify-content-between">
+        <div>
+          <p className="mt-0 mb-1 fw-bold"> Average Point</p>
+          <p class="mb-0 fw-500">{datascorebytest?.payload?.score?.average_score} ({datascorebytest?.payload?.score?.grade})</p>
+          </div>
+          <button type="button" class="fw-bold btn btn-yellow btn-sm"><span className="fa fa-download me-1"></span> E Sertifikat</button>
+          </div>
+      </>
+      )
+
+    }
 
     const renderTestScores = () => {
       if (!datascorebytest || !datascorebytest?.payload?.scoreItems?.length) {
@@ -72,9 +90,10 @@ const score = () => {
             <td colSpan="4" className='fw-500'> (Result test:83 (B). 5 of 10 Test)</td>
           </tr>
           </tbody>
+
         )
       }else {
-        return getListScore();
+        return (getListScore());
       }
     }
 
@@ -147,12 +166,14 @@ const score = () => {
                   {renderTestScores()}
                 {/* </tbody> */}
               </table>
+              {/* section average */}
               <div className="d-flex align-items-center justify-content-between">
-                <div>
+                {/* <div>
                   <p className="mt-0 mb-1 fw-bold"> Average Point</p>
                   <p class="mb-0 fw-500">{datascorebytest?.payload?.score?.average_score} ({datascorebytest?.payload?.score?.grade})</p>
                 </div>
-                <button type="button" class="fw-bold btn btn-yellow btn-sm"><span className="fa fa-download me-1"></span> E Sertifikat</button>
+                <button type="button" class="fw-bold btn btn-yellow btn-sm"><span className="fa fa-download me-1"></span> E Sertifikat</button> */}
+
               </div>
             </section>
 
