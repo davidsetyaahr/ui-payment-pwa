@@ -129,7 +129,7 @@ footer .nav-link,.font-dark{
 /* table */
 .table thead th:first-child,
 .table tbody td:first-child {
-  width: 1em !important;
+  width: 1em;
   white-space: nowrap !important;
 }
 
@@ -289,4 +289,8 @@ footer .nav-link,.font-dark{
 }
 .border-blue{
   border : 1px solid #136dde;
+}
+/* table */
+.width-th{
+  width: 16.66% !important;
 }

@@ -202,8 +202,8 @@ function payment_history() {
             <table className="table table-borderless">
               <thead>
                 <tr className="table-dark-opacity">
-                  <th scope="col">Date</th>
-                  <th scope="col">Total</th>
+                  <th scope="col" className="width-th">Date</th>
+                  <th scope="col" className="text-center">Total</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
