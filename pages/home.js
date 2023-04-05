@@ -52,15 +52,14 @@ function Home() {
     router.push("/signin");
   };
 
-  const handleSetStudent = (id, name) => {
+  const handleSetStudent = async (id, name) => {
+    let dataStorage = await JSON.parse(localStorage.getItem("userData"));
+    dataStorage.default_student_id = id;
+    dataStorage.default_student_name = name;
     setStudentId(id);
     setStudentName(name);
-
-    let dataStorage = JSON.parse(localStorage.getItem("userData"));
-    dataStorage.default_student_id = studentId;
-    dataStorage.default_student_name = studentName;
     localStorage.setItem("userData", JSON.stringify(dataStorage));
-    setStudentNameLocalStorage(studentName);
+    getDataSummary();
   };
 
   const handleClickSetDefaultStudentId = () => {
@@ -77,10 +76,8 @@ function Home() {
   };
 
   const getDataSummary = async () => {
-    // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
-
       id: tempStorage.default_student_id,
     };
     await getSummaryStudent({ data }, (res) => {
@@ -92,11 +89,10 @@ function Home() {
   };
 
   useEffect(() => {
-    const stundentIdLocalStorage = JSON.parse(
-      localStorage.getItem("userData")
-    )?.default_student_id;
+    var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     getDataSummary();
-    setStudentId(stundentIdLocalStorage);
+    setStudentId(tempStorage.default_student_id);
+    setStudentName(tempStorage.default_student_name);
     setToken(localStorage.getItem("token"));
     setStudentNameLocalStorage(
       JSON.parse(localStorage.getItem("userData"))?.default_student_name
@@ -141,7 +137,7 @@ function Home() {
                     data-bs-target="#exampleModal"
                   >
                     <p className="justify-content-center mb-1 text-warning d-flex align-items-center student-name">
-                      {studentNameLocalStorage}{" "}
+                      {studentName}{" "}
                       <span className="fa fa-chevron-down ms-1"></span>
                     </p>
                   </button>
@@ -163,10 +159,7 @@ function Home() {
                             Current bill :
                           </p>
                           <h4 className="mb-1 fw-bold color-blue price text-center">
-                            {formatMoney(
-                              parseInt(tagihan),
-                              "Rp. "
-                            )}
+                            {formatMoney(parseInt(tagihan), "Rp. ")}
                           </h4>
                         </div>
                         <Link
@@ -179,31 +172,27 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                    <div className="card rounded bg-light border-0 pr-3 mt-3">
-                      <div className="card-body">
-                <div className="row justify-content-between">
-                  <div className="col-6">
+                <div className="card rounded bg-light border-0 pr-3 mt-3">
+                  <div className="card-body">
+                    <div className="row justify-content-between">
+                      <div className="col-6">
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                           <div className="me-2 fw-500 color-blue sm">
-                            <h3 className="fw-bold my-0">
-                              {mypoint}
-                            </h3>
+                            <h3 className="fw-bold my-0">{mypoint}</h3>
                           </div>
                           <div className="mb-1 font-dark total_point fw-500">
                             Mypoint
                           </div>
-                        {/* </div>
+                          {/* </div>
                       </div> */}
-                    </div>
-                  </div>
-                  <div className="col-6">
-                    {/* <div className="card rounded bg-light border-0 pr-3">
+                        </div>
+                      </div>
+                      <div className="col-6">
+                        {/* <div className="card rounded bg-light border-0 pr-3">
                       <div className="card-body"> */}
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
                           <div className="me-2 fw-500 color-blue sm">
-                            <h3 className="fw-bold my-0">
-                              {averageScore}
-                            </h3>
+                            <h3 className="fw-bold my-0">{averageScore}</h3>
                           </div>
                           <div className="mb-1 font-dark total_point fw-500">
                             Average Score
@@ -228,8 +217,8 @@ function Home() {
                       }}
                     >
                       <div className="card-body d-flex align-items-center">
-                       {dt.date}
-                       <br></br>
+                        {dt.date}
+                        <br></br>
                         {dt.activity}
                       </div>
                     </div>
