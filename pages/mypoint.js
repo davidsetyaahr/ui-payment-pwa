@@ -140,7 +140,7 @@ function mypoint() {
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
-                <th scope="col" style={{width : "30% !important" }}>Date</th>
+                <th scope="col" className="width-th-point">Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Point</th>
                 <th scope="col">Category</th>
