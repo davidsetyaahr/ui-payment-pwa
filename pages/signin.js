@@ -86,21 +86,19 @@ function signin() {
       <div>
         <Head />
         <main className="main bg-white mobile-view">
-          <form onSubmit={handleOtpSubmit}>
-            <div className="row align-items-center justify-content-center">
+        <div className="container bg-light h-100">
+          <form className="h-100"  onSubmit={handleOtpSubmit}>
+            <div className="h-100 row align-items-center justify-content-center">
               <div className="col-12">
                 <Image
                   src="/img/logoutama1.png"
-                  className="rounded mx-auto d-block mb-5"
-                  width="80"
-                  height="80"
+                  className="rounded mx-auto d-block mb-3"
+                  width="130"
+                  height="130"
                   alt="..."
                 />
                 <div className="card py-4 rounded card-login">
                   <div className="card-body">
-                    <div className="bg-light p-3 mb-3">
-                      {code && <div>{code}</div>}
-                    </div>
                     <div className="mb-3">
                       {/* <label for="exampleFormControlInput1" className="form-label">Phone</label> */}
                       <input
@@ -124,6 +122,7 @@ function signin() {
               </div>
             </div>
           </form>
+          </div>
         </main>
       </div>
     );

@@ -8,6 +8,7 @@ import withAuth from "@/utils/withAuth.util";
 function mypoint() {
   const [dataPoint, setDataPoint] = useState();
   const [name, setname] = useState();
+  const [className, setclassName] = useState();
   const [startDate, setStartDate] = useState();
   const [studentName, setStudentName] = useState();
   const [endDate, setEndDate] = useState();
@@ -30,8 +31,9 @@ function mypoint() {
       setStudentName(tempStorage.default_student_name);
       setDataPoint(res.payload);
       setTotal(res.payload.total);
-      setname(student.default_student_name);
+      setname(tempStorage.default_student_name);
       setTotalPointStudent(res.total_point);
+      setclassName(res.class);
     });
   };
 
@@ -52,7 +54,7 @@ function mypoint() {
               <th scope="row">{data.date}</th>
               <td>{data.type}</td>
               <td>{data.total_point}</td>
-              <td>{data.keterangan}</td>
+              <td>{data.keterangan === "Absent" ? "attendance" : data.keterangan}</td>
             </tr>
           ))}
       </tbody>
@@ -91,8 +93,8 @@ function mypoint() {
         <section className="section-1 bg-light p-4">
         <div className="d-flex align-items-center justify-content-between">
           <div>
-            <small className="font-dark fw-bold">Point:</small>
-            <div className="icon-bg rounded auto fw-500">
+            <span className="font-dark fw-bold">Point:</span>
+            <div className="icon-bg h3 rounded auto fw-500">
             {totalPointStudent}
             </div>
             </div>

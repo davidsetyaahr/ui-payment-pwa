@@ -157,7 +157,9 @@ function payment_history() {
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
             <div className="icon-bg">
-              <span className="fa fa-shopping-cart fa-lg color-blue"></span>
+              <span className="color-blue fw-500">
+                B3
+              </span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -246,6 +248,7 @@ function payment_history() {
               ></button>
             </div>
             <div className="modal-body">
+              <div className="table-responsive">
               <table className="table table-striped">
                 <thead>
                   <tr className="table-dark text-center">
@@ -256,6 +259,7 @@ function payment_history() {
                 </thead>
                 {getDetail()}
               </table>
+              </div>
             </div>
             <div className="modal-footer border-0">
               <button type="button" onClick={() => getReceipt(code)} className="btn btn-primary mx-auto">

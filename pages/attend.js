@@ -4,99 +4,119 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
-import { getAttend } from "./api/fetchdata";
-
+import { getAttend, getClassItem } from "./api/fetchdata";
 
 function attend() {
   const [dataAttend, setDataAttend] = useState();
+  const [dataClass, setDataClass] = useState();
+  const [classSelected, setClassSelected] = useState(0);
   const [id, setId] = useState();
+  const [className, setclassName] = useState();
   const [perPage, setPerPage] = useState(10);
   const [studentName, setStudentName] = useState();
   const [total, setTotal] = useState();
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
   const getData = async (perpage) => {
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
-      startDate: startDate ?? "",
-      endDate: endDate ?? "",
+      classSelected: classSelected,
       id: tempStorage.default_student_id,
     };
     await getAttend({ data, perPage: perpage }, (res) => {
-      setStudentName(tempStorage.default_student_name)
+      setStudentName(tempStorage.default_student_name);
       setDataAttend(res.payload);
+      setclassName(res.class)
       setTotal(res.payload.total);
     });
   };
 
+  const getDataClass = async (perpage) => {
+    var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
+    let data = {
+      id: tempStorage.default_student_id,
+    };
+    await getClassItem({ data, perPage: perpage }, (res) => {
+      setDataClass(res.payload);
+    });
+  };
+
   useEffect(() => {
+    getDataClass();
     getData(10);
   }, []);
 
   function filter() {
-    getData(10);
+    getData(perPage);
   }
 
-
-
-    const getList = () => {
-      return (
-        <tbody>
-          {dataAttend &&
-            dataAttend.data.map((data, index) => (
-              <tr key={index} className="text-center">
-                <th scope="row">{data.date}</th>
-                <th scope="row">{data.is_absent=="1"?"in":"-"}</th>
-                <td>{data.total_point}</td>
-                <td>attend</td>
-              </tr>
+  const getList = () => {
+    return (
+      <tbody>
+        {dataAttend &&
+          dataAttend.data.map((data, index) => (
+            <tr key={index} className="text-center">
+              <th scope="row">{index + 1}</th>
+              <th scope="row">{data.date}</th>
+              <th scope="row">{data.is_absent == "1" ? "Attend" : "Alpha"}</th>
+            </tr>
           ))}
-        </tbody>
-      );
-    };
-
-    const getPageNum = () => {
-      let item = [];
-      let tmpTotal = 0;
-      for (let index = 0; index < total; index++) {
-        tmpTotal += 10;
-        item.push(
-          <option key={index} value={tmpTotal}>
-            {tmpTotal}
-          </option>
+      </tbody>
+    );
+  };
+  const getClassData = () => {
+    let item = [];
+    // item.push(<option value={0}>Select Class</option>);
+    {
+      dataClass &&
+        dataClass.map((dt, idx) =>
+          item.push(
+            <option key={idx} value={dt.id}>
+              {dt.program}
+            </option>
+          )
         );
-      }
+    }
+    return item;
+  };
 
-      return item;
-    };
+  const getPageNum = () => {
+    let item = [];
+    let tmpTotal = 0;
+    for (let index = 0; index < total; index++) {
+      tmpTotal += 10;
+      item.push(
+        <option key={index} value={tmpTotal}>
+          {tmpTotal}
+        </option>
+      );
+    }
+
+    return item;
+  };
+
   return (
     <>
       <Head />
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
-          <div className="d-flex flex-column align-items-start">
-
-          </div>
+          <div className="d-flex flex-column align-items-start"></div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
             <h4 className="font-dark fw-500 mb-0">Attendance</h4>
           </div>
         </div>
         <section className="section-1 bg-light p-4">
-        <div className="d-flex align-items-center justify-content-between">
-          <div className="icon-bg">
-            <span className="fa fa-clipboard-user fa-lg color-blue"></span>
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="icon-bg">
+              <span className="color-blue fw-500">{className}</span>
+            </div>
+            <a
+              className="text-decoration-none color-blue text-end"
+              href="#"
+              target="_blank"
+            >
+              <small className="font-dark fw-bold">Nama Siswa:</small>
+              <h5 className="my-0">{studentName}</h5>
+            </a>
           </div>
-          <a
-            className="text-decoration-none color-blue text-end"
-            href="#"
-            target="_blank"
-          >
-          <small className="font-dark fw-bold">Nama Siswa:</small>
-          <h5 className="my-0">
-            {studentName}
-          </h5>
-          </a>
-        </div>
           {/* <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0 mt-3">
             <select
               className="form-select rounded-pill me-3"
@@ -114,41 +134,28 @@ function attend() {
           <h2 className="mt-3 text-black">- Test 1</h2> */}
         </section>
         <section className="section-2 bg-light mt-3 p-4 mb-last-content">
-
-        <div className="filter-date">
-          <input
-            type="date"
-            value={startDate}
-            className="start"
-            name="startDate"
-            onChange={(e) => {
-              setStartDate(e.currentTarget.value);
-            }}
-            title="start"
-          />
-          <div className="px-1"></div>
-          <input
-            type="date"
-            value={endDate}
-            name="endDate"
-            onChange={(e) => {
-              setEndDate(e.currentTarget.value);
-            }}
-            className="end"
-            title="end"
-          />
-          <div className="px-3"></div>
-          <button type="submit" onClick={filter}>
-            Filter
-          </button>
+          <div className="filter-date">
+            <select
+              style={{ width: "250px !important" }}
+              value={classSelected}
+              onChange={(e) => {
+                setClassSelected(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              {getClassData()}
+            </select>
+            <div className="px-3"></div>
+            <button type="submit" onClick={filter}>
+              Filter
+            </button>
           </div>
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
+                <th scope="col">No</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
-                <th scope="col">Detail</th>
-                <th scope="col">Kategori</th>
               </tr>
             </thead>
             {/* get data table */}
@@ -156,19 +163,19 @@ function attend() {
           </table>
           {/* select  */}
           <div className="d-flex justify-content-center">
-
-          <span className="me-2">per</span>
-          <select className="text-center"
-            value={perPage}
-            onChange={(e) => {
-              setPerPage(e.target.value);
-              console.log(e.target.value);
-              getData(e.target.value);
-            }}
+            <span className="me-2">per</span>
+            <select
+              className="text-center"
+              value={perPage}
+              onChange={(e) => {
+                setPerPage(e.target.value);
+                console.log(e.target.value);
+                getData(e.target.value);
+              }}
             >
-          {getPageNum()}
-          </select>
-          <span className="ms-2">page</span>
+              {getPageNum()}
+            </select>
+            <span className="ms-2">page</span>
           </div>
         </section>
         <NavBottom />

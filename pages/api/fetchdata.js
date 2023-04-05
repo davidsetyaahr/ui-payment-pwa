@@ -16,7 +16,7 @@ export const getMyPoint = async ({ data, perPage = 10 }, callback) => {
     method: "GET",
   });
   const result = await res.json();
-  
+
   callback(result);
 };
 
@@ -90,13 +90,60 @@ export const getListBill = async ({ data }, callback) => {
 // update todo attend
 // update filter
 // attend
+export const getClassItem = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}classItem/${id}`;
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
 
 export const getAttend = async ({ data, perPage = 10 }, callback) => {
   const id = data.id;
   var url = `${baseUrl}attendace/${id}?perpage=${perPage}`;
-  if (data.startDate != "" && data.endDate != "") {
-    url = `${url}&start=${data.startDate}&end=${data.endDate}`;
+
+  if (data.classSelected !== 0) {
+    url = `${url}&class=${data.classSelected}`;
   }
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
+
+export const getSummaryStudent = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}summaryStudent/${id}`;
+
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
+
+export const getResultScore = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}score/getResult/${id}`;
+
   const res = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
