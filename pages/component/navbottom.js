@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 function NavBottom() {
+const segment = window.location.pathname.split("/");
   return (
         <section className="section-4 bg-white">
             <footer className="footer fixed-bottom bg-white">
@@ -9,7 +10,7 @@ function NavBottom() {
                     <div className="d-flex justify-content-between">
                         <div className="d-flex flex-row align-items-center">
                             <div className="d-flex flex-column py-3">
-                                <Link href="/home" className="nav-link">
+                                <Link href="/home" className={`nav-link${segment[1]=='home' ? ' active' : ''}`}>
                                 <div className="text-center mb-2">
                                   <span className="fa fa-home fa-lg"></span>
                                 </div>
@@ -21,7 +22,7 @@ function NavBottom() {
                         </div>
                         <div className="d-flex flex-row align-items-center">
                             <div className="d-flex flex-column pt-0 pb-0">
-                                <Link href="/attend" className="nav-link">
+                                <Link href="/attend"  className={`nav-link${segment[1]=='attend' ? ' active' : ''}`}>
                                 <div className="text-center mb-2">
                                   <span className="fa-lg fa fa-clipboard-user"></span>
                                 </div>
@@ -33,7 +34,7 @@ function NavBottom() {
                         </div>
                         <div className="d-flex flex-row align-items-center">
                             <div className="d-flex flex-column pt-0 pb-0">
-                                <Link href="/mypoint" className="nav-link">
+                                <Link href="/mypoint"  className={`nav-link${segment[1]=='mypoint' ? ' active' : ''}`}>
                                 <div className="text-center mb-2">
                                   <span className="fa-lg fas fa-coins"></span>
                                 </div>
@@ -45,7 +46,7 @@ function NavBottom() {
                         </div>
                         <div className="d-flex flex-row align-items-center">
                             <div className="d-flex flex-column pt-0 pb-0">
-                                <Link href="/score" className="nav-link">
+                                <Link href="/score"  className={`nav-link${segment[1]=='score' ? ' active' : ''}`}>
                                 <div className="text-center mb-2">
                                   <span className="fa-lg fa fa-star"></span>
                                 </div>
@@ -57,7 +58,7 @@ function NavBottom() {
                         </div>
                         <div className="d-flex flex-row align-items-center">
                             <div className="d-flex flex-column pt-0 pb-0">
-                                <Link href="/payment" className="nav-link">
+                                <Link href="/payment"  className={`nav-link${segment[1]=='payment' ? ' active' : ''}`}>
                                 <div className="text-center mb-2">
                                   <span className="fa-lg fa fa-cart-shopping fa-lg"></span>
                                 </div>

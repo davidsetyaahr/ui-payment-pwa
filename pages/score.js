@@ -144,18 +144,16 @@ const score = () => {
     if (resultScore && showResult === true) {
       return (
         <>
-          <div className="d-flex align-items-center justify-content-between">
+          <div className="d-flex align-items-center mt-3 justify-content-between">
             <table>
               <tbody>
                 <tr>
                   <td colSpan="4" className="fw-500">
                     {" "}
-                    <div className="mt-2">
                       (Result test:{resultScore.total_score} (
                       {resultScore.grade}
                       ). {resultScore.total_test_passed} of{" "}
                       {resultScore.total_test} Test)
-                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -232,8 +230,8 @@ const score = () => {
           <div className="d-flex align-items-center justify-content-between"></div>
         </section>
 
-        <section className="section-3 p-4 mt-3 bg-light">
-          <div className="">
+        <section className="section-3 p-4 mt-3 bg-light ">
+          <div className="mb-last-content">
             <h5 className="font-dark">Comment for student :</h5>
             <div className="bg-white p-4 border fs-18">
               {scoreData && scoreData.comment}
