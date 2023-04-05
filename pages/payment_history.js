@@ -16,6 +16,7 @@ function payment_history() {
   const [code, setCode] = useState();
   const [name, setname] = useState();
   const [studentName, setStudentName] = useState();
+  const [studentClass, setStudentClass] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [perPage, setPerPage] = useState(10);
@@ -35,6 +36,7 @@ function payment_history() {
       setStudentName(tempStorage.default_student_name)
       setDataPayment(res.payload);
       setTotal(res.payload.total);
+      setStudentClass(res.class);
       setname(student.default_student_name)
     });
   };
@@ -54,7 +56,7 @@ function payment_history() {
     };
     await getPrintReceipt({ data }, (res) => {
       const aElement = document.createElement("a");
-      aElement.setAttribute("download", `invoice-${Date()}`);
+      aElement.setAttribute("download", `invoice-${idDetail}`);
       const href = URL.createObjectURL(res);
       aElement.href = href;
       aElement.setAttribute("target", "_blank");
@@ -97,9 +99,9 @@ function payment_history() {
                   onClick={() => showModal(data.unique_code)}
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  className="rounded-pill text-decoration-none px-3 bg-primary text-white"
+                  className="btn-sm btn btn-primary rounded-pill px-3"
                 >
-                  view
+                  View
                 </button>
 
               </td>
@@ -156,10 +158,8 @@ function payment_history() {
         </div>
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
-            <div className="icon-bg">
-              <span className="color-blue fw-500">
-                B3
-              </span>
+            <div className="btn btn-yellow btn-sm me-3">
+              <span className="color-blue fw-bold">{studentClass}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -194,16 +194,16 @@ function payment_history() {
               }}
               title="end"
             />
-            <div className="px-3"></div>
+            <div className="px-1"></div>
             <button type="submit" onClick={filter}>
-              Submit
+              Filter
             </button>
           </div>
             <table className="table table-borderless">
               <thead>
                 <tr className="table-dark-opacity">
-                  <th scope="col">Tanggal</th>
-                  <th scope="col">Jumlah</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Total</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -234,8 +234,8 @@ function payment_history() {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-position-bottom">
-          <div className="modal-content animate-bottom">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
             <div className="modal-header border-0">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Payment detail:
@@ -262,8 +262,8 @@ function payment_history() {
               </div>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" onClick={() => getReceipt(code)} className="btn btn-primary mx-auto">
-                save recipt
+              <button type="button" onClick={() => getReceipt(code)} className="btn btn-yellow fw-bold  mx-auto">
+                Save Recipt
               </button>
             </div>
           </div>

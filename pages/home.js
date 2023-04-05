@@ -18,6 +18,7 @@ function Home() {
   const [testId, setTestId] = useState(2);
   const [studentId, setStudentId] = useState(null);
   const [studentName, setStudentName] = useState(null);
+  const [className, setclassName] = useState(null);
   const [studentNameLocalStorage, setStudentNameLocalStorage] = useState(null);
   const [tagihan, setTagihan] = useState(0);
   const [mypoint, setMypoint] = useState(0);
@@ -161,7 +162,7 @@ function Home() {
                           <p className="mb-0 fw-500 font-dark fs-16">
                             Current bill :
                           </p>
-                          <h4 className="mb-1 color-blue price text-center">
+                          <h4 className="mb-1 fw-bold color-blue price text-center">
                             {formatMoney(
                               parseInt(tagihan),
                               "Rp. "
@@ -183,10 +184,10 @@ function Home() {
                 <div className="row justify-content-between">
                   <div className="col-6">
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
-                          <div className="me-2 icon-bg fw-500 color-blue sm">
-                            <h5 className="my-0">
+                          <div className="me-2 fw-500 color-blue sm">
+                            <h3 className="fw-bold my-0">
                               {mypoint}
-                            </h5>
+                            </h3>
                           </div>
                           <div className="mb-1 font-dark total_point fw-500">
                             Mypoint
@@ -199,10 +200,10 @@ function Home() {
                     {/* <div className="card rounded bg-light border-0 pr-3">
                       <div className="card-body"> */}
                         <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
-                          <div className="me-2 icon-bg fw-500 color-blue sm">
-                            <h5 className="my-0">
+                          <div className="me-2 fw-500 color-blue sm">
+                            <h3 className="fw-bold my-0">
                               {averageScore}
-                            </h5>
+                            </h3>
                           </div>
                           <div className="mb-1 font-dark total_point fw-500">
                             Average Score

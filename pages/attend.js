@@ -26,6 +26,7 @@ function attend() {
       setDataAttend(res.payload);
       setclassName(res.class)
       setTotal(res.payload.total);
+
     });
   };
 
@@ -98,15 +99,19 @@ function attend() {
       <Head />
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
-          <div className="d-flex flex-column align-items-start"></div>
+          <div className="d-flex flex-column align-items-start">
+            <Link href="/">
+              <span className="fa fa-arrow-left fa-2x color-blue"></span>
+            </Link>
+          </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
             <h4 className="font-dark fw-500 mb-0">Attendance</h4>
           </div>
         </div>
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
-            <div className="icon-bg">
-              <span className="color-blue fw-500">{className}</span>
+            <div className="btn btn-yellow btn-sm me-3">
+              <span className="color-blue fw-bold">{className}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -134,9 +139,10 @@ function attend() {
           <h2 className="mt-3 text-black">- Test 1</h2> */}
         </section>
         <section className="section-2 bg-light mt-3 p-4 mb-last-content">
-          <div className="filter-date">
+          <div className="input-group">
             <select
-              style={{ width: "250px !important" }}
+            className="form-control"
+              // style={{ width: "250px !important" }}
               value={classSelected}
               onChange={(e) => {
                 setClassSelected(e.target.value);
@@ -145,8 +151,7 @@ function attend() {
             >
               {getClassData()}
             </select>
-            <div className="px-3"></div>
-            <button type="submit" onClick={filter}>
+            <button type="submit" className="btn fw-bold btn-yellow" onClick={filter}>
               Filter
             </button>
           </div>
@@ -162,7 +167,7 @@ function attend() {
             {getList()}
           </table>
           {/* select  */}
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mb-last-content">
             <span className="me-2">per</span>
             <select
               className="text-center"

@@ -93,7 +93,7 @@ function payment_konfirm() {
                 Secreenshoot bukti transfer
               </li>
               <li className="list-group-item border-0">
-                kli tombol konfirmasi di bawah.
+                Klik tombol konfirmasi di bawah.
               </li>
             </ol>
           </div>

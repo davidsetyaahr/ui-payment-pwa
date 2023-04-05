@@ -92,9 +92,9 @@ function mypoint() {
         </div>
         <section className="section-1 bg-light p-4">
         <div className="d-flex align-items-center justify-content-between">
-          <div>
-            <span className="font-dark fw-bold">Point:</span>
-            <div className="icon-bg h3 rounded auto fw-500">
+          <div className="me-3">
+            <small className="font-dark fw-bold d-block">Point:</small>
+            <div className="btn btn-yellow fs-18 fw-bold">
             {totalPointStudent}
             </div>
             </div>
@@ -108,7 +108,7 @@ function mypoint() {
             </a>
           </div>
         </section>
-        <section className="section-2 mt-3 mb-last-content bg-light p-4">
+        <section className="section-2 mt-3 mb-last-content bg-light p-4 ">
           <div className="filter-date">
             <input
               type="date"
@@ -131,7 +131,7 @@ function mypoint() {
               className="end"
               title="end"
             />
-            <div className="px-3"></div>
+            <div className="px-1"></div>
             <button type="submit" onClick={filter}>
               Filter
             </button>
@@ -140,16 +140,16 @@ function mypoint() {
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
-                <th scope="col">Date</th>
+                <th scope="col" style={{width : "30% !important" }}>Date</th>
                 <th scope="col">Status</th>
-                <th scope="col">Detail</th>
-                <th scope="col">Kategori</th>
+                <th scope="col">Point</th>
+                <th scope="col">Category</th>
               </tr>
             </thead>
             {getList()}
           </table>
           {/* {getPageNum()} */}
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mb-last-content">
             <span className="me-2">per</span>
             <select
               value={perPage}
