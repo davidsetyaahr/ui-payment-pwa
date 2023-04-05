@@ -12,7 +12,7 @@ import withAuth from "@/utils/withAuth.util";
 const score = () => {
   const [token, setToken] = useState(null);
   const [authUser, setAuthUser] = useState(null);
-  const [testId, setTestId] = useState(2);
+  const [testId, setTestId] = useState(0);
   const [className, setclassName] = useState();
   const [totalTest, settotalTest] = useState();
   const [totalPassed, settotalPassed] = useState();
@@ -118,8 +118,10 @@ const score = () => {
           <tr>
             <td colSpan="4" className="fw-500">
               {" "}
-              (Result test:{resultScore.total_score} ({resultScore.grade}).{" "}
-              {resultScore.total_test_passed} of {resultScore.total_test} Test)
+              <div className="mt-2">
+                (Result test:{resultScore.total_score} ({resultScore.grade}).{" "}
+                {resultScore.total_test_passed} of {resultScore.total_test} Test)
+              </div>
             </td>
           </tr>
         </tbody>
@@ -145,8 +147,8 @@ const score = () => {
         </div>
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
-            <div className="icon-bg">
-              <span className="color-blue fw-500">{className}</span>
+            <div className="btn btn-yellow btn-sm me-3">
+              <span className="color-blue fw-bold">{className}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -167,8 +169,8 @@ const score = () => {
               class="form-select py-1"
               aria-label="Default select example"
             >
-              <option value={10} selected>
-                select test
+              <option value={0} selected>
+                Select Test
               </option>
               {datascore?.payload?.map((score) => (
                 <option key={score.id} value={score.id}>
@@ -178,7 +180,7 @@ const score = () => {
             </select>
             <button
               type="submit"
-              class="btn btn-primary"
+              class="btn btn-yellow fw-bold"
               onClick={handleScoreByTestSubmit}
             >
               Filter
@@ -215,12 +217,9 @@ const score = () => {
         <section className="section-3 p-4 mt-3 bg-light">
           <div className="">
             <h5 className="font-dark">Comment for student :</h5>
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              value={datascorebytest?.payload?.score?.comment}
-            ></textarea>
+            <div className="bg-white p-4 border fs-18">
+            {datascorebytest?.payload?.score?.comment}
+            </div>
           </div>
         </section>
         <NavBottom />

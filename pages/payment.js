@@ -134,14 +134,22 @@ function payment() {
       <Head />
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
+          <div className="d-flex flex-column align-items-start">
+            <Link href="/">
+              <span className="fa fa-arrow-left fa-2x color-blue"></span>
+            </Link>
+          </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
             <h4 className="font-dark fw-500 mb-0">Payment</h4>
           </div>
+          <Link href="/payment_history" className="px-2">
+            <span className="fa fa-file-invoice fa-2x color-blue"></span>
+          </Link>
         </div>
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
             <div className="icon-bg">
-              <span className="fa fa-star fa-lg color-blue"></span>
+              <span className="fa fa-shopping-cart fa-lg color-blue"></span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -174,7 +182,7 @@ function payment() {
                   Total: {formatMoney(parseInt(total_payment), "Rp. ")}
                 </h5>
                 <button
-                  className="btn btn-yellow btn-sm"
+                  className="btn btn-yellow btn-sm fw-bold"
                   onClick={handleCheckOutBill}
                 >
                   Bayar Sekarang

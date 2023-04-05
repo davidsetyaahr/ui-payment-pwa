@@ -54,7 +54,7 @@ function payment_history() {
     };
     await getPrintReceipt({ data }, (res) => {
       const aElement = document.createElement("a");
-      aElement.setAttribute("download", `invoice-${Date()}`);
+      aElement.setAttribute("download", `invoice-${idDetail}`);
       const href = URL.createObjectURL(res);
       aElement.href = href;
       aElement.setAttribute("target", "_blank");
@@ -97,9 +97,9 @@ function payment_history() {
                   onClick={() => showModal(data.unique_code)}
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  className="rounded-pill text-decoration-none px-3 bg-primary text-white"
+                  className="btn-sm btn btn-primary rounded-pill px-3"
                 >
-                  view
+                  View
                 </button>
 
               </td>
@@ -194,16 +194,16 @@ function payment_history() {
               }}
               title="end"
             />
-            <div className="px-3"></div>
+            <div className="px-1"></div>
             <button type="submit" onClick={filter}>
-              Submit
+              Filter
             </button>
           </div>
             <table className="table table-borderless">
               <thead>
                 <tr className="table-dark-opacity">
-                  <th scope="col">Tanggal</th>
-                  <th scope="col">Jumlah</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Total</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -262,8 +262,8 @@ function payment_history() {
               </div>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" onClick={() => getReceipt(code)} className="btn btn-primary mx-auto">
-                save recipt
+              <button type="button" onClick={() => getReceipt(code)} className="btn btn-yellow fw-bold  mx-auto">
+                Save Recipt
               </button>
             </div>
           </div>
