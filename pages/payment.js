@@ -13,6 +13,7 @@ function payment() {
   const [dataBilling, setDataBilling] = useState();
   const [total_payment, setTotalPayment] = useState(0);
   const [studentName, setStudentName] = useState();
+  const [studentClass, setStudentClass] = useState();
   const [student_id, setStudentId] = useState();
   const [id_bill, setBodyBill] = useState([]);
   const [price, setBodyPrice] = useState([]);
@@ -27,6 +28,7 @@ function payment() {
     await getListBill({ data }, (res) => {
       setDataBilling(res.payload);
       setStudentName(student.default_student_name);
+      setStudentClass(res.class);
       setStudentId(student.default_student_id);
     });
   };
@@ -148,8 +150,8 @@ function payment() {
         </div>
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
-            <div className="icon-bg">
-              <span className="fa fa-shopping-cart fa-lg color-blue"></span>
+            <div className="btn btn-yellow btn-sm me-3">
+              <span className="color-blue fw-bold">{studentClass}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"

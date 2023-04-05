@@ -16,6 +16,7 @@ function payment_history() {
   const [code, setCode] = useState();
   const [name, setname] = useState();
   const [studentName, setStudentName] = useState();
+  const [studentClass, setStudentClass] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [perPage, setPerPage] = useState(10);
@@ -35,6 +36,7 @@ function payment_history() {
       setStudentName(tempStorage.default_student_name)
       setDataPayment(res.payload);
       setTotal(res.payload.total);
+      setStudentClass(res.class);
       setname(student.default_student_name)
     });
   };
@@ -156,10 +158,8 @@ function payment_history() {
         </div>
         <section className="section-1 bg-light p-4">
           <div className="d-flex align-items-center justify-content-between">
-            <div className="icon-bg">
-              <span className="color-blue fw-500">
-                B3
-              </span>
+            <div className="btn btn-yellow btn-sm me-3">
+              <span className="color-blue fw-bold">{studentClass}</span>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
