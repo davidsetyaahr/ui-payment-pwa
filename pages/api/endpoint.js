@@ -1,4 +1,4 @@
-export var baseUrl = 'https://primtech-sistem.com/ui-payment-backoffice/public/';
+import {baseUrl } from "@/helper/baseUrl";
 
 export const getPoint = async (callback) => {
     return callback(baseUrl);

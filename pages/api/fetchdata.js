@@ -1,5 +1,4 @@
-export var baseUrl = "https://primtech-sistem.com/ui-payment-backoffice/public/api/";
-export var baseStorageUrl = "https://primtech-sistem.com/ui-payment-backoffice/public/storage/";
+import { baseUrl, baseStorageUrl } from "@/helper/baseUrl";
 
 export const getMyPoint = async ({ data, perPage = 10 }, callback) => {
   const id = data.id;

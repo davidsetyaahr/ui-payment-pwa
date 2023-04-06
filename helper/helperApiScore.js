@@ -1,12 +1,11 @@
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { apiGet } from "@/utils/api.util";
-
-export const baseUrl = "https://primtech-sistem.com/ui-payment-backoffice/public/api";
+import {baseUrl } from "@/helper/baseUrl";
 
 export const fetchScore = (props) => {
   return apiGet({
-    url: `${baseUrl}/score/getTestItem`,
+    url: `${baseUrl}score/getTestItem`,
     ...props,
   });
 };
@@ -23,7 +22,7 @@ export const useScoreDetail = (params) => {
 
 // export const fetchScoreByTest = (studentId, testId, props) => {
 //     return apiGet({
-//       url: `${baseUrl}/score/getScore/${studentId}/${testId}`,
+//       url: `${baseUrl}score/getScore/${studentId}/${testId}`,
 //       ...props,
 //     });
 // };

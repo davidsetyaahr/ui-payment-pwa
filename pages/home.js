@@ -11,7 +11,8 @@ import {
   useAnnouncement,
 } from "@/helper/helperApiInfo";
 import { useRouter } from "next/router";
-import { baseStorageUrl, getSummaryStudent } from "../pages/api/fetchdata";
+import {baseStorageUrl } from "@/helper/baseUrl";
+import {getSummaryStudent } from "../pages/api/fetchdata";
 
 function Home() {
   const [authUser, setAuthUser] = useState(null);
@@ -19,6 +20,7 @@ function Home() {
   const [studentId, setStudentId] = useState(null);
   const [studentName, setStudentName] = useState(null);
   const [className, setclassName] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [studentNameLocalStorage, setStudentNameLocalStorage] = useState(null);
   const [tagihan, setTagihan] = useState(0);
   const [mypoint, setMypoint] = useState(0);
@@ -47,7 +49,6 @@ function Home() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setToken("");
-    setUserData(null);
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
     router.push("/signin");
@@ -143,7 +144,7 @@ function Home() {
                     </p>
                   </button>
                 </div>
-                <Link href="/signin" onClick={handleLogout} className="logout">
+                <Link href="#" onClick={handleLogout} className="logout">
                   <span className="fa fa-sign-out"></span>
                 </Link>
               </div>
