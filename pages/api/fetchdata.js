@@ -1,5 +1,5 @@
-export var baseUrl = "http://127.0.0.1:8000/api/";
-export var baseStorageUrl = "http://127.0.0.1:8000/storage/";
+export var baseUrl = "https://primtech-sistem.com/ui-payment-backoffice/public/api/";
+export var baseStorageUrl = "https://primtech-sistem.com/ui-payment-backoffice/public/storage/";
 
 export const getMyPoint = async ({ data, perPage = 10 }, callback) => {
   const id = data.id;

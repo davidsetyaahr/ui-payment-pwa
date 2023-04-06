@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { apiGet } from "@/utils/api.util";
 
-export const baseUrl = "http://127.0.0.1:8000/api";
+export const baseUrl = "https://primtech-sistem.com/ui-payment-backoffice/public/api";
 
 export const fetchScore = (props) => {
   return apiGet({
