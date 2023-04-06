@@ -8,14 +8,14 @@ module.exports = withPWA({
   // next.js config
   reactStrictMode: true,
   images: {
-    domains: ['127.0.0.1'],
+    domains: ['primtech-sistem.com'],
   },
   // images: {
   //   remotePatterns: [
   //     {
-  //       protocol: 'http',
-  //       hostname: '127.0.0.1',
-  //       port: '8000',
+  //       protocol: 'https',
+  //       hostname: 'primtech-sistem.com',
+  //       port: '',
   //       pathname: '/storage/',
   //     },
   //   ],
