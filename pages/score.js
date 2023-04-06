@@ -78,8 +78,6 @@ const score = () => {
     if (localStorageAuthUser) {
       setAuthUser(JSON.parse(localStorageAuthUser));
     }
-    console.log(totalTest);
-    console.log(totalPassed);
   }, []);
 
   const getListScore = () => {

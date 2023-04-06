@@ -146,7 +146,6 @@ function attend() {
               value={classSelected}
               onChange={(e) => {
                 setClassSelected(e.target.value);
-                console.log(e.target.value);
               }}
             >
               {getClassData()}
@@ -174,7 +173,6 @@ function attend() {
               value={perPage}
               onChange={(e) => {
                 setPerPage(e.target.value);
-                console.log(e.target.value);
                 getData(e.target.value);
               }}
             >

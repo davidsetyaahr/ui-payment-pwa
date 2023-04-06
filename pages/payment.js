@@ -75,7 +75,6 @@ function payment() {
           student_id,
         },
       };
-      console.log(data);
       checkOutBill(data, (rescallback) => {
         if (rescallback.code == "00") {
           toast("Berhasil generate pembayaran", {

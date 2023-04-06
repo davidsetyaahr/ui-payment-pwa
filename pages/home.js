@@ -82,7 +82,6 @@ function Home() {
       id: tempStorage.default_student_id,
     };
     await getSummaryStudent({ data }, (res) => {
-      console.log(res.payload);
       setTagihan(res.payload.billing);
       setAverageScore(res.payload.score);
       setMypoint(res.payload.point);

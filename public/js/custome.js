@@ -21,7 +21,5 @@ checkboxes.forEach(function(checkbox) {
     });
     var totalElement = document.getElementById('total');
     totalElement.textContent = total;
-    console.log(selectedRows);
-    console.log('Total: ' + total);
   });
 });
