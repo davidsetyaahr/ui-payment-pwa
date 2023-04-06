@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 function NavBottom() {
-const segment = window.location.pathname.split("/");
+const segment = (typeof window !== "undefined") ? window.location.pathname.split("/") : ['',''];
   return (
         <section className="section-4 bg-white">
             <footer className="footer fixed-bottom bg-white">

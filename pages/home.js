@@ -22,6 +22,7 @@ function Home() {
   const [studentNameLocalStorage, setStudentNameLocalStorage] = useState(null);
   const [tagihan, setTagihan] = useState(0);
   const [mypoint, setMypoint] = useState(0);
+  const [agenda, setAgenda] = useState([]);
   const [averageScore, setAverageScore] = useState(0);
   const [token, setToken] = useState(null);
   const router = useRouter();
@@ -85,6 +86,7 @@ function Home() {
       setTagihan(res.payload.billing);
       setAverageScore(res.payload.score);
       setMypoint(res.payload.point);
+      setAgenda(res.payload.agenda);
     });
   };
 
@@ -207,7 +209,7 @@ function Home() {
                 <h5 className="mb-2 font-dark fw-500">Agenda</h5>
                 {/* update ui agend with slide */}
                 <div className="img-slide">
-                  {dataagenda?.payload?.map((dt) => (
+                  {agenda?.map((dt) => (
                     <div
                       className="content card mr-1"
                       style={{
