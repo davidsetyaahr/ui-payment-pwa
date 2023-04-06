@@ -8,7 +8,7 @@ module.exports = withPWA({
   // next.js config
   reactStrictMode: true,
   images: {
-    domains: ['primtech-sistem.com/ui-payment-backoffice/public'],
+    domains: ['127.0.0.1'],
   },
   // images: {
   //   remotePatterns: [
