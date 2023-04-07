@@ -155,7 +155,6 @@ function mypoint() {
               value={perPage}
               onChange={(e) => {
                 setPerPage(e.target.value);
-                console.log(e.target.value);
                 getData(e.target.value);
               }}
             >

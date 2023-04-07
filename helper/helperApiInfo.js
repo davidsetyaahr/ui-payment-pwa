@@ -1,13 +1,12 @@
 import { AxiosError } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { apiGet } from '@/utils/api.util';
-
-export const baseUrl = "http://127.0.0.1:8000/api";
+import {baseUrl } from "@/helper/baseUrl";
 
 // Aannounce
 export const fetchAnnouncement = (props) => {
     return apiGet({
-      url: `${baseUrl}/announcement`,
+      url: `${baseUrl}announcement`,
       ...props,
     });
 };
@@ -23,7 +22,7 @@ export const useAnnouncement = (params) => {
 // advertise
 export const fetchAdvertise = (props) => {
     return apiGet({
-      url: `${baseUrl}/advertise`,
+      url: `${baseUrl}advertise`,
       ...props,
     });
 };
@@ -40,7 +39,7 @@ export const useAdvertise = (params) => {
 export const fetchAgenda = (props) => {
     const dataStorage = JSON.parse(localStorage.getItem('userData'))
     return apiGet({
-      url: `${baseUrl}/agenda/${dataStorage.default_student_id}`,
+      url: `${baseUrl}agenda/${dataStorage.default_student_id}`,
       ...props,
     });
 };
@@ -56,7 +55,7 @@ export const useAgenda = (params) => {
 // student
 export const fetchStudent = (props) => {
     return apiGet({
-      url: `${baseUrl}/listStudents/${JSON.parse(localStorage.getItem('userData')).id}`,
+      url: `${baseUrl}listStudents/${JSON.parse(localStorage.getItem('userData')).id}`,
       ...props,
     });
 };

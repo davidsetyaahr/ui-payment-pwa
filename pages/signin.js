@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import {baseUrl } from "@/helper/baseUrl";
+
 function signin() {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState(null);
@@ -26,7 +28,7 @@ function signin() {
   const handleCodeSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://127.0.0.1:8000/api/signin", {
+    const response = await fetch(baseUrl+"signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +43,7 @@ function signin() {
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://127.0.0.1:8000/api/authenticate", {
+    const response = await fetch(baseUrl+"authenticate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

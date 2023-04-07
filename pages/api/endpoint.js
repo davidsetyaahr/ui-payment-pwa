@@ -1,4 +1,4 @@
-export var baseUrl = 'http://127.0.0.1:8000/';
+import {baseUrl } from "@/helper/baseUrl";
 
 export const getPoint = async (callback) => {
     return callback(baseUrl);
