@@ -3,10 +3,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import {baseUrl } from "@/helper/baseUrl";
-
+import { toast } from "react-toastify";
 function signin() {
   const [phone, setPhone] = useState("");
-  const [code, setCode] = useState(null);
+  const [code, setCode] = useState(false);
   const [otp, setOtp] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
@@ -36,8 +36,19 @@ function signin() {
       body: JSON.stringify({ phone }),
     });
 
+
     const data = await response.json();
-    setCode(data.message.split(": ")[1]);
+    if (data.code == "00") {
+      setCode(true);
+    } else {
+      toast("Phone number not found !", {
+        hideProgressBar: true,
+        autoClose: 2000,
+        type: "error",
+        position: "top-right",
+        theme: "colored",
+      });
+    }
   };
 
   const handleOtpSubmit = async (event) => {
@@ -60,6 +71,14 @@ function signin() {
       setUserData(data.data);
       localStorage.setItem("userData", JSON.stringify(data.data));
       router.push('/home');
+    }else{
+      toast("OTP is invalid !", {
+        hideProgressBar: true,
+        autoClose: 2000,
+        type: "error",
+        position: "top-right",
+        theme: "colored",
+      });
     }
   };
 
