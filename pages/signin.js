@@ -12,6 +12,7 @@ function signin() {
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState(null);
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -27,7 +28,7 @@ function signin() {
 
   const handleCodeSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     const response = await fetch(baseUrl+"signin", {
       method: "POST",
       headers: {
@@ -36,6 +37,7 @@ function signin() {
       body: JSON.stringify({ phone }),
     });
 
+    setIsSubmitting(false);
 
     const data = await response.json();
     if (data.code == "00") {
@@ -53,7 +55,7 @@ function signin() {
 
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     const response = await fetch(baseUrl+"authenticate", {
       method: "POST",
       headers: {
@@ -62,7 +64,7 @@ function signin() {
       },
       body: JSON.stringify({ phone, otp }),
     });
-
+    setIsSubmitting(false);
     const data = await response.json();
     if (data.code === "00") {
       setToken(data.token.access_token);
@@ -133,9 +135,20 @@ function signin() {
                     <div className="d-grid gap-2">
                       <button
                         className="btn btn-secondary bg-warning-custome font-dark-custome"
-                        type="submit"
+                        type="submit" disabled={isSubmitting}
                       >
-                        submit
+                       {isSubmitting ? (
+                          <>
+                            <span
+                              className="spinner-border spinner-border-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Loading...
+                          </>
+                        ) : (
+                          'Submit'
+                        )}
                       </button>
                     </div>
                   </div>
@@ -180,9 +193,20 @@ function signin() {
                   <div className="d-grid gap-2">
                     <button
                       className="py-3 btn btn-yellow fw-bold"
-                      type="submit"
+                      type="submit" disabled={isSubmitting}
                     >
-                      Get Code
+                      {isSubmitting ? (
+                          <>
+                            <span
+                              className="spinner-border spinner-border-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Loading...
+                          </>
+                        ) : (
+                          'Get code'
+                        )}
                     </button>
                   </div>
                 </div>
