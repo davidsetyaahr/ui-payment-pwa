@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/router";
 import {baseStorageUrl } from "@/helper/baseUrl";
 import {getSummaryStudent } from "../pages/api/fetchdata";
+import { format_date } from "./helper/textHelper";
 
 function Home() {
   const [authUser, setAuthUser] = useState(null);
@@ -219,7 +220,7 @@ function Home() {
                       }}
                     >
                       <div className="card-body d-flex align-items-center">
-                        {dt.date}
+                        {format_date(String(dt.date))}
                         <br></br>
                         {dt.activity}
                       </div>

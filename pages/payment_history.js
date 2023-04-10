@@ -8,6 +8,7 @@ import {
 } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
+import { format_date } from "./helper/textHelper";
 
 function payment_history() {
   const [dataPayment, setDataPayment] = useState();
@@ -92,7 +93,7 @@ function payment_history() {
         {dataPayment &&
           dataPayment.data.map((data, index) => (
             <tr key={index} className="text-center">
-              <th scope="row">{String(data.created_at).split("T")[0]}</th>
+              <th scope="row">{format_date(String(data.created_at).split("T")[0])}</th>
               <td>{formatMoney(data.amount, 'Rp. ')}</td>
               <td>
                 <button
