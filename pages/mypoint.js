@@ -85,7 +85,7 @@ function mypoint() {
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/">
+            <Link href="/home">
               <span className="fa fa-arrow-left fa-2x color-blue"></span>
             </Link>
           </div>

@@ -132,7 +132,7 @@ function Home() {
                 />
                 <div className="d-flex flex-column p-2 pt-0 pb-0 ps-3">
                   <p className="mb-1 text-white text-center parent-name">
-                    {authUser?.name}
+                  {authUser && <span>MR.{authUser.name}</span>}
                   </p>
                   <button
                     className="p-0 text-decoration-none bg-dark-custome border-0"
@@ -150,7 +150,7 @@ function Home() {
                 </Link>
               </div>
               <section className="section-1 section-rounded bg-white p-4 pb-1">
-                <div className="bg-light rounded p-3">
+                {/* <div className="bg-light rounded p-3">
                   <div className="pt-0 pb-0 align-items-center justify-content-between">
                     <div>
                       <div className="mb-2 d-flex align-items-center justify-content-between">
@@ -174,33 +174,54 @@ function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="card rounded bg-light border-0 pr-3 mt-3">
                   <div className="card-body">
                     <div className="row justify-content-between">
-                      <div className="col-6">
-                        <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
+                      <div className="col-5">
+                      <div className="mb-2 d-flex flex-column align-items-center justify-content-between">
+                        {/* <div className="icon-bg">
+                          <span className="fa fa-receipt fa-lg color-blue"></span>
+                        </div> */}
+                        <div>
+                          <p className="mb-0 fw-500 font-dark fs-16">
+                            Current bill :
+                          </p>
+                          <h4 className="mt-2 fs-18 fw-bold color-blue price text-start">
+                            {formatMoney(parseInt(tagihan), "Rp. ")}
+                          </h4>
+                        </div>
+                        {/* <Link
+                          href="/payment"
+                          className="px-2 btn btn-sm btn-blue"
+                        >
+                          Detail
+                        </Link> */}
+                      </div>
+                      </div>
+                      <div className="col-3">
+                        <Link href="/mypoint" className="d-flex flex-column align-items-center p-0 pt-0 pb-0 text-decoration-none custome-card">
+                          <div className="mb-1 font-dark text-decoration-none total_point fw-500">
+                            Mypoint
+                          </div>
                           <div className="me-2 fw-500 color-blue sm">
                             <h3 className="fw-bold my-0">{mypoint}</h3>
                           </div>
-                          <Link href="/mypoint" className="mb-1 font-dark text-decoration-none total_point fw-500">
-                            Mypoint
-                          </Link>
                           {/* </div>
                       </div> */}
-                        </div>
+                        </Link>
                       </div>
-                      <div className="col-6">
+                      <div className="col-4">
                         {/* <div className="card rounded bg-light border-0 pr-3">
                       <div className="card-body"> */}
-                        <div className="d-flex flex-row align-items-center p-0 pt-0 pb-0">
+                        <Link href="/score" className="d-flex flex-column align-items-center p-0 pt-0 pb-0 text-decoration-none custome-card">
+                          <div className="mb-1 font-dark text-decoration-none total_point fw-500">
+                            Average Score
+                          </div>
                           <div className="me-2 fw-500 color-blue sm">
                             <h3 className="fw-bold my-0">{averageScore}</h3>
                           </div>
-                          <Link href="/score" className="mb-1 font-dark text-decoration-none total_point fw-500">
-                            Average Score
-                          </Link>
-                        </div>
+                        </Link>
                       </div>
                     </div>
                   </div>
