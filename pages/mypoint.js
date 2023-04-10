@@ -18,13 +18,11 @@ function mypoint() {
   const [totalPointStudent, setTotalPointStudent] = useState();
 
   const getData = async (perpage) => {
-    // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       page: 1,
-      // id: student.default_student_id,
       // id: "2067",
       id: tempStorage.default_student_id,
     };
@@ -53,10 +51,13 @@ function mypoint() {
           dataPoint.data.map((data, index) => (
             <tr key={index} className="text-center">
               <th scope="row">{format_date(String(data.date))}</th>
-              <td>{data.type}</td>
+              <td>{data.type !== "in" ? "Out" : "In"}</td>
               <td>{data.total_point}</td>
               <td>
-                {data.keterangan === "Absent" ? "attendance" : data.keterangan}
+                {data.keterangan === "Absent" ||
+                data.keterangan === "Attendance"
+                  ? "Present"
+                  : data.keterangan}
               </td>
             </tr>
           ))}
