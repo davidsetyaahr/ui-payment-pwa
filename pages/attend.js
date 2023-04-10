@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
 import { getAttend, getClassItem } from "./api/fetchdata";
+import { format_date } from "./helper/textHelper";
 
 function attend() {
   const [dataAttend, setDataAttend] = useState();
@@ -24,9 +25,8 @@ function attend() {
     await getAttend({ data, perPage: perpage }, (res) => {
       setStudentName(tempStorage.default_student_name);
       setDataAttend(res.payload);
-      setclassName(res.class)
+      setclassName(res.class);
       setTotal(res.payload.total);
-
     });
   };
 
@@ -56,7 +56,7 @@ function attend() {
           dataAttend.data.map((data, index) => (
             <tr key={index} className="text-center">
               <th scope="row">{index + 1}</th>
-              <th scope="row">{data.date}</th>
+              <th scope="row">{format_date(String(data.date))}</th>
               <th scope="row">{data.is_absent == "1" ? "Attend" : "Alpha"}</th>
             </tr>
           ))}
@@ -141,7 +141,7 @@ function attend() {
         <section className="section-2 bg-light mt-3 p-4 mb-last-content">
           <div className="input-group">
             <select
-            className="form-control"
+              className="form-control"
               // style={{ width: "250px !important" }}
               value={classSelected}
               onChange={(e) => {
@@ -150,7 +150,11 @@ function attend() {
             >
               {getClassData()}
             </select>
-            <button type="submit" className="btn fw-bold btn-yellow" onClick={filter}>
+            <button
+              type="submit"
+              className="btn fw-bold btn-yellow"
+              onClick={filter}
+            >
               Filter
             </button>
           </div>

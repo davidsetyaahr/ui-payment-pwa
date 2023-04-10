@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { getMyPoint } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
+import { format_date } from "./helper/textHelper";
 
 function mypoint() {
   const [dataPoint, setDataPoint] = useState();
@@ -51,10 +52,12 @@ function mypoint() {
         {dataPoint &&
           dataPoint.data.map((data, index) => (
             <tr key={index} className="text-center">
-              <th scope="row">{data.date}</th>
+              <th scope="row">{format_date(String(data.date))}</th>
               <td>{data.type}</td>
               <td>{data.total_point}</td>
-              <td>{data.keterangan === "Absent" ? "attendance" : data.keterangan}</td>
+              <td>
+                {data.keterangan === "Absent" ? "attendance" : data.keterangan}
+              </td>
             </tr>
           ))}
       </tbody>
@@ -91,12 +94,12 @@ function mypoint() {
           </div>
         </div>
         <section className="section-1 bg-light p-4">
-        <div className="d-flex align-items-center justify-content-between">
-          <div className="me-3">
-            <small className="font-dark fw-bold d-block">Point:</small>
-            <div className="btn btn-yellow fs-18 fw-bold">
-            {totalPointStudent}
-            </div>
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="me-3">
+              <small className="font-dark fw-bold d-block">Point:</small>
+              <div className="btn btn-yellow fs-18 fw-bold">
+                {totalPointStudent}
+              </div>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -140,7 +143,9 @@ function mypoint() {
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
-                <th scope="col" className="width-th-point">Date</th>
+                <th scope="col" className="width-th-point">
+                  Date
+                </th>
                 <th scope="col">Status</th>
                 <th scope="col">Point</th>
                 <th scope="col">Category</th>
