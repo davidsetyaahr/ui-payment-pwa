@@ -182,9 +182,9 @@ function Home() {
                           <div className="me-2 fw-500 color-blue sm">
                             <h3 className="fw-bold my-0">{mypoint}</h3>
                           </div>
-                          <div className="mb-1 font-dark total_point fw-500">
+                          <Link href="/mypoint" className="mb-1 font-dark text-decoration-none total_point fw-500">
                             Mypoint
-                          </div>
+                          </Link>
                           {/* </div>
                       </div> */}
                         </div>
@@ -196,9 +196,9 @@ function Home() {
                           <div className="me-2 fw-500 color-blue sm">
                             <h3 className="fw-bold my-0">{averageScore}</h3>
                           </div>
-                          <div className="mb-1 font-dark total_point fw-500">
+                          <Link href="/score" className="mb-1 font-dark text-decoration-none total_point fw-500">
                             Average Score
-                          </div>
+                          </Link>
                         </div>
                       </div>
                     </div>
