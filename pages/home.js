@@ -132,7 +132,7 @@ function Home() {
                 />
                 <div className="d-flex flex-column p-2 pt-0 pb-0 ps-3">
                   <p className="mb-1 text-white text-center parent-name">
-                  {authUser && <span>MR.{authUser.name}</span>}
+                  {authUser?.gender === "Male" ? "MR." : "Mrs."}&nbsp;{authUser?.name}
                   </p>
                   <button
                     className="p-0 text-decoration-none bg-dark-custome border-0"
