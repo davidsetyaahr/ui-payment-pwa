@@ -230,7 +230,7 @@ const Score = () => {
 
         <section className="section-3 p-4 mt-3 bg-light ">
           <div className="mb-last-content">
-            <h5 className="font-dark">Materialis :</h5>
+            <h5 className="font-dark">Materials  :</h5>
             <div className="bg-white p-4 border fs-18">
               {scoreData && scoreData.comment}
             </div>
