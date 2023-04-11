@@ -149,174 +149,150 @@ function Home() {
                   <span className="fa fa-sign-out"></span>
                 </Link>
               </div>
-              <section className="section-1 section-rounded bg-white p-4 pb-1">
-                {/* <div className="bg-light rounded p-3">
-                  <div className="pt-0 pb-0 align-items-center justify-content-between">
-                    <div>
-                      <div className="mb-2 d-flex align-items-center justify-content-between">
-                        <div className="icon-bg">
-                          <span className="fa fa-receipt fa-lg color-blue"></span>
+              <div className="section-rounded">
+                <section className="section-1  bg-white">
+                  <div className="card rounded bg-light border-0 p-4">
+                      <div className="row justify-content-between">
+                        <div className="col-auto">
+                        <div className="mb-2 d-flex flex-column align-items-center justify-content-between">
+                          {/* <div className="icon-bg">
+                            <span className="fa fa-receipt fa-lg color-blue"></span>
+                          </div> */}
+                          <Link href='/payment' className="text-decoration-none">
+                            <p className="mb-0 fw-500 font-dark fs-16">
+                              Current bill
+                            </p>
+                            <h4 className="mt-2 fs-18 fw-bold color-blue price text-start">
+                              {formatMoney(parseInt(tagihan), "Rp. ")}
+                            </h4>
+                          </Link>
+                          {/* <Link
+                            href="/payment"
+                            className="px-2 btn btn-sm btn-blue"
+                          >
+                            Detail
+                          </Link> */}
                         </div>
-                        <div>
-                          <p className="mb-0 fw-500 font-dark fs-16">
-                            Current bill :
-                          </p>
-                          <h4 className="mb-1 fw-bold color-blue price text-center">
-                            {formatMoney(parseInt(tagihan), "Rp. ")}
-                          </h4>
                         </div>
-                        <Link
-                          href="/payment"
-                          className="px-2 btn btn-sm btn-blue"
-                        >
-                          Detail
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-                <div className="card rounded bg-light border-0 pr-3 mt-3">
-                  <div className="card-body">
-                    <div className="row justify-content-between">
-                      <div className="col-5">
-                      <div className="mb-2 d-flex flex-column align-items-center justify-content-between">
-                        {/* <div className="icon-bg">
-                          <span className="fa fa-receipt fa-lg color-blue"></span>
+                        <div className="col-auto">
+                          <Link href="/mypoint" className="mb-2 text-decoration-none">
+                            <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
+                              Mypoint
+                            </div>
+                            <div className="mt-2 fw-500 color-blue sm">
+                              <h4 className="fs-18 fw-bold my-0">{mypoint}</h4>
+                            </div>
+                            {/* </div>
                         </div> */}
-                        <div>
-                          <p className="mb-0 fw-500 font-dark fs-16">
-                            Current bill :
-                          </p>
-                          <h4 className="mt-2 fs-18 fw-bold color-blue price text-start">
-                            {formatMoney(parseInt(tagihan), "Rp. ")}
-                          </h4>
+                          </Link>
                         </div>
-                        {/* <Link
-                          href="/payment"
-                          className="px-2 btn btn-sm btn-blue"
-                        >
-                          Detail
-                        </Link> */}
+                        <div className="col-auto">
+                          {/* <div className="card rounded bg-light border-0 pr-3">
+                        <div className="card-body"> */}
+                          <Link href="/score" className="text-decoration-none">
+                            <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
+                              Avg Score
+                            </div>
+                            <div className="mt-2 fw-500 color-blue sm">
+                              <h4 className="fs-18 fw-bold my-0">{averageScore}</h4>
+                            </div>
+                          </Link>
+                        </div>
                       </div>
+                  </div>
+                </section>
+                <section className="section-2 mt-3 bg-light p-4 mt-0">
+                  <h5 className="mb-2 font-dark fw-500">Agenda</h5>
+                  {/* update ui agend with slide */}
+                  <div className="img-slide">
+                    {agenda?.map((dt) => (
+                      <div
+                        key={dt.id}
+                        className="content card mr-1"
+                        style={{
+                          height: "100px !important",
+                          marginRight: "8px !important",
+                          width: "100% !important",
+                        }}
+                      >
+                        <div className="card-body d-flex align-items-center">
+                          {format_date(String(dt.date))}
+                          <br></br>
+                          {dt.activity}
+                        </div>
                       </div>
-                      <div className="col-3">
-                        <Link href="/mypoint" className="d-flex flex-column align-items-center p-0 pt-0 pb-0 text-decoration-none custome-card">
-                          <div className="mb-1 font-dark text-decoration-none total_point fw-500">
-                            Mypoint
-                          </div>
-                          <div className="me-2 fw-500 color-blue sm">
-                            <h3 className="fw-bold my-0">{mypoint}</h3>
-                          </div>
-                          {/* </div>
-                      </div> */}
-                        </Link>
-                      </div>
-                      <div className="col-4">
-                        {/* <div className="card rounded bg-light border-0 pr-3">
-                      <div className="card-body"> */}
-                        <Link href="/score" className="d-flex flex-column align-items-center p-0 pt-0 pb-0 text-decoration-none custome-card">
-                          <div className="mb-1 font-dark text-decoration-none total_point fw-500">
-                            Average Score
-                          </div>
-                          <div className="me-2 fw-500 color-blue sm">
-                            <h3 className="fw-bold my-0">{averageScore}</h3>
-                          </div>
-                        </Link>
-                      </div>
+                    ))}
+                  </div>
+                  {/* end update ui agend with slide */}
+                  {/* test ui agenda with slide */}
+                  {/* <div className="img-slide">
+                  <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                    <div className="card-body d-flex align-items-center">
+                      {dataagenda?.payload?.activity}
+                      <br></br>
+                      {dataagenda?.payload?.activity}
                     </div>
                   </div>
-                </div>
-              </section>
-              <section className="section-2 bg-light p-4">
-                <h5 className="mb-2 font-dark fw-500">Agenda</h5>
-                {/* update ui agend with slide */}
-                <div className="img-slide">
-                  {agenda?.map((dt) => (
-                    <div
-                      key={dt.id}
-                      className="content card mr-1"
-                      style={{
-                        height: "100px !important",
-                        marginRight: "8px !important",
-                        width: "100% !important",
-                      }}
-                    >
-                      <div className="card-body d-flex align-items-center">
-                        {format_date(String(dt.date))}
-                        <br></br>
-                        {dt.activity}
+                  <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                    <div className="card-body d-flex align-items-center">
+                      {dataagenda?.payload?.activity}
+                      <br></br>
+                      {dataagenda?.payload?.activity}
+                    </div>
+                  </div>
+                  <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                    <div className="card-body">
+                      {dataagenda?.payload?.activity}
+                      <br></br>
+                      {dataagenda?.payload?.activity}
+                    </div>
+                  </div>
+                  <div className="content card" style={{ height: "100px !important" }} id="card-slide">
+                    <div className="card-body">
+                      {dataagenda?.payload?.activity}
+                      <br></br>
+                      {dataagenda?.payload?.activity}
+                    </div>
+                  </div>
+                  </div> */}
+                  {/*end test ui agenda with slide */}
+                </section>
+                <section className="section-3 mt-3 bg-light p-4">
+                  <h5 className="mt-0 mb-2 font-dark fw-500">Announcement</h5>
+                  <div className="img-slide">
+                    {dataannounce?.payload?.map((dt) => (
+                      <div key={dt.id} className="content">
+                        <Image
+                          src={`${baseStorageUrl}${dt.banner}`}
+                          width={100}
+                          height={100}
+                          alt=""
+                        />
+                        <div className="title">{dt.description}</div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                {/* end update ui agend with slide */}
-                {/* test ui agenda with slide */}
-                {/* <div className="img-slide">
-                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
-                  <div className="card-body d-flex align-items-center">
-                    {dataagenda?.payload?.activity}
-                    <br></br>
-                    {dataagenda?.payload?.activity}
+                    ))}
                   </div>
-                </div>
-                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
-                  <div className="card-body d-flex align-items-center">
-                    {dataagenda?.payload?.activity}
-                    <br></br>
-                    {dataagenda?.payload?.activity}
-                  </div>
-                </div>
-                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
-                  <div className="card-body">
-                    {dataagenda?.payload?.activity}
-                    <br></br>
-                    {dataagenda?.payload?.activity}
-                  </div>
-                </div>
-                <div className="content card" style={{ height: "100px !important" }} id="card-slide">
-                  <div className="card-body">
-                    {dataagenda?.payload?.activity}
-                    <br></br>
-                    {dataagenda?.payload?.activity}
-                  </div>
-                </div>
-                </div> */}
-                {/*end test ui agenda with slide */}
-              </section>
-              <section className="section-3 mt-3 bg-light p-4">
-                <h5 className="mt-0 mb-2 font-dark fw-500">Announcement</h5>
-                <div className="img-slide">
-                  {dataannounce?.payload?.map((dt) => (
-                    <div key={dt.id} className="content">
-                      <Image
-                        src={`${baseStorageUrl}${dt.banner}`}
-                        width={100}
-                        height={100}
-                        alt=""
-                      />
-                      <div className="title">{dt.description}</div>
-                    </div>
-                  ))}
-                </div>
-                {/* <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1" alt="" /> */}
-              </section>
-              <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
-                <h5 className="mt-0 mb-2 font-dark fw-500">Advertise</h5>
+                  {/* <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1" alt="" /> */}
+                </section>
+                <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
+                  <h5 className="mt-0 mb-2 font-dark fw-500">Advertise</h5>
 
-                <div className="img-slide">
-                  {datads?.payload?.map((ads) => (
-                    <div key={ads.id} className="content">
-                      <Image
-                        src={`${baseStorageUrl}${ads.banner}`}
-                        width={100}
-                        height={100}
-                        alt=""
-                      />
-                      <div className="title">{ads.title}</div>
-                    </div>
-                  ))}
-                </div>
-              </section>
+                  <div className="img-slide">
+                    {datads?.payload?.map((ads) => (
+                      <div key={ads.id} className="content">
+                        <Image
+                          src={`${baseStorageUrl}${ads.banner}`}
+                          width={100}
+                          height={100}
+                          alt=""
+                        />
+                        <div className="title">{ads.title}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+
               <NavBottom />
             </main>
           </div>
