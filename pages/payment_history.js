@@ -9,7 +9,7 @@ import {
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
 
-function payment_history() {
+function Payment_history() {
   const [dataPayment, setDataPayment] = useState();
   const [dataDetail, setDataDetail] = useState();
   const [id, setId] = useState();
@@ -273,4 +273,4 @@ function payment_history() {
   );
 }
 
-export default withAuth(payment_history);
+export default withAuth(Payment_history);

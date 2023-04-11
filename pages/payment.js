@@ -9,7 +9,7 @@ import { getListBill, checkOutBill } from "../pages/api/fetchdata";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-function payment() {
+function Payment() {
   const [dataBilling, setDataBilling] = useState();
   const [total_payment, setTotalPayment] = useState(0);
   const [studentName, setStudentName] = useState();
@@ -202,4 +202,4 @@ function payment() {
   );
 }
 
-export default withAuth(payment);
+export default withAuth(Payment);

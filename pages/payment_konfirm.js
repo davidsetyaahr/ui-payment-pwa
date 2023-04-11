@@ -6,7 +6,7 @@ import withAuth from "@/utils/withAuth.util";
 import { useRouter } from "next/router";
 import { verifyPayment } from "../pages/api/fetchdata";
 import { toast } from "react-toastify";
-function payment_konfirm() {
+function Payment_konfirm() {
   const router = useRouter();
   const query = router.query;
 
@@ -110,4 +110,4 @@ function payment_konfirm() {
   );
 }
 
-export default withAuth(payment_konfirm);
+export default withAuth(Payment_konfirm);

@@ -5,7 +5,7 @@ import { getMyPoint } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
 
-function mypoint() {
+function Mypoint() {
   const [dataPoint, setDataPoint] = useState();
   const [name, setname] = useState();
   const [className, setclassName] = useState();
@@ -170,4 +170,4 @@ function mypoint() {
   );
 }
 
-export default withAuth(mypoint);
+export default withAuth(Mypoint);

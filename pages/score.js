@@ -11,7 +11,7 @@ import withAuth from "@/utils/withAuth.util";
 
 import { toast } from "react-toastify";
 
-const score = () => {
+const Score = () => {
   const [token, setToken] = useState(null);
   const [authUser, setAuthUser] = useState(null);
   const [testId, setTestId] = useState(0);
@@ -242,4 +242,4 @@ const score = () => {
   );
 };
 
-export default withAuth(score);
+export default withAuth(Score);

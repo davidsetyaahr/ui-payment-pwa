@@ -211,6 +211,7 @@ function Home() {
                 <div className="img-slide">
                   {agenda?.map((dt) => (
                     <div
+                      key={dt.id}
                       className="content card mr-1"
                       style={{
                         height: "100px !important",

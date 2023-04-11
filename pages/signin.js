@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import {baseUrl } from "@/helper/baseUrl";
 
-function signin() {
+function Signin() {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState(null);
   const [otp, setOtp] = useState("");
@@ -177,4 +177,4 @@ function signin() {
   );
 }
 
-export default signin;
+export default Signin;

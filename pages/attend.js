@@ -6,7 +6,7 @@ import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
 import { getAttend, getClassItem } from "./api/fetchdata";
 
-function attend() {
+function Attend() {
   const [dataAttend, setDataAttend] = useState();
   const [dataClass, setDataClass] = useState();
   const [classSelected, setClassSelected] = useState(0);
@@ -187,4 +187,4 @@ function attend() {
   );
 }
 
-export default withAuth(attend);
+export default withAuth(Attend);
