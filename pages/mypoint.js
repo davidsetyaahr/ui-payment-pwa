@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { getMyPoint } from "../pages/api/fetchdata";
 import NavBottom from "./component/navbottom";
 import withAuth from "@/utils/withAuth.util";
+import { format_date } from "./helper/textHelper";
 
 function Mypoint() {
   const [dataPoint, setDataPoint] = useState();
@@ -17,13 +18,11 @@ function Mypoint() {
   const [totalPointStudent, setTotalPointStudent] = useState();
 
   const getData = async (perpage) => {
-    // const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
     let data = {
       startDate: startDate ?? "",
       endDate: endDate ?? "",
       page: 1,
-      // id: student.default_student_id,
       // id: "2067",
       id: tempStorage.default_student_id,
     };
@@ -51,10 +50,15 @@ function Mypoint() {
         {dataPoint &&
           dataPoint.data.map((data, index) => (
             <tr key={index} className="text-center">
-              <th scope="row">{data.date}</th>
-              <td>{data.type}</td>
+              <th scope="row">{format_date(String(data.date))}</th>
+              <td>{data.type !== "in" ? "Out" : "In"}</td>
               <td>{data.total_point}</td>
-              <td>{data.keterangan === "Absent" ? "attendance" : data.keterangan}</td>
+              <td>
+                {data.keterangan === "Absent" ||
+                data.keterangan === "Attendance"
+                  ? "Present"
+                  : data.keterangan}
+              </td>
             </tr>
           ))}
       </tbody>
@@ -82,7 +86,7 @@ function Mypoint() {
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/">
+            <Link href="/home">
               <span className="fa fa-arrow-left fa-2x color-blue"></span>
             </Link>
           </div>
@@ -91,12 +95,12 @@ function Mypoint() {
           </div>
         </div>
         <section className="section-1 bg-light p-4">
-        <div className="d-flex align-items-center justify-content-between">
-          <div className="me-3">
-            <small className="font-dark fw-bold d-block">Point:</small>
-            <div className="btn btn-yellow fs-18 fw-bold">
-            {totalPointStudent}
-            </div>
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="me-3">
+              <small className="font-dark fw-bold d-block">Point:</small>
+              <div className="btn btn-yellow fs-18 fw-bold">
+                {totalPointStudent}
+              </div>
             </div>
             <a
               className="text-decoration-none color-blue text-end"
@@ -140,7 +144,9 @@ function Mypoint() {
           <table className="table table-borderless table-hover">
             <thead>
               <tr className="table-dark-opacity text-center">
-                <th scope="col" className="width-th-point">Date</th>
+                <th scope="col" className="width-th-point">
+                  Date
+                </th>
                 <th scope="col">Status</th>
                 <th scope="col">Point</th>
                 <th scope="col">Category</th>

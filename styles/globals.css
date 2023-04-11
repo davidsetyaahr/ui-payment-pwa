@@ -300,3 +300,11 @@ footer .nav-link,.font-dark{
 .width-th-point{
   width: 22.66% !important;;
 }
+
+.custome-card{
+      background: rgba(232, 232, 232, 0.94) !important;
+    /* shadow 1 */
+
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    border-radius: 6px !important;
+}

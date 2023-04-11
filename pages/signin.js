@@ -3,15 +3,17 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import {baseUrl } from "@/helper/baseUrl";
+import { toast } from "react-toastify";
 
 function Signin() {
   const [phone, setPhone] = useState("");
-  const [code, setCode] = useState(null);
+  const [code, setCode] = useState(false);
   const [otp, setOtp] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState(null);
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -27,7 +29,7 @@ function Signin() {
 
   const handleCodeSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     const response = await fetch(baseUrl+"signin", {
       method: "POST",
       headers: {
@@ -36,13 +38,25 @@ function Signin() {
       body: JSON.stringify({ phone }),
     });
 
+    setIsSubmitting(false);
+
     const data = await response.json();
-    setCode(data.message.split(": ")[1]);
+    if (data.code == "00") {
+      setCode(true);
+    } else {
+      toast("Phone number not found !", {
+        hideProgressBar: true,
+        autoClose: 2000,
+        type: "error",
+        position: "top-right",
+        theme: "colored",
+      });
+    }
   };
 
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
     const response = await fetch(baseUrl+"authenticate", {
       method: "POST",
       headers: {
@@ -51,7 +65,7 @@ function Signin() {
       },
       body: JSON.stringify({ phone, otp }),
     });
-
+    setIsSubmitting(false);
     const data = await response.json();
     if (data.code === "00") {
       setToken(data.token.access_token);
@@ -60,6 +74,14 @@ function Signin() {
       setUserData(data.data);
       localStorage.setItem("userData", JSON.stringify(data.data));
       router.push('/home');
+    }else{
+      toast("OTP is invalid !", {
+        hideProgressBar: true,
+        autoClose: 2000,
+        type: "error",
+        position: "top-right",
+        theme: "colored",
+      });
     }
   };
 
@@ -114,9 +136,20 @@ function Signin() {
                     <div className="d-grid gap-2">
                       <button
                         className="btn btn-secondary bg-warning-custome font-dark-custome"
-                        type="submit"
+                        type="submit" disabled={isSubmitting}
                       >
-                        submit
+                       {isSubmitting ? (
+                          <>
+                            <span
+                              className="spinner-border spinner-border-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Loading...
+                          </>
+                        ) : (
+                          'Submit'
+                        )}
                       </button>
                     </div>
                   </div>
@@ -161,9 +194,20 @@ function Signin() {
                   <div className="d-grid gap-2">
                     <button
                       className="py-3 btn btn-yellow fw-bold"
-                      type="submit"
+                      type="submit" disabled={isSubmitting}
                     >
-                      Get Code
+                      {isSubmitting ? (
+                          <>
+                            <span
+                              className="spinner-border spinner-border-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Loading...
+                          </>
+                        ) : (
+                          'Get code'
+                        )}
                     </button>
                   </div>
                 </div>

@@ -17,6 +17,7 @@ function Payment() {
   const [student_id, setStudentId] = useState();
   const [id_bill, setBodyBill] = useState([]);
   const [price, setBodyPrice] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
   const getData = async () => {
@@ -58,6 +59,7 @@ function Payment() {
   };
 
   const handleCheckOutBill = () => {
+    setIsSubmitting(true);
     if (id_bill.length == 0) {
       toast("Harap pilih tagihan!", {
         hideProgressBar: true,
@@ -66,6 +68,7 @@ function Payment() {
         position: "top-right",
         theme: "colored",
       });
+      setIsSubmitting(false);
     } else {
       let data = {
         body: {
@@ -186,7 +189,18 @@ function Payment() {
                   className="btn btn-yellow btn-sm fw-bold"
                   onClick={handleCheckOutBill}
                 >
-                  Bayar Sekarang
+                  {isSubmitting ? (
+                          <>
+                            <span
+                              className="spinner-border spinner-border-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Loading...
+                          </>
+                        ) : (
+                          'Bayar Sekarang'
+                        )}
                 </button>
                 {/* <Link href="/payment_konfirm" className="btn btn-yellow btn-sm">
                   Bayar Sekarang
