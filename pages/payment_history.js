@@ -154,7 +154,7 @@ function Payment_history() {
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
-            <h4 className="font-dark fw-500 mb-0">History Pembayaran</h4>
+            <h4 className="font-dark fw-500 mb-0">Payment History</h4>
           </div>
         </div>
         <section className="section-1 bg-light p-4">
@@ -167,7 +167,7 @@ function Payment_history() {
               href="#"
               target="_blank"
             >
-            <small className="font-dark fw-bold">Nama Siswa:</small>
+            <small className="font-dark fw-bold">Student's Name:</small>
             <h5 className="my-0">
               {studentName}
             </h5>
@@ -253,9 +253,9 @@ function Payment_history() {
               <table className="table table-striped">
                 <thead>
                   <tr className="table-dark text-center">
-                    <th scope="col">Nama</th>
-                    <th scope="col">Pembayaran</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Detail</th>
+                    <th scope="col">Nominal</th>
                   </tr>
                 </thead>
                 {getDetail()}

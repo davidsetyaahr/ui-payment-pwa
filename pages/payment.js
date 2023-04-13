@@ -80,7 +80,7 @@ function Payment() {
       };
       checkOutBill(data, (rescallback) => {
         if (rescallback.code == "00") {
-          toast("Berhasil generate pembayaran", {
+          toast("Generate payment success", {
             hideProgressBar: true,
             autoClose: 2000,
             type: "success",
@@ -95,7 +95,7 @@ function Payment() {
             },
           });
         } else {
-          toast("Gagal generate pembayaran", {
+          toast("Generate payment failed", {
             hideProgressBar: true,
             autoClose: 2000,
             type: "error",
@@ -160,7 +160,7 @@ function Payment() {
               href="#"
               target="_blank"
             >
-              <small className="font-dark fw-bold">Nama Siswa:</small>
+            <small className="font-dark fw-bold">Student's Name:</small>
               <h5 className="my-0">{studentName}</h5>
             </a>
           </div>
@@ -170,9 +170,9 @@ function Payment() {
             <thead>
               <tr className="table-dark-opacity text-center">
                 <th scope="col"></th>
-                <th scope="col">Nama</th>
-                <th scope="col">Pembayaran</th>
+                <th scope="col">Name</th>
                 <th scope="col">Detail</th>
+                <th scope="col">Nominal</th>
               </tr>
             </thead>
             {getList()}
@@ -199,7 +199,7 @@ function Payment() {
                             Loading...
                           </>
                         ) : (
-                          'Bayar Sekarang'
+                          'Pay Now'
                         )}
                 </button>
                 {/* <Link href="/payment_konfirm" className="btn btn-yellow btn-sm">

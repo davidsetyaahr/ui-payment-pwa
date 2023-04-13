@@ -57,7 +57,7 @@ function Attend() {
             <tr key={index} className="text-center">
               <th scope="row">{index + 1}</th>
               <th scope="row">{format_date(String(data.date))}</th>
-              <th scope="row">{data.is_absent == "1" ? "Attend" : "Alpha"}</th>
+              <th scope="row">{data.is_absent == "1" ? "Present" : "Absent"}</th>
             </tr>
           ))}
       </tbody>
@@ -118,7 +118,7 @@ function Attend() {
               href="#"
               target="_blank"
             >
-              <small className="font-dark fw-bold">Nama Siswa:</small>
+              <small className="font-dark fw-bold">Student's Name:</small>
               <h5 className="my-0">{studentName}</h5>
             </a>
           </div>

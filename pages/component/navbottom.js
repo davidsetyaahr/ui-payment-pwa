@@ -27,7 +27,7 @@ const segment = (typeof window !== "undefined") ? window.location.pathname.split
                                   <span className="fa-lg fa fa-clipboard-user"></span>
                                 </div>
                                 <span className="font-dark">
-                                    Attend
+                                    Attendance
                                 </span>
                                 </Link>
                             </div>
@@ -39,7 +39,7 @@ const segment = (typeof window !== "undefined") ? window.location.pathname.split
                                   <span className="fa-lg fas fa-coins"></span>
                                 </div>
                                 <span className="font-dark">
-                                    Point
+                                    Points
                                 </span>
                                 </Link>
                             </div>

@@ -1,11 +1,11 @@
 {
-    "theme_color": "#f69435",
-    "background_color": "#f69435",
+    "theme_color": "#fff",
+    "background_color": "#fff",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "ui-pwa",
-    "short_name": "pwa",
+    "name": "U&I APP",
+    "short_name": "U&I APP",
     "description": "project like management student learning",
     "icons": [
         {

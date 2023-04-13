@@ -132,7 +132,7 @@ function Home() {
                 />
                 <div className="d-flex flex-column p-2 pt-0 pb-0 ps-3">
                   <p className="mb-1 text-white text-center parent-name">
-                  {authUser?.gender === "Male" ? "MR." : "Mrs."}&nbsp;{authUser?.name}
+                  {authUser?.name}
                   </p>
                   <button
                     className="p-0 text-decoration-none bg-dark-custome border-0"
@@ -177,7 +177,7 @@ function Home() {
                         <div className="col-auto">
                           <Link href="/mypoint" className="mb-2 text-decoration-none">
                             <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
-                              Mypoint
+                              Points
                             </div>
                             <div className="mt-2 fw-500 color-blue sm">
                               <h4 className="fs-18 fw-bold my-0">{mypoint}</h4>
@@ -275,7 +275,7 @@ function Home() {
                   {/* <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1" alt="" /> */}
                 </section>
                 <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
-                  <h5 className="mt-0 mb-2 font-dark fw-500">Advertise</h5>
+                  <h5 className="mt-0 mb-2 font-dark fw-500">Promo</h5>
 
                   <div className="img-slide">
                     {datads?.payload?.map((ads) => (

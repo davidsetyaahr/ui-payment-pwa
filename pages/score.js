@@ -87,9 +87,9 @@ const Score = () => {
           <thead>
             <tr className="table-dark-opacity text-center">
               <th scope="col">No</th>
-              <th scope="col">Item</th>
+              <th scope="col">Skills</th>
               <th scope="col">Score</th>
-              <th scope="col">category</th>
+              <th scope="col">Category</th>
             </tr>
           </thead>
           <tbody>
@@ -114,7 +114,7 @@ const Score = () => {
       <>
         <div className="d-flex align-items-center justify-content-between">
           <div>
-            <p className="mt-0 mb-1 fw-bold"> Average Point</p>
+            <p className="mt-0 mb-1 fw-bold"> Average Score</p>
             <p className="mb-0 fw-500">
               {scoreData && scoreData.average_score} (
               {scoreData && scoreData.grade})
@@ -190,7 +190,7 @@ const Score = () => {
               href="#"
               target="_blank"
             >
-              <small className="font-dark fw-bold">Nama Siswa:</small>
+              <small className="font-dark fw-bold">Student's Name:</small>
               <h5 className="my-0">{authUser?.default_student_name}</h5>
             </a>
           </div>
@@ -230,7 +230,7 @@ const Score = () => {
 
         <section className="section-3 p-4 mt-3 bg-light ">
           <div className="mb-last-content">
-            <h5 className="font-dark">Materials  :</h5>
+            <h5 className="font-dark">Comments  :</h5>
             <div className="bg-white p-4 border fs-18">
               {scoreData && scoreData.comment}
             </div>
