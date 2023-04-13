@@ -167,7 +167,7 @@ function Payment_history() {
               href="#"
               target="_blank"
             >
-            <small className="font-dark fw-bold">Student's Name:</small>
+            <small className="font-dark fw-bold">{"Student's Name:"}</small>
             <h5 className="my-0">
               {studentName}
             </h5>
