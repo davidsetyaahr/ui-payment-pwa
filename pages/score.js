@@ -35,7 +35,6 @@ const Score = () => {
       id: tempStorage.default_student_id,
     };
     await getResultScore({ data }, (res) => {
-
       setResultScore(res.payload);
       setShowResult(true);
       setclassName(res.payload.class);
@@ -131,7 +130,7 @@ const Score = () => {
       return (
         <>
           <button type="button" className="fw-bold btn btn-yellow btn-sm">
-            <span className="fa fa-download me-1"></span> E Sertifikat
+            <span className="fa fa-download me-1"></span> E-Certificate
           </button>
         </>
       );
@@ -148,17 +147,15 @@ const Score = () => {
                 <tr>
                   <td colSpan="4" className="fw-500">
                     {" "}
-                      (Result test:{resultScore.total_score} (
-                      {resultScore.grade}
-                      ). {resultScore.total_test_passed} of{" "}
-                      {resultScore.total_test} Test)
+                    (Result test:{resultScore.total_score} ({resultScore.grade}
+                    ). {resultScore.total_test_passed} of{" "}
+                    {resultScore.total_test} Test)
                   </td>
                 </tr>
               </tbody>
             </table>
             {btnDownload()}
           </div>
-
         </>
       );
     } else {
@@ -230,7 +227,7 @@ const Score = () => {
 
         <section className="section-3 p-4 mt-3 bg-light ">
           <div className="mb-last-content">
-            <h5 className="font-dark">Comments  :</h5>
+            <h5 className="font-dark">Comments :</h5>
             <div className="bg-white p-4 border fs-18">
               {scoreData && scoreData.comment}
             </div>
