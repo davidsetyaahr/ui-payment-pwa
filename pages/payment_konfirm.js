@@ -79,7 +79,7 @@ function Payment_konfirm() {
             </p>
             <ol className="list-group list-group-numbered text-start">
               <li className="list-group-item border-0">
-                Transfer ke rekening BCA 1410098776 a.n Lis Citro dewi rusli
+                Transfer ke rekening BCA 4641327187 a.n Lie Citro Dewi Ruslie
               </li>
               <li className="list-group-item border-0">
                 Masukan jumlah pembayaran sebesar{" "}
