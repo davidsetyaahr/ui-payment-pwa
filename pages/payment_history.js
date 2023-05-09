@@ -23,7 +23,6 @@ function Payment_history() {
   const [perPage, setPerPage] = useState(10);
   const [total, setTotal] = useState();
 
-
   const getData = async (perpage) => {
     const student = JSON.parse(localStorage.getItem("userData")) ?? [];
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
@@ -34,11 +33,11 @@ function Payment_history() {
       id: tempStorage.default_student_id,
     };
     await getHistoryPayment({ data, perPage: perpage }, (res) => {
-      setStudentName(tempStorage.default_student_name)
+      setStudentName(tempStorage.default_student_name);
       setDataPayment(res.payload);
       setTotal(res.payload.total);
       setStudentClass(res.class);
-      setname(student.default_student_name)
+      setname(student.default_student_name);
     });
   };
 
@@ -93,8 +92,10 @@ function Payment_history() {
         {dataPayment &&
           dataPayment.data.map((data, index) => (
             <tr key={index} className="text-center">
-              <th scope="row">{format_date(String(data.created_at).split("T")[0])}</th>
-              <td>{formatMoney(data.amount, 'Rp. ')}</td>
+              <th scope="row">
+                {format_date(String(data.created_at).split("T")[0])}
+              </th>
+              <td>{formatMoney(data.amount, "Rp. ")}</td>
               <td>
                 <button
                   onClick={() => showModal(data.unique_code)}
@@ -104,7 +105,6 @@ function Payment_history() {
                 >
                   View
                 </button>
-
               </td>
             </tr>
           ))}
@@ -117,10 +117,10 @@ function Payment_history() {
       <tbody>
         {dataDetail &&
           dataDetail.map((data, index) => (
-            <tr  key={index} className="text-center">
+            <tr key={index} className="text-center">
               <td>{data.name}</td>
               <td>{data.payment}</td>
-              <td>{formatMoney(data.price, 'Rp. ')}</td>
+              <td>{formatMoney(data.price, "Rp. ")}</td>
             </tr>
           ))}
       </tbody>
@@ -148,9 +148,8 @@ function Payment_history() {
       <main className="main bg-white mobile-view">
         <div className="d-flex flex-row py-4 px-3 mx-auto">
           <div className="d-flex flex-column align-items-start">
-            <Link href="/" >
-              <span className="fa fa-arrow-left fa-2x font-dark">
-              </span>
+            <Link href="/">
+              <span className="fa fa-arrow-left fa-2x font-dark"></span>
             </Link>
           </div>
           <div className="d-flex flex-grow-1 justify-content-center align-items-center">
@@ -167,10 +166,8 @@ function Payment_history() {
               href="#"
               target="_blank"
             >
-            <small className="font-dark fw-bold">{"Student's Name:"}</small>
-            <h5 className="my-0">
-              {studentName}
-            </h5>
+              <small className="font-dark fw-bold">{"Student's Name:"}</small>
+              <h5 className="my-0">{studentName}</h5>
             </a>
           </div>
         </section>
@@ -200,17 +197,21 @@ function Payment_history() {
               Filter
             </button>
           </div>
-            <table className="table table-borderless">
-              <thead>
-                <tr className="table-dark-opacity">
-                  <th scope="col" className="width-th">Date</th>
-                  <th scope="col" className="text-center">Total</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              {getList()}
-            </table>
-            <div className="d-flex justify-content-center">
+          <table className="table table-borderless">
+            <thead>
+              <tr className="table-dark-opacity">
+                <th scope="col" className="width-th">
+                  Date
+                </th>
+                <th scope="col" className="text-center">
+                  Total
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            {getList()}
+          </table>
+          <div className="d-flex justify-content-center">
             <span className="me-2">per</span>
             <select
               value={perPage}
@@ -223,7 +224,7 @@ function Payment_history() {
               {getPageNum()}
             </select>
             <span className="ms-2">page</span>
-            </div>
+          </div>
         </section>
         <NavBottom />
       </main>
@@ -250,21 +251,25 @@ function Payment_history() {
             </div>
             <div className="modal-body">
               <div className="table-responsive">
-              <table className="table table-striped">
-                <thead>
-                  <tr className="table-dark text-center">
-                    <th scope="col">Name</th>
-                    <th scope="col">Detail</th>
-                    <th scope="col">Nominal</th>
-                  </tr>
-                </thead>
-                {getDetail()}
-              </table>
+                <table className="table table-striped">
+                  <thead>
+                    <tr className="table-dark text-center">
+                      <th scope="col">Name</th>
+                      <th scope="col">Detail</th>
+                      <th scope="col">Nominal</th>
+                    </tr>
+                  </thead>
+                  {getDetail()}
+                </table>
               </div>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" onClick={() => getReceipt(code)} className="btn btn-yellow fw-bold  mx-auto">
-                Save Recipt
+              <button
+                type="button"
+                onClick={() => getReceipt(code)}
+                className="btn btn-yellow fw-bold  mx-auto"
+              >
+                Save Receipt
               </button>
             </div>
           </div>

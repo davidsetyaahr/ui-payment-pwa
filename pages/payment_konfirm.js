@@ -42,8 +42,22 @@ function Payment_konfirm() {
     verify();
   };
 
-  function formatMoney(amount, currency) {
-    return currency + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+  function formatMoney(angka, prefix) {
+    angka = angka.toString();
+    var number_string = angka.replace(/[^,\d]/g, "").toString(),
+      split = number_string.split(","),
+      sisa = split[0].length % 3,
+      rupiah = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+      var separator = sisa ? "." : "";
+      rupiah += separator + ribuan.join(".");
+    }
+
+    rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+    return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
   }
   return (
     <>
@@ -69,7 +83,7 @@ function Payment_konfirm() {
           </h4>
 
           <span className="rounded-pill btn btn-yellow fw-bold h3">
-            {formatMoney(parseInt(query.total_pay), "Rp. ")},-
+            Rp. {formatMoney(parseInt(query.total_pay))}
           </span>
         </section>
         <section className="section-2 mt-3 bg-light text-center py-4 px-1">
@@ -82,8 +96,8 @@ function Payment_konfirm() {
                 Transfer ke rekening BCA 4641327187 a.n Lie Citro Dewi Ruslie
               </li>
               <li className="list-group-item border-0">
-                Masukan jumlah pembayaran sebesar{" "}
-                {formatMoney(parseInt(query.total_pay), "Rp. ")},-
+                Masukan jumlah pembayaran sebesar Rp.{" "}
+                {formatMoney(parseInt(query.total_pay))}
               </li>
               <li className="list-group-item border-0">
                 Masukan nomor transaction id diatas pada keterangan berita
