@@ -107,8 +107,22 @@ function Payment() {
     }
   };
 
-  function formatMoney(amount, currency) {
-    return currency + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+  function formatMoney(angka, prefix) {
+    angka = angka.toString();
+    var number_string = angka.replace(/[^,\d]/g, "").toString(),
+      split = number_string.split(","),
+      sisa = split[0].length % 3,
+      rupiah = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+      var separator = sisa ? "." : "";
+      rupiah += separator + ribuan.join(".");
+    }
+
+    rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+    return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
   }
 
   const getList = () => {
@@ -160,7 +174,7 @@ function Payment() {
               href="#"
               target="_blank"
             >
-            <small className="font-dark fw-bold">{"Student's Name:"}</small>
+              <small className="font-dark fw-bold">{"Student's Name:"}</small>
               <h5 className="my-0">{studentName}</h5>
             </a>
           </div>
@@ -190,17 +204,17 @@ function Payment() {
                   onClick={handleCheckOutBill}
                 >
                   {isSubmitting ? (
-                          <>
-                            <span
-                              className="spinner-border spinner-border-sm me-2"
-                              role="status"
-                              aria-hidden="true"
-                            ></span>
-                            Loading...
-                          </>
-                        ) : (
-                          'Pay Now'
-                        )}
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Loading...
+                    </>
+                  ) : (
+                    "Pay Now"
+                  )}
                 </button>
                 {/* <Link href="/payment_konfirm" className="btn btn-yellow btn-sm">
                   Bayar Sekarang

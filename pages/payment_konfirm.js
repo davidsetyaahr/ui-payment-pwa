@@ -83,7 +83,7 @@ function Payment_konfirm() {
           </h4>
 
           <span className="rounded-pill btn btn-yellow fw-bold h3">
-            Rp. {formatMoney(parseInt(query.total_pay))}
+            {formatMoney(parseInt(query.total_pay), "Rp. ")}
           </span>
         </section>
         <section className="section-2 mt-3 bg-light text-center py-4 px-1">
@@ -96,8 +96,8 @@ function Payment_konfirm() {
                 Transfer ke rekening BCA 4641327187 a.n Lie Citro Dewi Ruslie
               </li>
               <li className="list-group-item border-0">
-                Masukan jumlah pembayaran sebesar Rp.{" "}
-                {formatMoney(parseInt(query.total_pay))}
+                Masukan jumlah pembayaran sebesar
+                {formatMoney(parseInt(query.total_pay), "Rp. ")}
               </li>
               <li className="list-group-item border-0">
                 Masukan nomor transaction id diatas pada keterangan berita

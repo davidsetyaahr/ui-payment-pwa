@@ -11,8 +11,8 @@ import {
   useAnnouncement,
 } from "@/helper/helperApiInfo";
 import { useRouter } from "next/router";
-import {baseStorageUrl } from "@/helper/baseUrl";
-import {getSummaryStudent } from "../pages/api/fetchdata";
+import { baseStorageUrl } from "@/helper/baseUrl";
+import { getSummaryStudent } from "../pages/api/fetchdata";
 import { format_date } from "./helper/textHelper";
 
 function Home() {
@@ -70,13 +70,23 @@ function Home() {
     // var modal = new bootstrap.Modal.getInstance(myModalEl)
     // modal.hide();
   };
-  const formatMoney = (amount, currency) => {
-    if (isNaN(amount)) {
-      return 0;
-    } else {
-      return currency + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+  function formatMoney(angka, prefix) {
+    angka = angka.toString();
+    var number_string = angka.replace(/[^,\d]/g, "").toString(),
+      split = number_string.split(","),
+      sisa = split[0].length % 3,
+      rupiah = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+      var separator = sisa ? "." : "";
+      rupiah += separator + ribuan.join(".");
     }
-  };
+
+    rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+    return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+  }
 
   const getDataSummary = async () => {
     var tempStorage = JSON.parse(localStorage.getItem("userData")) ?? [];
@@ -132,7 +142,7 @@ function Home() {
                 />
                 <div className="d-flex flex-column p-2 pt-0 pb-0 ps-3">
                   <p className="mb-1 text-white text-center parent-name">
-                  {authUser?.name}
+                    {authUser?.name}
                   </p>
                   <button
                     className="p-0 text-decoration-none bg-dark-custome border-0"
@@ -152,13 +162,16 @@ function Home() {
               <div className="section-rounded">
                 <section className="section-1  bg-white">
                   <div className="card rounded bg-light border-0 p-4">
-                      <div className="row justify-content-between">
-                        <div className="col-auto">
+                    <div className="row justify-content-between">
+                      <div className="col-auto">
                         <div className="mb-2 d-flex flex-column align-items-center justify-content-between">
                           {/* <div className="icon-bg">
                             <span className="fa fa-receipt fa-lg color-blue"></span>
                           </div> */}
-                          <Link href='/payment' className="text-decoration-none">
+                          <Link
+                            href="/payment"
+                            className="text-decoration-none"
+                          >
                             <p className="mb-0 fw-500 font-dark fs-16">
                               Current bill
                             </p>
@@ -173,32 +186,37 @@ function Home() {
                             Detail
                           </Link> */}
                         </div>
-                        </div>
-                        <div className="col-auto">
-                          <Link href="/mypoint" className="mb-2 text-decoration-none">
-                            <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
-                              Points
-                            </div>
-                            <div className="mt-2 fw-500 color-blue sm">
-                              <h4 className="fs-18 fw-bold my-0">{mypoint}</h4>
-                            </div>
-                            {/* </div>
-                        </div> */}
-                          </Link>
-                        </div>
-                        <div className="col-auto">
-                          {/* <div className="card rounded bg-light border-0 pr-3">
-                        <div className="card-body"> */}
-                          <Link href="/score" className="text-decoration-none">
-                            <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
-                              Avg Score
-                            </div>
-                            <div className="mt-2 fw-500 color-blue sm">
-                              <h4 className="fs-18 fw-bold my-0">{averageScore}</h4>
-                            </div>
-                          </Link>
-                        </div>
                       </div>
+                      <div className="col-auto">
+                        <Link
+                          href="/mypoint"
+                          className="mb-2 text-decoration-none"
+                        >
+                          <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
+                            Points
+                          </div>
+                          <div className="mt-2 fw-500 color-blue sm">
+                            <h4 className="fs-18 fw-bold my-0">{mypoint}</h4>
+                          </div>
+                          {/* </div>
+                        </div> */}
+                        </Link>
+                      </div>
+                      <div className="col-auto">
+                        {/* <div className="card rounded bg-light border-0 pr-3">
+                        <div className="card-body"> */}
+                        <Link href="/score" className="text-decoration-none">
+                          <div className="mb-1 font-dark text-decoration-none total_point fs-16 fw-500">
+                            Avg Score
+                          </div>
+                          <div className="mt-2 fw-500 color-blue sm">
+                            <h4 className="fs-18 fw-bold my-0">
+                              {averageScore}
+                            </h4>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </section>
                 <section className="section-2 mt-3 bg-light p-4 mt-0">
