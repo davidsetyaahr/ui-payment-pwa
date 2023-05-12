@@ -237,6 +237,8 @@ function Home() {
                           {format_date(String(dt.date))}
                           <br></br>
                           {dt.activity}
+                          <br></br>
+                          Text book : {dt.text_book}
                         </div>
                       </div>
                     ))}
@@ -286,13 +288,15 @@ function Home() {
                           height={100}
                           alt=""
                         />
-                        <div className="title">{dt.description}</div>
+                        <div className="title" style={{ width: "200px" }}>
+                          {dt.description}
+                        </div>
                       </div>
                     ))}
                   </div>
                   {/* <Image  src={`${baseStorageUrl}${dataannounce?.payload?.banner}`} width={100} height={100} style={{width:"100%"}} className="rounded-1" alt="" /> */}
                 </section>
-                <section className="section-3 mt-3 bg-light px-4 pt-4 mb-last-content">
+                <section className="section-3 mt-1 bg-light px-4 pt-4 mb-last-content">
                   <h5 className="mt-0 mb-2 font-dark fw-500">Promo</h5>
 
                   <div className="img-slide">
