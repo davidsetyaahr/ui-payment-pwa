@@ -43,13 +43,13 @@ function Signin() {
 
     const data = await response.json();
     if (data.code == "00") {
-      // setCode(true);
-      setToken(data.token.access_token);
-      setIsLoggedIn(true);
-      localStorage.setItem("token", data.token.access_token);
-      setUserData(data.data);
-      localStorage.setItem("userData", JSON.stringify(data.data));
-      router.push("/home");
+      // setToken(data.token.access_token);
+      // setIsLoggedIn(true);
+      // localStorage.setItem("token", data.token.access_token);
+      // setUserData(data.data);
+      // localStorage.setItem("userData", JSON.stringify(data.data));
+      // router.push("/home");
+      setCode(true);
     } else if (data.code == "01") {
       toast("Enter your name !", {
         hideProgressBar: true,

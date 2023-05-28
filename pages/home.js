@@ -9,6 +9,7 @@ import {
   useAdvertise,
   useAgenda,
   useAnnouncement,
+  useBillMonth,
 } from "@/helper/helperApiInfo";
 import { useRouter } from "next/router";
 import { baseStorageUrl } from "@/helper/baseUrl";
@@ -34,6 +35,10 @@ function Home() {
     options: { enabled: !!token },
   });
   const { data: dataagenda } = useAgenda({
+    token,
+    options: { enabled: !!token },
+  });
+  const { data: databillmonth } = useBillMonth({
     token,
     options: { enabled: !!token },
   });

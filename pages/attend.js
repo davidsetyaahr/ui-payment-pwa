@@ -57,7 +57,9 @@ function Attend() {
             <tr key={index} className="text-center">
               <th scope="row">{index + 1}</th>
               <th scope="row">{format_date(String(data.date))}</th>
-              <th scope="row">{data.is_absent == "1" ? "Present" : "Absent"}</th>
+              <th scope="row">
+                {data.is_absent == "1" ? "Present" : "Absent"}
+              </th>
             </tr>
           ))}
       </tbody>
@@ -148,6 +150,7 @@ function Attend() {
                 setClassSelected(e.target.value);
               }}
             >
+              <option value="">All</option>
               {getClassData()}
             </select>
             <button

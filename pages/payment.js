@@ -125,24 +125,54 @@ function Payment() {
     return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
   }
 
+  function getMonthNow() {
+    var now = new Date();
+    var oldMonth = now.getMonth() + 1;
+    var month = oldMonth < 10 ? "0" + oldMonth : oldMonth;
+    var data = new Array();
+    data["month"] = month + "-" + now.getFullYear();
+    data["monthNow"] = month;
+    return data;
+  }
+
   const getList = () => {
     return (
       <tbody>
         {dataBilling &&
-          dataBilling.map((data, index) => (
-            <tr key={data.id} className="text-center">
-              <td>
-                <input
-                  type="checkbox"
-                  onChange={() => handleOnChange(data.id, data.price)}
-                  className="form-check-input"
-                />
-              </td>
-              <td>{data.name}</td>
-              <td>{data.payment}</td>
-              <td>{formatMoney(parseInt(data.price), "Rp. ")}</td>
-            </tr>
-          ))}
+          dataBilling.map((data, index) => {
+            const getDate = data.payment.split("COURSE ")[1];
+            const getMonth = getDate.split("-")[0];
+            const amountPenalty =
+              parseInt(getMonthNow().month, 10) - parseInt(getMonth, 10);
+            console.log(parseInt(amountPenalty + "0"));
+            const isPenalty =
+              getDate < getMonthNow().month
+                ? (parseInt(amountPenalty + "0") / 100) * data.price
+                : 0;
+            const penaltyTrue =
+              isPenalty != 0
+                ? " + Penalty " + parseInt(amountPenalty + "0") + "%"
+                : "";
+            return (
+              <tr key={data.id} className="text-center">
+                <td>
+                  <input
+                    type="checkbox"
+                    onChange={() =>
+                      handleOnChange(data.id, data.price + isPenalty)
+                    }
+                    className="form-check-input"
+                  />
+                </td>
+                <td>{data.name}</td>
+                <td>
+                  {data.payment}
+                  <span className="text-danger">{penaltyTrue}</span>
+                </td>
+                <td>{formatMoney(parseInt(data.price + isPenalty), "Rp. ")}</td>
+              </tr>
+            );
+          })}
       </tbody>
     );
   };

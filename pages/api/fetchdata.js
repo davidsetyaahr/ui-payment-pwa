@@ -202,3 +202,19 @@ export const verifyPayment = async ({ data }, callback) => {
 
   callback(result);
 };
+
+export const getBillMonth = async ({ data }, callback) => {
+  const id = data.id;
+  var url = `${baseUrl}payment/get-bill-month/${id}`;
+
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    method: "GET",
+  });
+  const result = await res.json();
+
+  callback(result);
+};
