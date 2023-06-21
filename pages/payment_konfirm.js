@@ -42,6 +42,16 @@ function Payment_konfirm() {
     verify();
   };
 
+  let checkCount = 0;
+  const countHandle = () => {
+    var count = checkCount++;
+    const wa = document.getElementById("wa-confirm");
+    if (count == 0) {
+      wa.setAttribute("disabled", "");
+      verify();
+    }
+  };
+
   function formatMoney(angka, prefix) {
     angka = angka.toString();
     var number_string = angka.replace(/[^,\d]/g, "").toString(),
@@ -113,8 +123,9 @@ function Payment_konfirm() {
           </div>
         </section>
         <button
-          onClick={handleVerify}
+          onClick={countHandle}
           className="btn fw-bold py-3 btn-success wa-confirm"
+          id="wa-confirm"
         >
           <span className="fab fa-whatsapp me-1 fa-lg"></span> Konfirmasi
           Whatsapp
