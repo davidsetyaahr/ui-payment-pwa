@@ -27,6 +27,7 @@ function Home() {
   const [tagihan, setTagihan] = useState(0);
   const [mypoint, setMypoint] = useState(0);
   const [agenda, setAgenda] = useState([]);
+  const [review, setReview] = useState([]);
   const [averageScore, setAverageScore] = useState(0);
   const [token, setToken] = useState(null);
   const router = useRouter();
@@ -103,6 +104,7 @@ function Home() {
       setAverageScore(res.payload.score);
       setMypoint(res.payload.point);
       setAgenda(res.payload.agenda);
+      setReview(res.payload.review);
     });
   };
 
@@ -128,6 +130,34 @@ function Home() {
       (data) => data.id === studentId
     );
   }
+  const reviewTest = () => {
+    const row = [];
+    for (let i = 0; i < review.length; i++) {
+      row.push(
+        <>
+          {review[i]?.map((r) => (
+            <div
+              key={r}
+              className="content card mr-1"
+              style={{
+                height: "100px !important",
+                marginRight: "8px !important",
+                width: "100% !important",
+              }}
+            >
+              <div className="card-body d-flex align-items-center">
+                {format_date(String(r.date))}
+                <br></br>
+                {r.review_test} on {format_date(String(r.date_review))}
+              </div>
+            </div>
+          ))}
+          ;
+        </>
+      );
+    }
+    return row;
+  };
 
   return (
     <div>
@@ -281,6 +311,14 @@ function Home() {
                   </div>
                   </div> */}
                   {/*end test ui agenda with slide */}
+                </section>
+                <section className="section-2 mt-3 bg-light p-4 mt-0">
+                  <h5 className="mb-2 font-dark fw-500">Review</h5>
+                  {/* update ui agend with slide */}
+
+                  {/* review */}
+
+                  <div className="img-slide">{reviewTest()}</div>
                 </section>
                 <section className="section-3 mt-3 bg-light p-4">
                   <h5 className="mt-0 mb-2 font-dark fw-500">Announcement</h5>

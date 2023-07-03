@@ -1,5 +1,6 @@
 import { useScoreDetail, useScoreDetailBytest } from "@/helper/helperApiScore";
 import { useQueryClient } from "@tanstack/react-query";
+import { baseUrlCertificate } from "@/helper/baseUrl";
 import { useState, useEffect } from "react";
 import { getResultScore, getScoreByTest } from "./api/fetchdata";
 import Head from "next/head";
@@ -129,9 +130,19 @@ const Score = () => {
     if (totalTest === totalPassed) {
       return (
         <>
-          <button type="button" className="fw-bold btn btn-yellow btn-sm">
+          {/* <button
+            type="button"
+            className="fw-bold btn btn-yellow btn-sm"
+            onClick={eCertificate()}
+          >
             <span className="fa fa-download me-1"></span> E-Certificate
-          </button>
+          </button> */}
+          <a
+            href={`${baseUrlCertificate}${authUser?.default_student_id}`}
+            className="fw-bold btn btn-yellow btn-sm"
+          >
+            <span className="fa fa-download me-1"></span> E-Certificate
+          </a>
         </>
       );
     }
