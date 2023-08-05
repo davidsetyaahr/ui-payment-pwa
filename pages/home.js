@@ -198,11 +198,8 @@ function Home() {
                 <section className="section-1  bg-white">
                   <div className="card rounded bg-light border-0 p-4">
                     <div className="row justify-content-between">
-                      <div className="col-auto">
+                      {/* <div className="col-auto">
                         <div className="mb-2 d-flex flex-column align-items-center justify-content-between">
-                          {/* <div className="icon-bg">
-                            <span className="fa fa-receipt fa-lg color-blue"></span>
-                          </div> */}
                           <Link
                             href="/payment"
                             className="text-decoration-none"
@@ -214,14 +211,8 @@ function Home() {
                               {formatMoney(parseInt(tagihan), "Rp. ")}
                             </h4>
                           </Link>
-                          {/* <Link
-                            href="/payment"
-                            className="px-2 btn btn-sm btn-blue"
-                          >
-                            Detail
-                          </Link> */}
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-auto">
                         <Link
                           href="/mypoint"
